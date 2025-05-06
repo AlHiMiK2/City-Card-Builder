@@ -4,15 +4,21 @@ namespace _Project.Scripts.Handlers
 {
     public class GameHandler : MonoBehaviour
     {
-        [SerializeField] private City.City _city;
+        [SerializeField] private GameConfig _config;
+        [SerializeField] private Player.Player[] _players;
 
-        public City.City City => _city;
+        private int _currentTurn;
         
         public static GameHandler Instance { get; private set; }
 
         private void Awake()
         {
             Instance = this;
+            
+            foreach(var player in _players)
+            {
+                player.Init(_config.StartResources);
+            }
         }
     }
 }

@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
+using _Project.Scripts.City;
 using _Project.Scripts.City.Wallet;
 using _Project.Scripts.Handlers;
+using _Project.Scripts.Player;
 using TMPro;
 using UniRx;
 using UnityEngine;
 
 public class WalletView : MonoBehaviour
 {
+    [SerializeField] private Player _targetPlayer;
     [SerializeField] private string _woodPrefix;
     [SerializeField] private TMP_Text _woodView;
     [SerializeField] private string _stonePrefix;
@@ -20,22 +23,18 @@ public class WalletView : MonoBehaviour
     
     private void Start()
     {
-        Init();
+        _wallet = _targetPlayer.Wallet;
+        
+        _wallet.Resources
+            .Subscribe(UpdateView)
+            .AddTo(_disposables);
     }
 
-    private void Init()
+    private void UpdateView(CityResources resources)
     {
-        _wallet = GameHandler.Instance.City.Wallet;
-        
-        _wallet.Wood
-            .Subscribe(v => { _woodView.text = _woodPrefix + v; })
-            .AddTo(_disposables);
-        _wallet.Stone
-            .Subscribe(v => { _stoneView.text = _stonePrefix + v; })
-            .AddTo(_disposables);
-        _wallet.Metal
-            .Subscribe(v => { _metalView.text = _metalPrefix + v; })
-            .AddTo(_disposables);
+        _woodView.text = _woodPrefix + resources.Wood;
+        _stoneView.text = _stonePrefix + resources.Stone;
+        _metalView.text = _metalPrefix + resources.Metal;
     }
 
     private void OnDestroy()

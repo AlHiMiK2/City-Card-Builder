@@ -4,19 +4,34 @@ namespace _Project.Scripts.City.Wallet
 {
     public class Wallet
     {
-        private ReactiveProperty<int> _wood;
-        private ReactiveProperty<int> _stone;
-        private ReactiveProperty<int> _metal;
+        private ReactiveProperty<CityResources> _resources;
         
-        public IReadOnlyReactiveProperty<int> Wood => _wood;
-        public IReadOnlyReactiveProperty<int> Stone => _stone;
-        public IReadOnlyReactiveProperty<int> Metal => _metal;
-
-        public Wallet(int wood, int stone, int metal)
+        public IReadOnlyReactiveProperty<CityResources> Resources => _resources;
+        
+        public Wallet(CityResources resources)
         {
-            _wood = new (wood);
-            _stone = new (stone);
-            _metal = new (metal);
+            _resources = new (resources);
+        }
+
+        public void AddResources(CityResources resources)
+        {
+            _resources.SetValueAndForceNotify(_resources.Value + resources);
+        }
+        
+        public bool TryTakeResources(CityResources resources)
+        {
+            var resourcesAfterTake = _resources.Value - resources;
+            bool isWoodValid = resourcesAfterTake.Wood >= 0;
+            bool isStoneValid = resourcesAfterTake.Stone >= 0;
+            bool isMetalValid = resourcesAfterTake.Metal >= 0;
+
+            if (isWoodValid && isStoneValid && isMetalValid)
+            {
+                _resources.SetValueAndForceNotify(resourcesAfterTake);
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.singularitygroup.hotreload": {
+      "version": "file:C:/My Files/Job/Unity Projects/assets/com.singularitygroup.hotreload",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      }
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.7",
       "depth": 0,

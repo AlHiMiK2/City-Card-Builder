@@ -2,8 +2,8 @@
 
 namespace _Project.Scripts.Card
 {
-    [CreateAssetMenu(fileName = "New Construction Card", menuName = "Create Construction Card", order = 0)]
-    public class ConstructionCardConfig : CardConfig
+    [CreateAssetMenu(fileName = "New Defence Card", menuName = "Create Defence Card", order = 0)]
+    public class DefenceCardConfig : CardConfig
     {
         [SerializeField] private int _startHealth;
         [SerializeField] private int _earn;

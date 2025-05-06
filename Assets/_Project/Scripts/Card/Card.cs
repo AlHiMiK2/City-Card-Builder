@@ -54,7 +54,7 @@ namespace _Project.Scripts.Card
             
             if (isHit)
             {
-                if (_config is ConstructionCardConfig constructionConfig)
+                if (_config is DefenceCardConfig constructionConfig)
                 {
                     if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace))
                     {

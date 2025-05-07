@@ -9,39 +9,27 @@ namespace _Project.Scripts.City
         [SerializeField] private MeshFilter _constructionMeshFilter;
         [SerializeField] private MeshRenderer _constructionRenderer;
         
-        private bool _isActive;
-        private Construction _construction;
+        private ConstructionData _constructionData;
+        private int _ownerPlayerIndex;
 
-        public bool IsActive => _isActive;
-        public Construction Construction => _construction;
-
+        public ConstructionData ConstructionData;
+        
         private void Awake()
         {
-            _construction = new Construction(this);
+            _constructionData = new ConstructionData();
         }
-
-        private void Start()
+        public void Init(int ownerPlayerIndex, DefenceCardConfig defenceCardConfig)
         {
-            Build(GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
+            _ownerPlayerIndex = ownerPlayerIndex;
+            Build(defenceCardConfig);
         }
 
         public void Build(DefenceCardConfig config)
         {
-            _construction.Init(config.Health, config.Earn);
+            _constructionData.SetData(config.Health, config.Earn);
             _constructionRenderer.material = config.Material;
             _constructionMeshFilter.mesh = config.Mesh;
             _constructionMeshFilter.transform.localPosition = config.MeshOffset;
-            Debug.Log(config.Health + " " + config.Earn);
-        }
-
-        public void Enable()
-        {
-            _isActive = true;
-        }
-
-        public void Disable()
-        {
-            _isActive = false;
         }
     }
 }

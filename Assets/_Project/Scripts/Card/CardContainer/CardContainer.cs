@@ -3,29 +3,32 @@ using UnityEngine;
 
 namespace _Project.Scripts.Card
 {
-    [RequireComponent(typeof(CardGenerator))]
     public class CardContainer : MonoBehaviour
     {
-        private CardGenerator _generator;
-        private List<Card> _cards;
+        [SerializeField] private Card _cardPrefab;
         
-        private void Awake()
-        {
-            _generator = GetComponent<CardGenerator>();
-        }
+        private List<Card> _cards = new ();
 
-        public void Fill()
+        public List<Card> Cards => _cards;
+
+        public void Fill(List<CardConfig> cardConfigs, int ownerPlayerIndex)
         {
-            _cards = _generator.Generate();
-            
-            foreach (var card in _cards)
+            foreach (var cardConfig in cardConfigs)
             {
-                card.transform.SetParent(transform);
+                var instance = Instantiate(_cardPrefab, transform);
+                instance.Init(cardConfig, ownerPlayerIndex);
+                _cards.Add(instance);
             }
         }
 
         public void Clear()
         {
+            foreach (var card in _cards)
+            {
+                if(card)
+                    Destroy(card.gameObject);
+            }
+            
             _cards.Clear();
         }
     }

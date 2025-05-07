@@ -676,6 +676,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 259593406430661208, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 282214020724963845, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -1229,11 +1233,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 282214020724963845, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 701335565517771834, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
+    - target: {fileID: 259593406430661208, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -1242,14 +1242,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1384044359570243442, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1846802191786984849, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1921155947188464857, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -1293,10 +1285,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2712758005081121358, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3853421170474231609, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1305,43 +1293,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
-    - target: {fileID: 4288563632285886800, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4802722411974216384, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5257871498730611967, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5390767444422712297, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 330585545}
-    - target: {fileID: 6407842103645549908, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621773155037469724, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7271542866806100619, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7887484730602275104, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7961660978262812776, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8847351535768361365, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}

@@ -32,7 +32,14 @@ namespace _Project.Scripts.Handlers
 
         private void StartTurn()
         {
-            _cardHandler.CreateCardBuild(_turnOwnerIndex);
+            bool isBonusBuild = _players[_turnOwnerIndex].Wallet.IsFulled;
+            
+            _cardHandler.CreateCardBuild(_turnOwnerIndex, isBonusBuild);
+            
+            if (isBonusBuild)
+            {
+                _players[_turnOwnerIndex].Wallet.ClearScore();
+            }
         }
 
         public void NextTurn()
@@ -42,9 +49,18 @@ namespace _Project.Scripts.Handlers
             if (_turnOwnerIndex > _players.Length - 1)
             {
                 _turnOwnerIndex = 0;
+                EndRound();
             }
             
             StartTurn();
+        }
+
+        private void EndRound()
+        {
+            foreach (var player in _players)
+            {
+                player.Earn();
+            }
         }
     }
 }

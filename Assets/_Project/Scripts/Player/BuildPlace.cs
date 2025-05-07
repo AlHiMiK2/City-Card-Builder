@@ -12,7 +12,7 @@ namespace _Project.Scripts.City
         private ConstructionData _constructionData;
         private int _ownerPlayerIndex;
 
-        public ConstructionData ConstructionData;
+        public ConstructionData ConstructionData => _constructionData;
         
         private void Awake()
         {

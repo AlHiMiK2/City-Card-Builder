@@ -6,9 +6,10 @@ namespace _Project.Scripts.City.Wallet
     {
         private int _score;
         private int _capacity;
-        
+        private bool _isFulled;
+
+        public bool IsFulled => _isFulled;
         public event UnityAction<int> ScoreChanged;
-        public event UnityAction Fulled;
         
         public Wallet(int capacity)
         {
@@ -22,15 +23,16 @@ namespace _Project.Scripts.City.Wallet
             if (_score >= _capacity)
             {
                 _score = _capacity;
-                Fulled?.Invoke();
+                _isFulled = true;
             }
             
             ScoreChanged?.Invoke(_score);
         }
         
-        public void ClearScore(int money)
+        public void ClearScore()
         {
             _score = 0;
+            _isFulled = false;
             ScoreChanged?.Invoke(_score);
         }
     }

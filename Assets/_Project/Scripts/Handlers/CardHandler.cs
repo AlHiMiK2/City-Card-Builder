@@ -25,7 +25,7 @@ namespace _Project.Scripts.Handlers
             _cardBuildGenerator = new CardBuildGenerator(_gameHandler.Config);
         }
 
-        public void CreateCardBuild(int ownerPlayerIndex)
+        public void CreateCardBuild(int ownerPlayerIndex, bool isBonusBuild)
         {
             _cardContainer.Fill(_cardBuildGenerator.Generate(), ownerPlayerIndex);
             _appliedCardCount = 0;
@@ -36,19 +36,16 @@ namespace _Project.Scripts.Handlers
             if (config is DefenceCardConfig defenceConfig)
             {
                 target.Build(defenceConfig);
-                Debug.Log("Applied Defence Card");
                 CardApplied();
                 return true;
             }
             if (config is AttackCardConfig attackConfig)
             {
-                Debug.Log("Applied Attack Card");
                 CardApplied();
                 return true;
             }
             if (config is UpgradeCardConfig upgradeConfig)
             {
-                Debug.Log("Applied Upgrade Card");
                 CardApplied();
                 return true;
             }

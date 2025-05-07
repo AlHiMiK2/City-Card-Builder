@@ -15,6 +15,8 @@ namespace _Project.Scripts.Player
         private GameHandler _gameHandler;
         private Wallet _wallet;
         private int _index;
+
+        public Wallet Wallet => _wallet;
         
         [Serializable]
         private class BuildPlaceLine
@@ -36,6 +38,21 @@ namespace _Project.Scripts.Player
                     place.Init(_index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
                 }
             }
+        }
+        
+        public void Earn()
+        {
+            int earn = 0;
+            
+            foreach (var line in _buildPlaceLines)
+            {
+                foreach (var place in line.Places)
+                {
+                    earn += place.ConstructionData.Earn;
+                }
+            }
+            
+            _wallet.AddScore(earn);
         }
     }
 }

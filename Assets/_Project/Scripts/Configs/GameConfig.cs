@@ -6,8 +6,8 @@ namespace _Project.Scripts
     [CreateAssetMenu(fileName = "New Game Config", menuName = "Create Game Config", order = 0)]
     public class GameConfig : ScriptableObject
     {
+        [Header("Config")]
         [SerializeField] private int _walletCapacity;
-        [Header("Card Settings")]
         [SerializeField] private int _upgradeCardCount;
         [SerializeField] private int _otherCardCount;
         [SerializeField] private int _cardApplyPerTurn;

@@ -1,4 +1,4 @@
-﻿using _Project.Scripts.City;
+﻿using _Project.Scripts.Card;
 using UnityEngine;
 
 namespace _Project.Scripts
@@ -7,9 +7,14 @@ namespace _Project.Scripts
     public class GameConfig : ScriptableObject
     {
         [SerializeField] private int _walletCapacity;
-        [SerializeField] private int _maxCards;
+        [Header("Card Generate")]
+        [SerializeField] private int _upgradeCardCount;
+        [SerializeField] private int _otherCardCount;
+        [SerializeField] private CardDatabase _cardDatabase;
 
         public int WalletCapacity => _walletCapacity;
-        public int MaxCards => _maxCards;
+        public int UpgradeCardCount => _upgradeCardCount;
+        public int OtherCardCount => _otherCardCount;
+        public CardDatabase CardDatabase => _cardDatabase;
     }
 }

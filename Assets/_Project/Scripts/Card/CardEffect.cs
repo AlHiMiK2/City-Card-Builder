@@ -10,7 +10,9 @@ namespace _Project.Scripts.Card
     {
         [SerializeField] private float _pointerEnterScale;
         [SerializeField] private float _dragScale;
+        [SerializeField] private float _moveLenght;
         [SerializeField] private float _scaleDuration;
+        [SerializeField] private RectTransform _view;
         
         private Draggable _draggable;
         private Card _card;
@@ -42,8 +44,8 @@ namespace _Project.Scripts.Card
 
         private void OnBeginDrag()
         {
-            transform.DOKill();
-            transform.DOScale(Vector3.one * _dragScale, _scaleDuration);
+            _view.DOKill();
+            _view.DOScale(Vector3.one * _dragScale, _scaleDuration);
             _isDragging = true;
         }
         
@@ -54,8 +56,8 @@ namespace _Project.Scripts.Card
         
         private void OnEndDrag()
         {
-            transform.DOKill();
-            transform.DOScale(Vector3.one, _scaleDuration);
+            _view.DOKill();
+            _view.DOScale(Vector3.one, _scaleDuration);
             _isDragging = false;
         }
 
@@ -63,8 +65,9 @@ namespace _Project.Scripts.Card
         {
             if (!_isDragging)
             {
-                transform.DOKill();
-                transform.DOScale(Vector3.one * _pointerEnterScale, _scaleDuration);
+                _view.DOKill();
+                _view.DOScale(Vector3.one * _pointerEnterScale, _scaleDuration);
+                _view.DOLocalMoveY(_moveLenght, _scaleDuration);
             }
         }
 
@@ -72,14 +75,15 @@ namespace _Project.Scripts.Card
         {
             if (!_isDragging)
             {
-                transform.DOKill();
-                transform.DOScale(Vector3.one, _scaleDuration);
+                _view.DOKill();
+                _view.DOScale(Vector3.one, _scaleDuration);
+                _view.DOLocalMoveY(0, _scaleDuration);
             }
         }
 
         private void OnDestroy()
         {
-            transform.DOKill();
+            _view.DOKill();
         }
     }
 }

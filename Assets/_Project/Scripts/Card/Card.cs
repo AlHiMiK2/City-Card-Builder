@@ -38,15 +38,15 @@ namespace _Project.Scripts.Card
 
         private void OnEnable()
         {
-            _draggable.EndDrag += Interact;
+            _draggable.EndDrag += OnEndDrag;
         }
 
         private void OnDisable()
         {
-            _draggable.EndDrag -= Interact;
+            _draggable.EndDrag -= OnEndDrag;
         }
 
-        private void Interact()
+        private void OnEndDrag()
         {
             if(!_isInit) return;
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
@@ -54,14 +54,15 @@ namespace _Project.Scripts.Card
             
             if (isHit)
             {
-                if (_config is DefenceCardConfig constructionConfig)
+                if (_config is DefenceCardConfig defenceConfig)
                 {
                     if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace))
                     {
-                        //if (buildPlace.TryBuild(constructionConfig.ConstructionPrefab))
-                        //{
-                        //    Destroy(gameObject);
-                        //}
+                        if (buildPlace.IsActive)
+                        {
+                            buildPlace.Build(defenceConfig);
+                            Destroy(gameObject);
+                        }
                     }
                 }
             }

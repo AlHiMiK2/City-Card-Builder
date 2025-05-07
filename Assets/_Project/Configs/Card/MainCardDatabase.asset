@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca8201e7c264ab398764b9d454eba2d, type: 3}
+  m_Name: MainCardDatabase
+  m_EditorClassIdentifier: 
+  _attackCardConfigs:
+  - {fileID: 11400000, guid: 8114578fa3131ef4f9d0df487b2b7a1e, type: 2}
+  - {fileID: 11400000, guid: 2e2638f7782e1ed4591c3993d4d3bbbb, type: 2}
+  _defaultDefenceCardConfig: {fileID: 11400000, guid: 3ca03caee0096c546ad19d9fcacadc92, type: 2}
+  _defenceCardConfigs:
+  - {fileID: 11400000, guid: 2289d60949a2a15418339f26c0657d2d, type: 2}
+  - {fileID: 11400000, guid: ecde9e093a1635d4da292870ab06c00f, type: 2}
+  - {fileID: 11400000, guid: c5ae0e02f4252bc449b8dcf012c47d21, type: 2}
+  _upgradeCardConfigs:
+  - {fileID: 11400000, guid: 20c4efb019c13024e90a261b4e23dc48, type: 2}

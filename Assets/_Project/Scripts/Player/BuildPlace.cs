@@ -30,6 +30,7 @@ namespace _Project.Scripts.City
             _construction.Init(config.Health, config.Earn);
             _constructionRenderer.material = config.Material;
             _constructionMeshFilter.mesh = config.Mesh;
+            _constructionMeshFilter.transform.localPosition = config.MeshOffset;
             Debug.Log(config.Health + " " + config.Earn);
         }
 

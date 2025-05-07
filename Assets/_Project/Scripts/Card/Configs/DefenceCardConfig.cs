@@ -9,10 +9,12 @@ namespace _Project.Scripts.Card
         [SerializeField] private int _earn;
         [SerializeField] private Mesh _mesh;
         [SerializeField] private Material _material;
+        [SerializeField] private Vector3 _meshOffset;
 
         public int Health => _health;
         public int Earn => _earn;
         public Mesh Mesh => _mesh;
         public Material Material => _material;
+        public Vector3 MeshOffset => _meshOffset;
     }
 }

@@ -16,5 +16,6 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _health: 10
   _earn: 3
-  _mesh: {fileID: 0}
-  _material: {fileID: 0}
+  _mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  _material: {fileID: 2100000, guid: c66492b54c04b1b44907cacfc7d10acf, type: 2}
+  _meshOffset: {x: 0, y: 1, z: 0}

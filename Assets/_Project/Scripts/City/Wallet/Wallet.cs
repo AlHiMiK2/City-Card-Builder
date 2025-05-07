@@ -1,37 +1,38 @@
 ﻿using UniRx;
+using UnityEngine.Events;
 
 namespace _Project.Scripts.City.Wallet
 {
     public class Wallet
     {
-        private ReactiveProperty<CityResources> _resources;
+        private ReactiveProperty<int> _money;
+        private int _capacity;
         
-        public IReadOnlyReactiveProperty<CityResources> Resources => _resources;
+        public IReadOnlyReactiveProperty<int> Money => _money;
+        public event UnityAction Fulled;
         
-        public Wallet(CityResources resources)
+        public Wallet(int capacity)
         {
-            _resources = new (resources);
+            _money = new (0);
+            _capacity = capacity;
         }
 
-        public void AddResources(CityResources resources)
+        public void AddMoney(int money)
         {
-            _resources.SetValueAndForceNotify(_resources.Value + resources);
-        }
-        
-        public bool TryTakeResources(CityResources resources)
-        {
-            var resourcesAfterTake = _resources.Value - resources;
-            bool isWoodValid = resourcesAfterTake.Wood >= 0;
-            bool isStoneValid = resourcesAfterTake.Stone >= 0;
-            bool isMetalValid = resourcesAfterTake.Metal >= 0;
+            int sum = _money.Value + money;
+            
 
-            if (isWoodValid && isStoneValid && isMetalValid)
+            if (sum >= _capacity)
             {
-                _resources.SetValueAndForceNotify(resourcesAfterTake);
-                return true;
+                sum = _capacity;
+                _money.SetValueAndForceNotify(sum);
+                Fulled?.Invoke();
             }
-
-            return false;
+        }
+        
+        public void ResetMoney(int money)
+        {
+            _money.SetValueAndForceNotify(0);
         }
     }
 }

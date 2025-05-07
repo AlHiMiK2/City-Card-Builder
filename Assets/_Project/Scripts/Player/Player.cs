@@ -1,5 +1,4 @@
-﻿using _Project.Scripts.City;
-using _Project.Scripts.City.Wallet;
+﻿using _Project.Scripts.City.Wallet;
 using UnityEngine;
 
 namespace _Project.Scripts.Player
@@ -12,9 +11,9 @@ namespace _Project.Scripts.Player
         
         public Wallet Wallet => _wallet;
 
-        public void Init(CityResources startResources)
+        public void Init(int walletCapacity)
         {
-            _wallet = new Wallet(startResources);
+            _wallet = new Wallet(walletCapacity);
         }
     }
 }

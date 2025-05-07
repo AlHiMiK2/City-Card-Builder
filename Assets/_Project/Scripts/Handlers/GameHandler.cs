@@ -2,13 +2,11 @@
 
 namespace _Project.Scripts.Handlers
 {
-    public class GameHandler : MonoBehaviour
+    public class GameHandler : StateMachine
     {
         [SerializeField] private GameConfig _config;
         [SerializeField] private Player.Player[] _players;
 
-        private int _currentTurn;
-        
         public static GameHandler Instance { get; private set; }
 
         private void Awake()
@@ -17,7 +15,7 @@ namespace _Project.Scripts.Handlers
             
             foreach(var player in _players)
             {
-                player.Init(_config.StartResources);
+                player.Init(_config.WalletCapacity);
             }
         }
     }

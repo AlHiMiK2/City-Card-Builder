@@ -11,12 +11,8 @@ using UnityEngine;
 public class WalletView : MonoBehaviour
 {
     [SerializeField] private Player _targetPlayer;
-    [SerializeField] private string _woodPrefix;
-    [SerializeField] private TMP_Text _woodView;
-    [SerializeField] private string _stonePrefix;
-    [SerializeField] private TMP_Text _stoneView;
-    [SerializeField] private string _metalPrefix;
-    [SerializeField] private TMP_Text _metalView;
+    [SerializeField] private string _moneyPrefix;
+    [SerializeField] private TMP_Text _moneyView;
 
     private List<IDisposable> _disposables = new ();
     private Wallet _wallet;
@@ -25,16 +21,14 @@ public class WalletView : MonoBehaviour
     {
         _wallet = _targetPlayer.Wallet;
         
-        _wallet.Resources
+        _wallet.Money
             .Subscribe(UpdateView)
             .AddTo(_disposables);
     }
 
-    private void UpdateView(CityResources resources)
+    private void UpdateView(int money)
     {
-        _woodView.text = _woodPrefix + resources.Wood;
-        _stoneView.text = _stonePrefix + resources.Stone;
-        _metalView.text = _metalPrefix + resources.Metal;
+        _moneyView.text = _moneyPrefix + money;
     }
 
     private void OnDestroy()

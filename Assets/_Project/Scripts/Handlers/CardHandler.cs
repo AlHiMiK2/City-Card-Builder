@@ -1,5 +1,6 @@
 ﻿using _Project.Scripts.Card;
 using _Project.Scripts.City;
+using _Project.Scripts.Enums;
 using UnityEngine;
 
 namespace _Project.Scripts.Handlers
@@ -43,6 +44,20 @@ namespace _Project.Scripts.Handlers
             if (config is AttackCardConfig attackConfig)
             {
                 if (target.OwnerIndex == ownerIndex) return false;
+
+                var ownerPlayer = _gameHandler.Players[ownerIndex];
+
+                if (attackConfig.Type == DamageType.Accurate)
+                {
+                    AttackUtils.ApplyAccurateDamage();
+                }
+                else if (attackConfig.Type == DamageType.Area)
+                {
+                    if (AttackUtils.TryApplyAreaDamage(attackConfig.Damage, _gameHandler.Players[target.OwnerIndex]) == false)
+                    {
+                        return false;
+                    }
+                }
                 
                 CardApplied();
                 return true;

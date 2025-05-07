@@ -1,5 +1,4 @@
-﻿using System;
-using _Project.Scripts.City;
+﻿using _Project.Scripts.City;
 using _Project.Scripts.City.Wallet;
 using _Project.Scripts.Handlers;
 using UnityEngine;
@@ -8,7 +7,8 @@ namespace _Project.Scripts.Player
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] private BuildPlaceLine[] _buildPlaceLines;
+        [SerializeField] private BuildPlace[] _buildPlaces;
+        [SerializeField] private BuildPlace _mainBuildPlace;
         [SerializeField] private WalletView _walletView;
         
         private CardHandler _cardHandler;
@@ -17,12 +17,8 @@ namespace _Project.Scripts.Player
         private int _index;
 
         public Wallet Wallet => _wallet;
-        
-        [Serializable]
-        private class BuildPlaceLine
-        {
-            public BuildPlace[] Places;
-        }
+        public BuildPlace[] BuildPlaces => _buildPlaces;
+        public BuildPlace MainBuildPlace => _mainBuildPlace;
 
         public void Init(int walletCapacity, int index)
         {
@@ -30,13 +26,12 @@ namespace _Project.Scripts.Player
             _walletView.Init(_wallet);
             _wallet.AddScore(0);
             _index = index;
-
-            foreach (var line in _buildPlaceLines)
+            
+            int placeIndex = 0;
+            foreach (var place in _buildPlaces)
             {
-                foreach (var place in line.Places)
-                {
-                    place.Init(_index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
-                }
+                place.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
+                placeIndex++;
             }
         }
         
@@ -44,15 +39,20 @@ namespace _Project.Scripts.Player
         {
             int earn = 0;
             
-            foreach (var line in _buildPlaceLines)
+            foreach (var place in _buildPlaces)
             {
-                foreach (var place in line.Places)
-                {
-                    earn += place.ConstructionData.Earn;
-                }
+                earn += place.ConstructionData.Earn;
             }
             
             _wallet.AddScore(earn);
+        }
+
+        private void OnValidate()
+        {
+            if (_buildPlaces.Length != 6)
+            {
+                _buildPlaces = new BuildPlace[6];
+            }
         }
     }
 }

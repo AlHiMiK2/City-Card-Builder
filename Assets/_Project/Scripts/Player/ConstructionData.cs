@@ -4,16 +4,20 @@ namespace _Project.Scripts.City
 {
     public class ConstructionData
     {
+        private int _initHealth;
         private int _health;
         private int _initEarn;
         private int _earn;
         
         public int Earn => _earn;
-        public event UnityAction<int> HealthChanged; 
+        public int InitHealth => _initHealth;
+        public int Health => _health;
+        public event UnityAction HealthChanged; 
 
         public void SetData(int health, int earn)
         {
-            _health = health;
+            _initHealth = health;
+            _health = _initHealth;
             _initEarn = earn;
             _earn = _initEarn;
         }
@@ -28,7 +32,7 @@ namespace _Project.Scripts.City
                 _earn = 0;
             }
             
-            HealthChanged?.Invoke(_health);
+            HealthChanged?.Invoke();
         }
     }
 }

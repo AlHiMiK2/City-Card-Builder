@@ -9,7 +9,8 @@ namespace _Project.Scripts.Handlers
 
         private CardHandler _cardHandler;
         private int _turnOwnerIndex;
-        
+
+        public Player.Player[] Players => _players;
         public GameConfig Config => _config;
         public static GameHandler Instance { get; private set; }
 

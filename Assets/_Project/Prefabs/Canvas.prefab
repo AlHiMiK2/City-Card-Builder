@@ -39,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.0037689, y: 130.156}
+  m_AnchoredPosition: {x: 0.0037689, y: 196}
   m_SizeDelta: {x: 2043.2, y: 260.312}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5729519585582467333
@@ -529,9 +529,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f050b5ca5c013c343883b909c89e9409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _woodText: {fileID: 3635347865874969331}
-  _stoneText: {fileID: 5252381768854137749}
-  _metalText: {fileID: 8776217992693154679}
+  _targetPlayer: {fileID: 0}
+  _woodPrefix: 
+  _woodView: {fileID: 0}
+  _stonePrefix: 
+  _stoneView: {fileID: 0}
+  _metalPrefix: 
+  _metalView: {fileID: 0}
 --- !u!1 &4491997610227759704
 GameObject:
   m_ObjectHideFlags: 0

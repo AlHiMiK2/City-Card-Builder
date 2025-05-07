@@ -10,8 +10,9 @@ namespace _Project.Scripts.City
         [SerializeField] private MeshRenderer _constructionRenderer;
         
         private ConstructionData _constructionData;
-        private int _ownerPlayerIndex;
+        private int _ownerIndex;
 
+        public int OwnerIndex => _ownerIndex;
         public ConstructionData ConstructionData => _constructionData;
         
         private void Awake()
@@ -20,7 +21,7 @@ namespace _Project.Scripts.City
         }
         public void Init(int ownerPlayerIndex, DefenceCardConfig defenceCardConfig)
         {
-            _ownerPlayerIndex = ownerPlayerIndex;
+            _ownerIndex = ownerPlayerIndex;
             Build(defenceCardConfig);
         }
 

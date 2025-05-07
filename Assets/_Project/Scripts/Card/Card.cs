@@ -22,7 +22,7 @@ namespace _Project.Scripts.Card
         private Camera _camera;
         private Transform _startParent;
         private Draggable _draggable;
-        private int _ownerPlayerIndex;
+        private int _ownerIndex;
 
         private void Awake()
         {
@@ -35,7 +35,7 @@ namespace _Project.Scripts.Card
             _label.text = _config.Label;
             _icon.sprite = _config.Icon;
             _camera = Camera.main;
-            _ownerPlayerIndex = ownerPlayerIndex;
+            _ownerIndex = ownerPlayerIndex;
             _cardHandler = CardHandler.Instance;
         }
 
@@ -58,7 +58,7 @@ namespace _Project.Scripts.Card
             {
                 if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace))
                 {
-                    if(_cardHandler.TryApplyCard(_config, buildPlace))
+                    if(_cardHandler.TryApplyCard(_config, buildPlace, _ownerIndex))
                         Destroy(gameObject);
                 }
             }

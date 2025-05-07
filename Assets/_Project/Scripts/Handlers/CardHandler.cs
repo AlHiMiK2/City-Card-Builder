@@ -31,10 +31,11 @@ namespace _Project.Scripts.Handlers
             _appliedCardCount = 0;
         }
 
-        public bool TryApplyCard(CardConfig config, BuildPlace target)
+        public bool TryApplyCard(CardConfig config, BuildPlace target, int ownerIndex)
         {
             if (config is DefenceCardConfig defenceConfig)
             {
+                if (target.OwnerIndex != ownerIndex) return false;
                 target.Build(defenceConfig);
                 CardApplied();
                 return true;

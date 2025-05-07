@@ -20,16 +20,18 @@ namespace _Project.Scripts.Handlers
             Instance = this;
         }
 
-        private void Start()
+        public void Init(GameHandler handler)
         {
-            _gameHandler = GameHandler.Instance;
-            _cardBuildGenerator = new CardBuildGenerator(_gameHandler.Config);
-        } 
+            _gameHandler = handler;
+        }
 
         public void CreateCardBuild(int ownerPlayerIndex, bool isBonusBuild)
         {
+            if(_cardBuildGenerator == null)
+                _cardBuildGenerator = new CardBuildGenerator(_gameHandler.Config);
+            
             _cardContainer.Fill(_cardBuildGenerator.Generate(), ownerPlayerIndex);
-            _appliedCardCount = 0;
+            _appliedCardCount = 0; 
         }
 
         public bool TryApplyCard(CardConfig config, BuildPlace target, int ownerIndex)
@@ -44,8 +46,6 @@ namespace _Project.Scripts.Handlers
             if (config is AttackCardConfig attackConfig)
             {
                 if (target.OwnerIndex == ownerIndex) return false;
-
-                var ownerPlayer = _gameHandler.Players[ownerIndex];
 
                 if (attackConfig.Type == DamageType.Accurate)
                 {

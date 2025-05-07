@@ -270,7 +270,7 @@ MonoBehaviour:
   - {fileID: 2317338860796918011}
   - {fileID: 8876398276260509610}
   - {fileID: 461566507227619504}
-  _mainBuildPlace: {fileID: 0}
+  _mainBuildPlace: {fileID: 2857245278484660842}
   _walletView: {fileID: 3725467432322371390}
 --- !u!1 &5364061930669411380
 GameObject:

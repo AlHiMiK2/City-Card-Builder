@@ -41,6 +41,7 @@ namespace _Project.Scripts.City
             _constructionRenderer.material = config.Material;
             _constructionMeshFilter.mesh = config.Mesh;
             _constructionMeshFilter.transform.localPosition = config.MeshOffset;
+            _constructionMeshFilter.transform.localRotation = Quaternion.Euler(config.RotationOffset);
         }
 
         private void OnDestroy()

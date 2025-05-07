@@ -23,7 +23,7 @@ namespace _Project.Scripts.Handlers
         {
             _gameHandler = GameHandler.Instance;
             _cardBuildGenerator = new CardBuildGenerator(_gameHandler.Config);
-        }
+        } 
 
         public void CreateCardBuild(int ownerPlayerIndex, bool isBonusBuild)
         {
@@ -42,11 +42,14 @@ namespace _Project.Scripts.Handlers
             }
             if (config is AttackCardConfig attackConfig)
             {
+                if (target.OwnerIndex == ownerIndex) return false;
+                
                 CardApplied();
                 return true;
             }
             if (config is UpgradeCardConfig upgradeConfig)
             {
+                if (target.OwnerIndex != ownerIndex) return false;
                 CardApplied();
                 return true;
             }

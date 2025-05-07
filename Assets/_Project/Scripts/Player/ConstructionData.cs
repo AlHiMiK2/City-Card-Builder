@@ -1,3 +1,5 @@
+using UnityEngine.Events;
+
 namespace _Project.Scripts.City
 {
     public class ConstructionData
@@ -5,9 +7,9 @@ namespace _Project.Scripts.City
         private int _health;
         private int _initEarn;
         private int _earn;
-
-        public int Health => _health;
+        
         public int Earn => _earn;
+        public event UnityAction<int> HealthChanged; 
 
         public void SetData(int health, int earn)
         {
@@ -25,6 +27,8 @@ namespace _Project.Scripts.City
                 _health = 0;
                 _earn = 0;
             }
+            
+            HealthChanged?.Invoke(_health);
         }
     }
 }

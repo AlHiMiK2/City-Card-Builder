@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: D1E3
   m_EditorClassIdentifier: 
   _label: Farm
-  _icon: {fileID: 1773087416, guid: 1974dd1b2ec03224ab7e12e4d74d59b8, type: 3}
+  _icon: {fileID: 21300000, guid: df4db3a31bab9f148b921c9ae035fa28, type: 3}
   _health: 10
   _earn: 15
   _mesh: {fileID: 0}

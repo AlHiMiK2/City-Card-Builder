@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Area
   m_EditorClassIdentifier: 
   _label: Area Damage
-  _icon: {fileID: -1138942169, guid: 1974dd1b2ec03224ab7e12e4d74d59b8, type: 3}
+  _icon: {fileID: 21300000, guid: 93bb96332fb08044b91dec6d4f7ee5ec, type: 3}
   _damage: 9
   _type: 0

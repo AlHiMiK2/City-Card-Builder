@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: D3E1
   m_EditorClassIdentifier: 
   _label: Reinforced Wall
-  _icon: {fileID: -1645715526, guid: 1974dd1b2ec03224ab7e12e4d74d59b8, type: 3}
+  _icon: {fileID: 21300000, guid: ea262d7a02ddf264395a57dcefb67dff, type: 3}
   _health: 20
   _earn: 5
   _mesh: {fileID: 0}

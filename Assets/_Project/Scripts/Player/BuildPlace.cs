@@ -1,5 +1,4 @@
 ﻿using _Project.Scripts.Card;
-using _Project.Scripts.Handlers;
 using UnityEngine;
 
 namespace _Project.Scripts.City
@@ -9,39 +8,44 @@ namespace _Project.Scripts.City
         [SerializeField] private MeshFilter _constructionMeshFilter;
         [SerializeField] private MeshRenderer _constructionRenderer;
         
-        private bool _isActive;
-        private Construction _construction;
+        private ConstructionData _constructionData;
+        private int _ownerIndex;
 
-        public bool IsActive => _isActive;
-        public Construction Construction => _construction;
-
+        public int OwnerIndex => _ownerIndex;
+        public ConstructionData ConstructionData => _constructionData;
+        
         private void Awake()
         {
-            _construction = new Construction(this);
+            _constructionData = new ConstructionData();
+            _constructionData.HealthChanged += OnConstructionHealthChanged;
+        }
+        public void Init(int ownerPlayerIndex, DefenceCardConfig defenceCardConfig)
+        {
+            _ownerIndex = ownerPlayerIndex;
+            Build(defenceCardConfig);
         }
 
-        private void Start()
+        private void OnConstructionHealthChanged(int health)
         {
-            Build(GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
+            if (health <= 0)
+            {
+                _constructionRenderer.material = null;
+                _constructionMeshFilter.mesh = null;
+                _constructionMeshFilter.transform.localPosition = Vector3.zero;
+            }
         }
 
         public void Build(DefenceCardConfig config)
         {
-            _construction.Init(config.Health, config.Earn);
+            _constructionData.SetData(config.Health, config.Earn);
             _constructionRenderer.material = config.Material;
             _constructionMeshFilter.mesh = config.Mesh;
             _constructionMeshFilter.transform.localPosition = config.MeshOffset;
-            Debug.Log(config.Health + " " + config.Earn);
         }
 
-        public void Enable()
+        private void OnDestroy()
         {
-            _isActive = true;
-        }
-
-        public void Disable()
-        {
-            _isActive = false;
+            _constructionData.HealthChanged -= OnConstructionHealthChanged;
         }
     }
 }

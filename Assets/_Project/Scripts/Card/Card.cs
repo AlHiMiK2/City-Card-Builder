@@ -1,4 +1,5 @@
 ﻿using _Project.Scripts.City;
+using _Project.Scripts.Handlers;
 using _Project.Scripts.UI;
 using TMPro;
 using UnityEngine;
@@ -17,23 +18,25 @@ namespace _Project.Scripts.Card
         [SerializeField] private LayerMask _layerMask;
         
         private CardConfig _config;
+        private CardHandler _cardHandler;
         private Camera _camera;
         private Transform _startParent;
         private Draggable _draggable;
-        private bool _isInit;
+        private int _ownerIndex;
 
         private void Awake()
         {
             _draggable = GetComponent<Draggable>();
         }
 
-        public void Init(CardConfig config)
+        public void Init(CardConfig config, int ownerPlayerIndex)
         {
             _config = config;
             _label.text = _config.Label;
             _icon.sprite = _config.Icon;
             _camera = Camera.main;
-            _isInit = true;
+            _ownerIndex = ownerPlayerIndex;
+            _cardHandler = CardHandler.Instance;
         }
 
         private void OnEnable()
@@ -48,22 +51,15 @@ namespace _Project.Scripts.Card
 
         private void OnEndDrag()
         {
-            if(!_isInit) return;
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             bool isHit = Physics.Raycast(ray, out RaycastHit hitInfo, _rayDistance, _layerMask, QueryTriggerInteraction.Ignore);
             
             if (isHit)
             {
-                if (_config is DefenceCardConfig defenceConfig)
+                if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace))
                 {
-                    if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace))
-                    {
-                        if (buildPlace.IsActive)
-                        {
-                            buildPlace.Build(defenceConfig);
-                            Destroy(gameObject);
-                        }
-                    }
+                    if(_cardHandler.TryApplyCard(_config, buildPlace, _ownerIndex))
+                        Destroy(gameObject);
                 }
             }
         }

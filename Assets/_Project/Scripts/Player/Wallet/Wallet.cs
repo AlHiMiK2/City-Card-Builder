@@ -1,38 +1,39 @@
-﻿using UniRx;
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 
 namespace _Project.Scripts.City.Wallet
 {
     public class Wallet
     {
-        private ReactiveProperty<int> _money;
+        private int _score;
         private int _capacity;
-        
-        public IReadOnlyReactiveProperty<int> Money => _money;
-        public event UnityAction Fulled;
+        private bool _isFulled;
+
+        public bool IsFulled => _isFulled;
+        public event UnityAction<int> ScoreChanged;
         
         public Wallet(int capacity)
         {
-            _money = new (0);
             _capacity = capacity;
         }
 
-        public void AddMoney(int money)
+        public void AddScore(int score)
         {
-            int sum = _money.Value + money;
-            
+            _score += score;
 
-            if (sum >= _capacity)
+            if (_score >= _capacity)
             {
-                sum = _capacity;
-                _money.SetValueAndForceNotify(sum);
-                Fulled?.Invoke();
+                _score = _capacity;
+                _isFulled = true;
             }
+            
+            ScoreChanged?.Invoke(_score);
         }
         
-        public void ResetMoney(int money)
+        public void ClearScore()
         {
-            _money.SetValueAndForceNotify(0);
+            _score = 0;
+            _isFulled = false;
+            ScoreChanged?.Invoke(_score);
         }
     }
 }

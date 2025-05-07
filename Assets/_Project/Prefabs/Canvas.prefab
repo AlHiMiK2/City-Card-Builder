@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5729519585582467333}
   - component: {fileID: 2415142739839643892}
   - component: {fileID: 3220315741416799688}
-  - component: {fileID: 5081332555574905052}
+  - component: {fileID: 5582845037406470091}
   - component: {fileID: 3699914774167478555}
   m_Layer: 5
   m_Name: CardContainer
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &5081332555574905052
+--- !u!114 &5582845037406470091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,10 +113,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 73212649199921843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 707f8627467147018e34336bb7cfc5f4, type: 3}
+  m_Script: {fileID: 11500000, guid: fd12fe492abe4501a3c0d1ae39a67a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardPrefab: {fileID: -7113842017304705252, guid: 5db3a1b98b07b654c828f42dbfbd0556, type: 3}
+  _cardContainer: {fileID: 3699914774167478555}
 --- !u!114 &3699914774167478555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fb079112b84ec495701a576801c84d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _container: {fileID: 8923018690013864132}
+  _cardPrefab: {fileID: -7113842017304705252, guid: 5db3a1b98b07b654c828f42dbfbd0556, type: 3}
 --- !u!1 &426895434331307723
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,4 +246,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 2908767116527639649}
-  _cardContainer: {fileID: 3699914774167478555}

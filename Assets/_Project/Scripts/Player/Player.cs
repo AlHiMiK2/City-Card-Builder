@@ -9,12 +9,13 @@ namespace _Project.Scripts.Player
     public class Player : MonoBehaviour
     {
         [SerializeField] private BuildPlaceLine[] _buildPlaceLines;
+        [SerializeField] private WalletView _walletView;
         
-        private UIHandler _uiHandler;
+        private CardHandler _cardHandler;
+        private GameHandler _gameHandler;
         private Wallet _wallet;
-        private bool _isTurn;
-        private bool _isInit;
-        
+        private int _index;
+
         public Wallet Wallet => _wallet;
         
         [Serializable]
@@ -23,36 +24,35 @@ namespace _Project.Scripts.Player
             public BuildPlace[] Places;
         }
 
-        public void Init(int walletCapacity)
+        public void Init(int walletCapacity, int index)
         {
             _wallet = new Wallet(walletCapacity);
-            _uiHandler = UIHandler.Instance;
-        }
+            _walletView.Init(_wallet);
+            _wallet.AddScore(0);
+            _index = index;
 
-        public void EnableTurn()
-        {
-            _uiHandler.CardContainer.Fill();
-
-            foreach (var lines in _buildPlaceLines)
+            foreach (var line in _buildPlaceLines)
             {
-                foreach (var place in lines.Places)
+                foreach (var place in line.Places)
                 {
-                    place.Enable();
+                    place.Init(_index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
                 }
             }
         }
-
-        public void DisableTurn()
+        
+        public void Earn()
         {
-            _uiHandler.CardContainer.Clear();
+            int earn = 0;
             
-            foreach (var lines in _buildPlaceLines)
+            foreach (var line in _buildPlaceLines)
             {
-                foreach (var place in lines.Places)
+                foreach (var place in line.Places)
                 {
-                    place.Disable();
+                    earn += place.ConstructionData.Earn;
                 }
             }
+            
+            _wallet.AddScore(earn);
         }
     }
 }

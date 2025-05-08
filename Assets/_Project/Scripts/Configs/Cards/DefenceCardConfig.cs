@@ -8,14 +8,14 @@ namespace _Project.Scripts.Card
         [SerializeField] private int _health;
         [SerializeField] private int _earn;
         [SerializeField] private Mesh _mesh;
-        [SerializeField] private Material _material;
+        [SerializeField] private Material[] _materials;
         [SerializeField] private Vector3 _meshOffset;
         [SerializeField] private Vector3 _rotationOffset;
 
         public int Health => _health;
         public int Earn => _earn;
         public Mesh Mesh => _mesh;
-        public Material Material => _material;
+        public Material[] Materials => _materials;
         public Vector3 MeshOffset => _meshOffset;
         public Vector3 RotationOffset => _rotationOffset;
     }

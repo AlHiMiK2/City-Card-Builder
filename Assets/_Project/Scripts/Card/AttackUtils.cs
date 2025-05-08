@@ -216,7 +216,7 @@ namespace _Project.Scripts.Card
             }
             else
             {
-                if (isNotFirstFull)
+                if (ownerPlayer.BuildPlaces[target.Index - 3].ConstructionData.Health <= 0)
                 {
                     attackPlaces.Add(target);
 

@@ -98,10 +98,7 @@ namespace _Project.Scripts.Handlers
                 }
                 else if (attackConfig.Type == DamageType.Area)
                 {
-                    //if (AttackUtils.TryApplyAreaDamage(attackConfig.Damage, _gameHandler.Players[target.OwnerIndex]) == false)
-                    //{
-                    //    return;
-                    //}
+                    AttackUtils.VisualiseAreaDamage(_gameHandler.Players[target.OwnerIndex]);
                 }
                 
                 return;

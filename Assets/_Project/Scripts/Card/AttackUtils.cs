@@ -39,6 +39,38 @@ namespace _Project.Scripts.Card
             return true;
         }
         
+        public static void VisualiseAreaDamage(Player.Player ownerPlayer)
+        {
+            List<BuildPlace> attackPlaces = new List<BuildPlace>();
+            List<BuildPlace> allPlaces = new List<BuildPlace>();
+
+            foreach (var buildPlace in ownerPlayer.BuildPlaces)
+            {
+                allPlaces.Add(buildPlace);
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (allPlaces[i].ConstructionData.Health > 0)
+                {
+                    attackPlaces.Add(allPlaces[i]);
+                }
+                else if (allPlaces[i + 3].ConstructionData.Health > 0)
+                {
+                    attackPlaces.Add(allPlaces[i + 3]);
+                }
+                else
+                {
+                    attackPlaces.Add(ownerPlayer.MainBuildPlace);
+                }
+            }
+
+            foreach (var place in attackPlaces)
+            {
+                place.SetOutlineState(true);
+            }
+        }
+        
         public static bool ApplyAccurateDamage()
         {
             return false;

@@ -320,6 +320,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pointerEnterScale: 1.25
   _dragScale: 0.4
+  _shakeDuration: 0.5
+  _shakeStrength: 25
+  _shakeVibrato: 20
   _moveLenght: 45
   _scaleDuration: 0.2
   _view: {fileID: 7733372969117363125}
@@ -388,17 +391,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Label
+  m_text: "Accurate \nDamage"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c7a3abd54de085a46abc8e913b4580a6, type: 2}
+  m_sharedMaterial: {fileID: -5373284642551144849, guid: c7a3abd54de085a46abc8e913b4580a6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -421,7 +424,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535

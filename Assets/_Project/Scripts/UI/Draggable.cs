@@ -43,7 +43,6 @@ namespace _Project.Scripts.UI
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            _rect.anchoredPosition = eventData.pressPosition;
             _rect.SetParent(_startParent);
             EndDrag?.Invoke();
         }

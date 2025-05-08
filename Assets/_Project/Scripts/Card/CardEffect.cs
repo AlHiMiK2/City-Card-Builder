@@ -1,6 +1,7 @@
 ﻿using _Project.Scripts.UI;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Card
 {
@@ -15,13 +16,11 @@ namespace _Project.Scripts.Card
         [SerializeField] private RectTransform _view;
         
         private Draggable _draggable;
-        private Card _card;
         private bool _isDragging;
         
         private void Awake()
         {
             _draggable = GetComponent<Draggable>();
-            _card = GetComponent<Card>();
         }
 
         private void OnEnable()

@@ -22,3 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5ae0e02f4252bc449b8dcf012c47d21, type: 2}
   _upgradeCardConfigs:
   - {fileID: 11400000, guid: 20c4efb019c13024e90a261b4e23dc48, type: 2}
+  _mainDefenceCardConfig: {fileID: 11400000, guid: cd2c2f354e7b0de4b8f8aad654ddfaae, type: 2}

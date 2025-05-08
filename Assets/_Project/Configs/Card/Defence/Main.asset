@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df66a73b8e84e9c96eb383078b12b45, type: 3}
+  m_Name: Main
+  m_EditorClassIdentifier: 
+  _label: Main
+  _icon: {fileID: 21300000, guid: 84e7f25708955094ead68d0825b975b1, type: 3}
+  _health: 1
+  _earn: 0
+  _mesh: {fileID: -462981019419857548, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  _materials:
+  - {fileID: 4404839247605695133, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  - {fileID: -551597020860776487, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  - {fileID: 8556262120643298411, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  - {fileID: -4973734387028869240, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  _meshOffset: {x: 0, y: 0.5, z: 0}
+  _rotationOffset: {x: 0, y: 180, z: 0}

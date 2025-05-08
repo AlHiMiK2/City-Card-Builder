@@ -9,8 +9,10 @@ namespace _Project.Scripts.Card
         [SerializeField] private DefenceCardConfig _defaultDefenceCardConfig;
         [SerializeField] private DefenceCardConfig[] _defenceCardConfigs;
         [SerializeField] private UpgradeCardConfig[] _upgradeCardConfigs;
+        [SerializeField] private DefenceCardConfig _mainDefenceCardConfig;
 
         public DefenceCardConfig DefaultDefenceCardConfig => _defaultDefenceCardConfig;
+        public DefenceCardConfig MainDefenceCardConfig => _mainDefenceCardConfig;
 
         public AttackCardConfig GetRandomAttackCardConfig()
         {

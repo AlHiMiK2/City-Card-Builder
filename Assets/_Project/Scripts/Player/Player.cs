@@ -15,10 +15,12 @@ namespace _Project.Scripts.Player
         private GameHandler _gameHandler;
         private Wallet _wallet;
         private int _index;
+        private bool _isDead;
 
         public Wallet Wallet => _wallet;
         public BuildPlace[] BuildPlaces => _buildPlaces;
         public BuildPlace MainBuildPlace => _mainBuildPlace;
+        public bool IsDead => _isDead;
 
         public void Init(int walletCapacity, int index)
         {
@@ -33,6 +35,14 @@ namespace _Project.Scripts.Player
                 place.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
                 placeIndex++;
             }
+            
+            _mainBuildPlace.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.MainDefenceCardConfig);
+            _mainBuildPlace.ConstructionData.HealthChanged += OnMainPlaceHealthChanged;
+        }        
+        
+        private void OnDestroy()
+        {
+            _mainBuildPlace.ConstructionData.HealthChanged -= OnMainPlaceHealthChanged;
         }
         
         public void Earn()
@@ -45,6 +55,14 @@ namespace _Project.Scripts.Player
             }
             
             _wallet.AddScore(earn);
+        }
+
+        private void OnMainPlaceHealthChanged()
+        {
+            if (_mainBuildPlace.ConstructionData.Health <= 0)
+            {
+                _isDead = true;
+            }
         }
 
         private void OnValidate()

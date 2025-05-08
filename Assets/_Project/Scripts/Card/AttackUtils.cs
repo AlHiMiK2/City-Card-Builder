@@ -73,9 +73,6 @@ namespace _Project.Scripts.Card
             
             List<ConstructionData> firstLine = new List<ConstructionData>();
             List<ConstructionData> secondLine = new List<ConstructionData>();
-
-            bool isNotFirstFull = false;
-            bool isNotSecondFull = false;
             
             for (int i = 0; i < ownerPlayer.BuildPlaces.Length; i++)
             {
@@ -86,20 +83,12 @@ namespace _Project.Scripts.Card
                     {
                         firstLine.Add(ownerPlayer.BuildPlaces[i].ConstructionData);
                     }
-                    else
-                    {
-                        isNotFirstFull = true;
-                    }
                 }
                 else
                 {
                     if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
                     {
                         secondLine.Add(ownerPlayer.BuildPlaces[i].ConstructionData);
-                    }
-                    else
-                    {
-                        isNotSecondFull = true;
                     }
                 }
             }
@@ -164,9 +153,6 @@ namespace _Project.Scripts.Card
             List<BuildPlace> attackPlaces = new List<BuildPlace>();
             List<BuildPlace> firstLine = new List<BuildPlace>();
             List<BuildPlace> secondLine = new List<BuildPlace>();
-
-            bool isNotFirstFull = false;
-            bool isNotSecondFull = false;
             
             for (int i = 0; i < ownerPlayer.BuildPlaces.Length; i++)
             {
@@ -177,20 +163,12 @@ namespace _Project.Scripts.Card
                     {
                         firstLine.Add(ownerPlayer.BuildPlaces[i]);
                     }
-                    else
-                    {
-                        isNotFirstFull = true;
-                    }
                 }
                 else
                 {
                     if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
                     {
                         secondLine.Add(ownerPlayer.BuildPlaces[i]);
-                    }
-                    else
-                    {
-                        isNotSecondFull = true;
                     }
                 }
             }

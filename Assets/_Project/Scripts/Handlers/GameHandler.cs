@@ -10,6 +10,7 @@ namespace _Project.Scripts.Handlers
         private CardHandler _cardHandler;
         private UIHandler _uiHandler;
         private int _turnOwnerIndex;
+        private bool _isEnd;
 
         public Player.Player[] Players => _players;
         public GameConfig Config => _config;
@@ -51,15 +52,22 @@ namespace _Project.Scripts.Handlers
 
         public void NextTurn()
         {
-            _turnOwnerIndex++;
-            
-            if (_turnOwnerIndex > _players.Length - 1)
+            if (TryEndGame(out int winPlayerIndex))
             {
-                _turnOwnerIndex = 0;
-                EndRound();
+                Debug.Log("Win Player: " + winPlayerIndex + 1);
             }
+            else
+            {
+                _turnOwnerIndex++;
             
-            StartTurn();
+                if (_turnOwnerIndex > _players.Length - 1)
+                {
+                    _turnOwnerIndex = 0;
+                    EndRound();
+                }
+            
+                StartTurn();
+            }
         }
 
         private void EndRound()
@@ -68,6 +76,25 @@ namespace _Project.Scripts.Handlers
             {
                 player.Earn();
             }
+        }
+
+        private bool TryEndGame(out int winPlayerIndex)
+        {
+            int lifePlayerCount = 0;
+            winPlayerIndex = 0;
+            
+            for (var i = 0; i < _players.Length; i++)
+            {
+                if (!_players[i].IsDead)
+                {
+                    lifePlayerCount++;
+                    winPlayerIndex = i;
+                }
+            }
+
+            bool isEnd = lifePlayerCount <= 1;
+            
+            return isEnd;
         }
     }
 }

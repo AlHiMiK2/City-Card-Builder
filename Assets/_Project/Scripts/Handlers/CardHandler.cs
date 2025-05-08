@@ -79,6 +79,8 @@ namespace _Project.Scripts.Handlers
         {
             foreach (var player in _gameHandler.Players)
             {
+                player.MainBuildPlace.SetOutlineState(false);
+                
                 foreach (var buildPlace in player.BuildPlaces)
                 {
                     buildPlace.SetOutlineState(false);

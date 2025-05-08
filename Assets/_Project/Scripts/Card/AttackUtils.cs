@@ -103,8 +103,6 @@ namespace _Project.Scripts.Card
                     {
                         place.TakeDamage(damage / (firstLine.Count * 2));
                     }
-                    
-                    return true;
                 }
                 else
                 {
@@ -112,11 +110,15 @@ namespace _Project.Scripts.Card
                     {
                         place.TakeDamage(damage / (secondLine.Count * 2));
                     }
-                    
-                    return true;
                 }
+                if (firstLine.Count == 0 && secondLine.Count == 0)
+                {
+                    ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage / 2);
+                }
+                        
+                return true;
             }
-            else
+            if (target.Index < 6)
             {
                 if (ownerPlayer.BuildPlaces[target.Index - 3].ConstructionData.Health <= 0)
                 {
@@ -126,20 +128,64 @@ namespace _Project.Scripts.Card
                     {
                         foreach (var place in firstLine)
                         {
-                            place.TakeDamage(damage / firstLine.Count);
+                            place.TakeDamage(damage / (firstLine.Count * 2));
                         }
-
-                        return true;
                     }
                     else
                     {
                         foreach (var place in secondLine)
                         {
-                            place.TakeDamage(damage / secondLine.Count);
+                            place.TakeDamage(damage / (secondLine.Count * 2));
                         }
-                        
-                        return true;
                     }
+                    if (firstLine.Count == 0 && secondLine.Count == 0)
+                    {
+                        ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage / 2);
+                    }
+                        
+                    return true;
+                }
+            }
+            else
+            {
+                bool isValid = false;
+
+                for (int i = 3; i < ownerPlayer.BuildPlaces.Length; i++)
+                {
+                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health <= 0)
+                    {
+                        if (ownerPlayer.BuildPlaces[i - 3].ConstructionData.Health <= 0)
+                        {
+                            isValid = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (isValid)
+                {
+                    ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage / 2);
+                    
+                    if (firstLine.Count > 0)
+                    {
+                        foreach (var place in firstLine)
+                        {
+                            place.TakeDamage(damage / (firstLine.Count * 2));
+                        }
+                    }
+                    else if (secondLine.Count > 0)
+                    {
+                        foreach (var place in secondLine)
+                        {
+                            place.TakeDamage(damage / (secondLine.Count * 2));
+                        }
+                    }
+                    else
+                    {
+                        ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage / 2);
+                    }
+
+                    return true;
                 }
             }
             
@@ -191,8 +237,12 @@ namespace _Project.Scripts.Card
                         attackPlaces.Add(place);
                     }
                 }
+                if (firstLine.Count == 0 && secondLine.Count == 0)
+                {
+                    attackPlaces.Add(ownerPlayer.MainBuildPlace);
+                }
             }
-            else
+            else if (target.Index < 6)
             {
                 if (ownerPlayer.BuildPlaces[target.Index - 3].ConstructionData.Health <= 0)
                 {
@@ -206,6 +256,46 @@ namespace _Project.Scripts.Card
                         }
                     }
                     else
+                    {
+                        foreach (var place in secondLine)
+                        {
+                            attackPlaces.Add(place);
+                        }
+                    }
+                    if (firstLine.Count == 0 && secondLine.Count == 0)
+                    {
+                        attackPlaces.Add(ownerPlayer.MainBuildPlace);
+                    }
+                }
+            }
+            else
+            {
+                bool isValid = false;
+
+                for (int i = 3; i < ownerPlayer.BuildPlaces.Length; i++)
+                {
+                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health <= 0)
+                    {
+                        if (ownerPlayer.BuildPlaces[i - 3].ConstructionData.Health <= 0)
+                        {
+                            isValid = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (isValid)
+                {
+                    attackPlaces.Add(ownerPlayer.MainBuildPlace);
+                    
+                    if (firstLine.Count > 0)
+                    {
+                        foreach (var place in firstLine)
+                        {
+                            attackPlaces.Add(place);
+                        }
+                    }
+                    else if (secondLine.Count > 0)
                     {
                         foreach (var place in secondLine)
                         {

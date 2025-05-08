@@ -20,6 +20,7 @@ namespace _Project.Scripts.City
             _health = _initHealth;
             _initEarn = earn;
             _earn = _initEarn;
+            HealthChanged?.Invoke();
         }
         
         public void TakeDamage(int damage)

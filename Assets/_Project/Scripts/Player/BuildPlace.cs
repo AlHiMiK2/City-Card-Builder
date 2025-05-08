@@ -1,4 +1,5 @@
 ﻿using _Project.Scripts.Card;
+using _Project.Scripts.Handlers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +9,13 @@ namespace _Project.Scripts.City
     {
         [SerializeField] private MeshFilter _constructionMeshFilter;
         [SerializeField] private MeshRenderer _constructionRenderer;
-        [SerializeField] private Slider _healthBar;
+        [SerializeField] private Vector3 _healthBarOffset;
         
         private ConstructionData _constructionData;
         private int _ownerIndex;
         private int _index;
-
+        private UIHandler _uiHandler;
+        
         public int Index => _index;
         public int OwnerIndex => _ownerIndex;
         public ConstructionData ConstructionData => _constructionData;
@@ -27,33 +29,37 @@ namespace _Project.Scripts.City
         {
             _ownerIndex = ownerPlayerIndex;
             _index = index;
+            _uiHandler = UIHandler.Instance;
+            _uiHandler.AddHealthBar(transform.position + _healthBarOffset, _ownerIndex);
             Build(defenceCardConfig);
         }
 
         private void OnConstructionHealthChanged()
         {
-            UpdateHealthBar();
+            UpdateHealthView();
+            
             if (_constructionData.Health <= 0)
             {
                 _constructionRenderer.material = null;
+                _constructionRenderer.enabled = false;
                 _constructionMeshFilter.mesh = null;
                 _constructionMeshFilter.transform.localPosition = Vector3.zero;
             }
         }
 
-        private void UpdateHealthBar()
+        private void UpdateHealthView()
         {
-            _healthBar.value = (float)_constructionData.Health / _constructionData.InitHealth;
+            _uiHandler.SetHealthViewValue(_constructionData.InitHealth, _constructionData.Health, _index, _ownerIndex);
         }
         
         public void Build(DefenceCardConfig config)
         {
             _constructionData.SetData(config.Health, config.Earn);
             _constructionRenderer.material = config.Material;
+            _constructionRenderer.enabled = true;
             _constructionMeshFilter.mesh = config.Mesh;
             _constructionMeshFilter.transform.localPosition = config.MeshOffset;
             _constructionMeshFilter.transform.SetLocalPositionAndRotation(config.MeshOffset, Quaternion.Euler(config.RotationOffset));
-            UpdateHealthBar();
         }
 
         private void OnDestroy()

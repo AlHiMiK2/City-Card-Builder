@@ -23,6 +23,7 @@ namespace _Project.Scripts.Handlers
         {
             _cardHandler = CardHandler.Instance;
             _cardHandler.Init(this);
+            UIHandler.Instance.Init();
             
             for (var i = 0; i < _players.Length; i++)
             {

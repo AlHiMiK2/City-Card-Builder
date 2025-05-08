@@ -9,7 +9,10 @@ namespace _Project.Scripts.Handlers
     {
         [SerializeField] private Canvas _canvas;
         [SerializeField] private TMP_Text _healthViewPrefab;
-        
+        [SerializeField] private string _turnPrefix;
+        [SerializeField] private string _turnPostfix;
+        [SerializeField] private TMP_Text _turnView;
+
         private List<List<TMP_Text>> _healthBars = new ();
         private Camera _camera;
         
@@ -49,6 +52,11 @@ namespace _Project.Scripts.Handlers
             {
                 _healthBars[ownerIndex][index].text = $"";
             }
+        }
+
+        public void SetTurnViewValue(int turn)
+        {
+            _turnView.text = _turnPrefix + turn + _turnPostfix;
         }
     }
 }

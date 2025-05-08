@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _constructionMeshFilter: {fileID: 8237243926242361380}
   _constructionRenderer: {fileID: 3392658171909542416}
+  _buildPlaceRenderer: {fileID: 8406830115496433165}
   _healthBarOffset: {x: 0, y: 1, z: 0}
   _outlineLayerMask: 1
 --- !u!1 &6609092080524640586

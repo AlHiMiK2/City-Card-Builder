@@ -9,6 +9,7 @@ namespace _Project.Scripts.City
     {
         [SerializeField] private MeshFilter _constructionMeshFilter;
         [SerializeField] private MeshRenderer _constructionRenderer;
+        [SerializeField] private MeshRenderer _buildPlaceRenderer;
         [SerializeField] private Vector3 _healthBarOffset;
         [SerializeField] private int _outlineLayerMask;
         
@@ -77,6 +78,7 @@ namespace _Project.Scripts.City
             }
     
             _constructionRenderer.renderingLayerMask = mask;
+            _buildPlaceRenderer.renderingLayerMask = mask;
         }
         
         private void OnDestroy()

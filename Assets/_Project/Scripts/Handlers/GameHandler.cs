@@ -8,6 +8,7 @@ namespace _Project.Scripts.Handlers
         [SerializeField] private Player.Player[] _players;
 
         private CardHandler _cardHandler;
+        private UIHandler _uiHandler;
         private int _turnOwnerIndex;
 
         public Player.Player[] Players => _players;
@@ -23,7 +24,8 @@ namespace _Project.Scripts.Handlers
         {
             _cardHandler = CardHandler.Instance;
             _cardHandler.Init(this);
-            UIHandler.Instance.Init();
+            _uiHandler = UIHandler.Instance;
+            _uiHandler.Init();
             
             for (var i = 0; i < _players.Length; i++)
             {
@@ -43,6 +45,8 @@ namespace _Project.Scripts.Handlers
             {
                 _players[_turnOwnerIndex].Wallet.ClearScore();
             }
+            
+            _uiHandler.SetTurnViewValue(_turnOwnerIndex + 1);
         }
 
         public void NextTurn()

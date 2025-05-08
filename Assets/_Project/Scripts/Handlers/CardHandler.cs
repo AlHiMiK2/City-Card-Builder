@@ -49,7 +49,10 @@ namespace _Project.Scripts.Handlers
 
                 if (attackConfig.Type == DamageType.Accurate)
                 {
-                    AttackUtils.ApplyAccurateDamage();
+                    if (AttackUtils.TryApplyAccurateDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex]) == false)
+                    {
+                        return false;
+                    }
                 }
                 else if (attackConfig.Type == DamageType.Area)
                 {
@@ -95,6 +98,7 @@ namespace _Project.Scripts.Handlers
 
                 if (attackConfig.Type == DamageType.Accurate)
                 {
+                    AttackUtils.VisualiseAccurateDamage(target, _gameHandler.Players[target.OwnerIndex]);
                 }
                 else if (attackConfig.Type == DamageType.Area)
                 {

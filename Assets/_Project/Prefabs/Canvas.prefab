@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardPrefab: {fileID: -7113842017304705252, guid: 5db3a1b98b07b654c828f42dbfbd0556, type: 3}
   _container: {fileID: 7401705514716709016}
+  _spawnOffset: {x: 0, y: 151.8834, z: 0}
 --- !u!1 &426895434331307723
 GameObject:
   m_ObjectHideFlags: 0

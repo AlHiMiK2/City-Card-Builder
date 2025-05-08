@@ -7,6 +7,7 @@ namespace _Project.Scripts.Card
     {
         [SerializeField] private Card _cardPrefab;
         [SerializeField] private Transform _container;
+        [SerializeField] private Vector3 _spawnOffset;
         
         private List<Card> _cards = new ();
 
@@ -19,6 +20,7 @@ namespace _Project.Scripts.Card
                 var instance = Instantiate(_cardPrefab, _container);
                 instance.Init(cardConfig, ownerPlayerIndex);
                 _cards.Add(instance);
+                instance.transform.Translate(_spawnOffset);
             }
         }
 

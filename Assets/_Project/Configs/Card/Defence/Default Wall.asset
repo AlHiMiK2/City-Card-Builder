@@ -16,7 +16,9 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _health: 10
   _earn: 3
-  _mesh: {fileID: 2035880078066663383, guid: 287d8c3357973dd42bc05f4c1764e42c, type: 3}
-  _material: {fileID: -1255982633427224767, guid: 287d8c3357973dd42bc05f4c1764e42c, type: 3}
+  _mesh: {fileID: -462981019419857548, guid: 287d8c3357973dd42bc05f4c1764e42c, type: 3}
+  _materials:
+  - {fileID: 4404839247605695133, guid: 287d8c3357973dd42bc05f4c1764e42c, type: 3}
+  - {fileID: -551597020860776487, guid: 287d8c3357973dd42bc05f4c1764e42c, type: 3}
   _meshOffset: {x: 0, y: 0.5, z: 0}
-  _rotationOffset: {x: 0, y: 0, z: 0}
+  _rotationOffset: {x: 0, y: 90, z: 0}

@@ -17,6 +17,10 @@ MonoBehaviour:
   _health: 15
   _earn: 10
   _mesh: {fileID: -462981019419857548, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
-  _material: {fileID: -8649992195856677659, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  _materials:
+  - {fileID: 4404839247605695133, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  - {fileID: -551597020860776487, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  - {fileID: 8556262120643298411, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  - {fileID: -4973734387028869240, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
   _meshOffset: {x: 0, y: 0.5, z: 0}
   _rotationOffset: {x: 0, y: 180, z: 0}

@@ -72,6 +72,46 @@ namespace _Project.Scripts.Handlers
             return false;
         }
 
+        public void VisualiseApplyCard(CardConfig config, BuildPlace target, int ownerIndex)
+        {
+            foreach (var player in _gameHandler.Players)
+            {
+                foreach (var buildPlace in player.BuildPlaces)
+                {
+                    buildPlace.SetOutlineState(false);
+                }
+            }
+            
+            if(!target) return;
+            if (config is DefenceCardConfig defenceConfig)
+            {
+                if (target.OwnerIndex != ownerIndex) return;
+                target.SetOutlineState(true);
+                return;
+            }
+            if (config is AttackCardConfig attackConfig)
+            {
+                if (target.OwnerIndex == ownerIndex) return;
+
+                if (attackConfig.Type == DamageType.Accurate)
+                {
+                }
+                else if (attackConfig.Type == DamageType.Area)
+                {
+                    //if (AttackUtils.TryApplyAreaDamage(attackConfig.Damage, _gameHandler.Players[target.OwnerIndex]) == false)
+                    //{
+                    //    return;
+                    //}
+                }
+                
+                return;
+            }
+            if (config is UpgradeCardConfig upgradeConfig)
+            {
+                if (target.OwnerIndex != ownerIndex) return;
+            }
+        }
+
         private void CardApplied()
         {
             _appliedCardCount++;

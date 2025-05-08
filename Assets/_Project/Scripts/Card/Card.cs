@@ -41,16 +41,37 @@ namespace _Project.Scripts.Card
 
         private void OnEnable()
         {
+            _draggable.Drag += OnDrag;
             _draggable.EndDrag += OnEndDrag;
         }
 
         private void OnDisable()
         {
+            _draggable.Drag -= OnDrag;
             _draggable.EndDrag -= OnEndDrag;
         }
 
+        private void OnDrag()
+        {
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            bool isHit = Physics.Raycast(ray, out RaycastHit hitInfo, _rayDistance, _layerMask, QueryTriggerInteraction.Ignore);
+            
+            if (isHit)
+            {
+                if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace))
+                {
+                    _cardHandler.VisualiseApplyCard(_config, buildPlace, _ownerIndex);
+                    return;
+                }
+            }
+            
+            _cardHandler.VisualiseApplyCard(_config, null, _ownerIndex);
+        }
+        
         private void OnEndDrag()
         {
+            _cardHandler.VisualiseApplyCard(_config, null, _ownerIndex);
+            
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             bool isHit = Physics.Raycast(ray, out RaycastHit hitInfo, _rayDistance, _layerMask, QueryTriggerInteraction.Ignore);
             

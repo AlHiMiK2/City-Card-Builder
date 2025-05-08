@@ -10,6 +10,7 @@ namespace _Project.Scripts.City
         [SerializeField] private MeshFilter _constructionMeshFilter;
         [SerializeField] private MeshRenderer _constructionRenderer;
         [SerializeField] private Vector3 _healthBarOffset;
+        [SerializeField] private int _outlineLayerMask;
         
         private ConstructionData _constructionData;
         private int _ownerIndex;
@@ -62,6 +63,22 @@ namespace _Project.Scripts.City
             _constructionMeshFilter.transform.SetLocalPositionAndRotation(config.MeshOffset, Quaternion.Euler(config.RotationOffset));
         }
 
+        public void SetOutlineState(bool state)
+        {
+            uint mask = _constructionRenderer.renderingLayerMask;
+    
+            if (state)
+            {
+                mask |= (uint)(1 << _outlineLayerMask);
+            }
+            else
+            {
+                mask &= ~(uint)(1 << _outlineLayerMask);
+            }
+    
+            _constructionRenderer.renderingLayerMask = mask;
+        }
+        
         private void OnDestroy()
         {
             _constructionData.HealthChanged -= OnConstructionHealthChanged;

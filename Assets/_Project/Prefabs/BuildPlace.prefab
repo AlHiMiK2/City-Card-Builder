@@ -157,6 +157,7 @@ MonoBehaviour:
   _constructionMeshFilter: {fileID: 8237243926242361380}
   _constructionRenderer: {fileID: 3392658171909542416}
   _healthBarOffset: {x: 0, y: 1, z: 0}
+  _outlineLayerMask: 1
 --- !u!1 &6609092080524640586
 GameObject:
   m_ObjectHideFlags: 0

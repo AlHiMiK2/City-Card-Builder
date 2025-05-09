@@ -18,7 +18,7 @@ MonoBehaviour:
   _earn: 3
   _mesh: {fileID: -462981019419857548, guid: 287d8c3357973dd42bc05f4c1764e42c, type: 3}
   _materials:
-  - {fileID: 4404839247605695133, guid: 287d8c3357973dd42bc05f4c1764e42c, type: 3}
-  - {fileID: -551597020860776487, guid: 287d8c3357973dd42bc05f4c1764e42c, type: 3}
+  - {fileID: 2100000, guid: 25b503a56e6d4d3488d2a1e504fd3971, type: 2}
+  - {fileID: 2100000, guid: c80728a1535647a498766fb8326eff70, type: 2}
   _meshOffset: {x: 0, y: 0.5, z: 0}
   _rotationOffset: {x: 0, y: 90, z: 0}

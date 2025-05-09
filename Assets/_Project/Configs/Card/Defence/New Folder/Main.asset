@@ -15,8 +15,8 @@ MonoBehaviour:
   _label: Main
   _icon: {fileID: 21300000, guid: 84e7f25708955094ead68d0825b975b1, type: 3}
   _health: 50
-  _earn: 0
-  _mesh: {fileID: -462981019419857548, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
+  _earn: 1
+  _mesh: {fileID: -6184455318211055047, guid: 33f5fe8a17b50f2469eefb369b7ef92e, type: 3}
   _materials:
   - {fileID: 2100000, guid: 25b503a56e6d4d3488d2a1e504fd3971, type: 2}
   - {fileID: 2100000, guid: c80728a1535647a498766fb8326eff70, type: 2}

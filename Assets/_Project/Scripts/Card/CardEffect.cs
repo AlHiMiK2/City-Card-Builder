@@ -9,7 +9,6 @@ namespace _Project.Scripts.Card
     [RequireComponent(typeof(Draggable))]
     public class CardEffect : MonoBehaviour
     {
-        [SerializeField] private float _pointerEnterScale;
         [SerializeField] private float _dragScale;
         [SerializeField] private float _moveLenght;
         [SerializeField] private float _scaleDuration;
@@ -45,6 +44,7 @@ namespace _Project.Scripts.Card
         {
             _view.DOKill();
             _view.DOScale(Vector3.one * _dragScale, _scaleDuration);
+            _view.DOLocalMoveY(0, _scaleDuration);
             _isDragging = true;
         }
         
@@ -65,7 +65,6 @@ namespace _Project.Scripts.Card
             if (!_isDragging)
             {
                 _view.DOKill();
-                _view.DOScale(Vector3.one * _pointerEnterScale, _scaleDuration);
                 _view.DOLocalMoveY(_moveLenght, _scaleDuration);
             }
         }

@@ -8,7 +8,7 @@ namespace _Project.Scripts.Player
     public class Player : MonoBehaviour
     {
         [SerializeField] private BuildPlace[] _buildPlaces;
-        [SerializeField] private BuildPlace _mainBuildPlace;
+        [SerializeField] private MainBuildPlace _mainBuildPlace;
         [SerializeField] private WalletView _walletView;
         
         private CardHandler _cardHandler;
@@ -19,7 +19,7 @@ namespace _Project.Scripts.Player
 
         public Wallet Wallet => _wallet;
         public BuildPlace[] BuildPlaces => _buildPlaces;
-        public BuildPlace MainBuildPlace => _mainBuildPlace;
+        public MainBuildPlace MainBuildPlace => _mainBuildPlace;
         public bool IsDead => _isDead;
 
         public void Init(int walletCapacity, int index)

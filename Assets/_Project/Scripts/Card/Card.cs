@@ -58,7 +58,7 @@ namespace _Project.Scripts.Card
             
             if (isHit)
             {
-                if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace))
+                if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace) && buildPlace is not MainBuildPlace)
                 {
                     _cardHandler.VisualiseApplyCard(_config, buildPlace, _ownerIndex);
                     return;

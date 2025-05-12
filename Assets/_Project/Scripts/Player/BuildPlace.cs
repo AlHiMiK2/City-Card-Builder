@@ -32,7 +32,7 @@ namespace _Project.Scripts.City
             _ownerIndex = ownerPlayerIndex;
             _index = index;
             _uiHandler = UIHandler.Instance;
-            _uiHandler.AddHealthBar(transform.position + _healthBarOffset, _ownerIndex);
+            _uiHandler.AddConstructionDataView(transform.position + _healthBarOffset, _ownerIndex);
             Build(defenceCardConfig);
         }
 
@@ -51,7 +51,7 @@ namespace _Project.Scripts.City
 
         private void UpdateHealthView()
         {
-            _uiHandler.SetHealthViewValue(_constructionData.InitHealth, _constructionData.Health, _index, _ownerIndex);
+            _uiHandler.SetConstructionDataViewValue(_constructionData.InitHealth, _constructionData.Health, _constructionData.Earn, _index, _ownerIndex);
         }
         
         public void Build(DefenceCardConfig config)

@@ -38,11 +38,11 @@ namespace _Project.Scripts.Handlers
 
         private void StartTurn()
         {
-            bool isBonusBuild = _players[_turnOwnerIndex].Wallet.IsFulled;
+            bool isWalletFulled = _players[_turnOwnerIndex].Wallet.IsFulled;
             
-            _cardHandler.CreateCardBuild(_turnOwnerIndex, isBonusBuild);
+            _cardHandler.CreateCardBuild(_turnOwnerIndex, isWalletFulled);
             
-            if (isBonusBuild)
+            if (isWalletFulled)
             {
                 _players[_turnOwnerIndex].Wallet.ClearScore();
             }

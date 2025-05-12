@@ -10,13 +10,17 @@ namespace _Project.Scripts
         [SerializeField] private int _walletCapacity;
         [SerializeField] private int _upgradeCardCount;
         [SerializeField] private int _otherCardCount;
+        [SerializeField] private int _bonusCardCount;
         [SerializeField] private int _cardApplyPerTurn;
+        [SerializeField] private int _bonusCardApplyPerTurn;
         [SerializeField] private CardDatabase _cardDatabase;
 
         public int WalletCapacity => _walletCapacity;
         public int UpgradeCardCount => _upgradeCardCount;
         public int OtherCardCount => _otherCardCount;
+        public int BonusCardCount => _bonusCardCount;
         public int CardApplyPerTurn => _cardApplyPerTurn;
+        public int BonusCardApplyPerTurn => _bonusCardApplyPerTurn;
         public CardDatabase CardDatabase => _cardDatabase;
     }
 }

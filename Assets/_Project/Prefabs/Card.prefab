@@ -242,9 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d60cd28c734cd69a5b6e73c1a3cb9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointerEnterScale: 1
   _dragScale: 0.4
-  _moveLenght: 45
+  _move: {x: -45, y: 45}
   _scaleDuration: 0.2
   _view: {fileID: 7733372969117363125}
 --- !u!1 &6394699749755524151

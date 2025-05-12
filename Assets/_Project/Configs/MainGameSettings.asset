@@ -15,5 +15,7 @@ MonoBehaviour:
   _walletCapacity: 100
   _upgradeCardCount: 1
   _otherCardCount: 4
+  _bonusCardCount: 3
   _cardApplyPerTurn: 2
+  _bonusCardApplyPerTurn: 1
   _cardDatabase: {fileID: 11400000, guid: f6d6447b7b990424bb1aee95b39961b7, type: 2}

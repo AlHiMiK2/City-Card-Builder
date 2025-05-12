@@ -1,7 +1,6 @@
 ﻿using _Project.Scripts.UI;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Card
 {
@@ -10,7 +9,7 @@ namespace _Project.Scripts.Card
     public class CardEffect : MonoBehaviour
     {
         [SerializeField] private float _dragScale;
-        [SerializeField] private float _moveLenght;
+        [SerializeField] private Vector3 _move;
         [SerializeField] private float _scaleDuration;
         [SerializeField] private RectTransform _view;
         
@@ -44,7 +43,7 @@ namespace _Project.Scripts.Card
         {
             _view.DOKill();
             _view.DOScale(Vector3.one * _dragScale, _scaleDuration);
-            _view.DOLocalMoveY(0, _scaleDuration);
+            _view.DOLocalMove(Vector3.zero, _scaleDuration);
             _isDragging = true;
         }
         
@@ -65,7 +64,7 @@ namespace _Project.Scripts.Card
             if (!_isDragging)
             {
                 _view.DOKill();
-                _view.DOLocalMoveY(_moveLenght, _scaleDuration);
+                _view.DOLocalMove(_move, _scaleDuration);
             }
         }
 
@@ -75,7 +74,7 @@ namespace _Project.Scripts.Card
             {
                 _view.DOKill();
                 _view.DOScale(Vector3.one, _scaleDuration);
-                _view.DOLocalMoveY(0, _scaleDuration);
+                _view.DOLocalMove(Vector3.zero, _scaleDuration);
             }
         }
 

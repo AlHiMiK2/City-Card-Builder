@@ -12,7 +12,7 @@ namespace _Project.Scripts.Card
             _config = config;
         }
 
-        public List<CardConfig> Generate()
+        public List<CardConfig> Generate(bool isBonus)
         {
             List<CardConfig> instantiatedCards = new List<CardConfig>();
 
@@ -21,7 +21,9 @@ namespace _Project.Scripts.Card
                 instantiatedCards.Add(_config.CardDatabase.GetRandomUpgradeCardConfig());
             }
 
-            for (int i = 0; i < _config.OtherCardCount; i++)
+            int otherCardCount = isBonus ? _config.OtherCardCount + _config.BonusCardCount : _config.OtherCardCount;
+
+            for (int i = 0; i < otherCardCount; i++)
             {
                 int selectedCardType = Random.Range(0, 2);
 

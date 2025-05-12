@@ -12,6 +12,7 @@ namespace _Project.Scripts.Handlers
         private CardBuildGenerator _cardBuildGenerator;
         private GameHandler _gameHandler;
         private int _appliedCardCount;
+        private bool _isBonus;
         
         public static CardHandler Instance { get; private set; }
 
@@ -25,12 +26,13 @@ namespace _Project.Scripts.Handlers
             _gameHandler = handler;
         }
 
-        public void CreateCardBuild(int ownerPlayerIndex, bool isBonusBuild)
+        public void CreateCardBuild(int ownerPlayerIndex, bool isBonus)
         {
-            if(_cardBuildGenerator == null)
+            if (_cardBuildGenerator == null)
                 _cardBuildGenerator = new CardBuildGenerator(_gameHandler.Config);
-            
-            _cardContainer.Fill(_cardBuildGenerator.Generate(), ownerPlayerIndex);
+
+            _isBonus = isBonus;
+            _cardContainer.Fill(_cardBuildGenerator.Generate(_isBonus), ownerPlayerIndex);
             _appliedCardCount = 0; 
         }
 
@@ -119,7 +121,11 @@ namespace _Project.Scripts.Handlers
         {
             _appliedCardCount++;
 
-            if (_gameHandler.Config.CardApplyPerTurn <= _appliedCardCount)
+            int cardApplyCount = _isBonus
+                ? _gameHandler.Config.CardApplyPerTurn + _gameHandler.Config.BonusCardApplyPerTurn
+                : _gameHandler.Config.CardApplyPerTurn;
+                
+            if (cardApplyCount <= _appliedCardCount)
             {
                 _cardContainer.Clear();
                 _gameHandler.NextTurn();

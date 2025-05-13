@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardPrefab: {fileID: -7113842017304705252, guid: 5db3a1b98b07b654c828f42dbfbd0556, type: 3}
+  _bonusCardPrefab: {fileID: -7113842017304705252, guid: aff0e368a8a98284cbe568299fb8c6fe, type: 3}
   _container: {fileID: 7401705514716709016}
   _spawnOffset: {x: 0, y: 105, z: 0}
 --- !u!1 &426895434331307723
@@ -242,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 2908767116527639649}
-  _healthViewPrefab: {fileID: 4092273762660891531, guid: 1198345534e931d4eb11afd919af4d61, type: 3}
+  _constructionDataViewPrefab: {fileID: 4092273762660891531, guid: 1198345534e931d4eb11afd919af4d61, type: 3}
   _turnPrefix: 'Player '
   _turnPostfix: '''s turn'
   _turnView: {fileID: 1416918270812110158}
@@ -303,7 +304,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 250, y: 350}
-  m_Spacing: {x: 30, y: 0}
+  m_Spacing: {x: 20, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
 --- !u!1 &5560741558170021335

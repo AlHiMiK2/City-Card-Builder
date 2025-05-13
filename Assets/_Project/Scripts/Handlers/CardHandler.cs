@@ -12,7 +12,9 @@ namespace _Project.Scripts.Handlers
         private CardBuildGenerator _cardBuildGenerator;
         private GameHandler _gameHandler;
         private int _appliedCardCount;
-        private bool _isBonus;
+        private bool _isBonusBuild;
+        private bool _isMainBuildApplied;
+        private int _ownerPlayerIndex;
         
         public static CardHandler Instance { get; private set; }
 
@@ -26,13 +28,21 @@ namespace _Project.Scripts.Handlers
             _gameHandler = handler;
         }
 
-        public void CreateCardBuild(int ownerPlayerIndex, bool isBonus)
+        public void StartTurn(int ownerPlayerIndex, bool isBonusBuild)
+        {
+            _isMainBuildApplied = false;
+            _isBonusBuild = isBonusBuild;
+            _ownerPlayerIndex = ownerPlayerIndex;
+    
+            CreateCardBuild(_ownerPlayerIndex, false);
+        }
+        
+        private void CreateCardBuild(int ownerPlayerIndex, bool isBonusBuild)
         {
             if (_cardBuildGenerator == null)
                 _cardBuildGenerator = new CardBuildGenerator(_gameHandler.Config);
 
-            _isBonus = isBonus;
-            _cardContainer.Fill(_cardBuildGenerator.Generate(_isBonus), ownerPlayerIndex);
+            _cardContainer.Fill(_cardBuildGenerator.Generate(isBonusBuild), ownerPlayerIndex, isBonusBuild);
             _appliedCardCount = 0; 
         }
 
@@ -121,14 +131,31 @@ namespace _Project.Scripts.Handlers
         {
             _appliedCardCount++;
 
-            int cardApplyCount = _isBonus
-                ? _gameHandler.Config.CardApplyPerTurn + _gameHandler.Config.BonusCardApplyPerTurn
-                : _gameHandler.Config.CardApplyPerTurn;
-                
-            if (cardApplyCount <= _appliedCardCount)
+            if (_isMainBuildApplied)
             {
-                _cardContainer.Clear();
-                _gameHandler.NextTurn();
+                if (_gameHandler.Config.BonusCardApplyPerTurn <= _appliedCardCount)
+                {
+                    _cardContainer.Clear();
+                    _gameHandler.NextTurn();
+                }
+            }
+            else
+            {
+                if (_gameHandler.Config.CardApplyPerTurn <= _appliedCardCount)
+                {
+                    _isMainBuildApplied = true;
+                
+                    if (_isBonusBuild)
+                    {
+                        _cardContainer.Clear();
+                        CreateCardBuild(_ownerPlayerIndex, true);
+                    }
+                    else
+                    {
+                        _cardContainer.Clear();
+                        _gameHandler.NextTurn();
+                    }
+                }
             }
         }
     }

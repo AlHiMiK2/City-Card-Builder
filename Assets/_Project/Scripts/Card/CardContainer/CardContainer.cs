@@ -6,6 +6,7 @@ namespace _Project.Scripts.Card
     public class CardContainer : MonoBehaviour
     {
         [SerializeField] private Card _cardPrefab;
+        [SerializeField] private Card _bonusCardPrefab;
         [SerializeField] private Transform _container;
         [SerializeField] private Vector3 _spawnOffset;
         
@@ -13,11 +14,17 @@ namespace _Project.Scripts.Card
 
         public List<Card> Cards => _cards;
 
-        public void Fill(List<CardConfig> cardConfigs, int ownerPlayerIndex)
+        public void Fill(List<CardConfig> cardConfigs, int ownerPlayerIndex, bool isBonus)
         {
             foreach (var cardConfig in cardConfigs)
             {
-                var instance = Instantiate(_cardPrefab, _container);
+                Card instance;
+                
+                if (isBonus)
+                    instance = Instantiate(_bonusCardPrefab, _container);
+                else
+                    instance = Instantiate(_cardPrefab, _container);
+                
                 instance.Init(cardConfig, ownerPlayerIndex);
                 _cards.Add(instance);
                 instance.transform.Translate(_spawnOffset);

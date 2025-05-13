@@ -40,7 +40,7 @@ namespace _Project.Scripts.Handlers
         {
             bool isWalletFulled = _players[_turnOwnerIndex].Wallet.IsFulled;
             
-            _cardHandler.CreateCardBuild(_turnOwnerIndex, isWalletFulled);
+            _cardHandler.StartTurn(_turnOwnerIndex, isWalletFulled);
             
             if (isWalletFulled)
             {

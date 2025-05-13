@@ -45,7 +45,7 @@ namespace _Project.Scripts.Handlers
         {
             if (health > 0)
             {
-                _healthBars[ownerIndex][index].text = $"{health}/{maxHealth}HP";
+                _healthBars[ownerIndex][index].text = $"{health}/{maxHealth}HP \n {earn} Earn";
             }
             else
             {

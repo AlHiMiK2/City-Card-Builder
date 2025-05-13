@@ -12,16 +12,19 @@ namespace _Project.Scripts.Card
             _config = config;
         }
 
-        public List<CardConfig> Generate(bool isBonus)
+        public List<CardConfig> Generate(bool isBonusBuild)
         {
             List<CardConfig> instantiatedCards = new List<CardConfig>();
 
-            for (int i = 0; i < _config.UpgradeCardCount; i++)
+            if (isBonusBuild == false)
             {
-                instantiatedCards.Add(_config.CardDatabase.GetRandomUpgradeCardConfig());
+                for (int i = 0; i < _config.UpgradeCardCount; i++)
+                {
+                    instantiatedCards.Add(_config.CardDatabase.GetRandomUpgradeCardConfig());
+                }
             }
 
-            int otherCardCount = isBonus ? _config.OtherCardCount + _config.BonusCardCount : _config.OtherCardCount;
+            int otherCardCount = isBonusBuild ? _config.BonusCardCount : _config.OtherCardCount;
 
             for (int i = 0; i < otherCardCount; i++)
             {

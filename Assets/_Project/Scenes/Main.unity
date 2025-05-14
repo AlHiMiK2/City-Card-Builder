@@ -771,7 +771,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
     - target: {fileID: 680472782122666465, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -780,8 +779,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-=======
->>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -808,17 +805,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
     - target: {fileID: 1679887248755278591, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1679887248755278591, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalScale.z
-=======
-    - target: {fileID: 1749224749377989550, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: _isFlip
->>>>>>> Stashed changes
 =======
     - target: {fileID: 1749224749377989550, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: _isFlip
@@ -916,7 +908,6 @@ PrefabInstance:
     - target: {fileID: 3260730528475795856, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
       propertyPath: m_LocalScale.z
       value: -1
       objectReference: {fileID: 0}
@@ -931,10 +922,6 @@ PrefabInstance:
     - target: {fileID: 3404300495923794346, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-=======
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
->>>>>>> Stashed changes
 =======
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
@@ -1028,13 +1015,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
       objectReference: {fileID: 0}
     - target: {fileID: 6021518425395638339, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
-=======
->>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
       objectReference: {fileID: 0}
@@ -1052,7 +1036,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
     - target: {fileID: 7215777255890767696, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -1061,8 +1044,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-=======
->>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -1125,7 +1106,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
     - target: {fileID: 8374754784101457659, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -1134,8 +1114,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-=======
->>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -1182,17 +1160,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
     - target: {fileID: 8588754757755254707, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8588754757755254707, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalScale.z
-=======
-    - target: {fileID: 8657946924932521698, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: _isFlip
->>>>>>> Stashed changes
 =======
     - target: {fileID: 8657946924932521698, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: _isFlip

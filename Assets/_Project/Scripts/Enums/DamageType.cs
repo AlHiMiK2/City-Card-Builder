@@ -4,7 +4,6 @@
     {
         Area,
         Accurate,
-        Debuff,
-        Layer
+        Debuff
     }
 }

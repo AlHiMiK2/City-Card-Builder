@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.singularitygroup.hotreload": "file:C:/My Files/Job/Unity Projects/assets/com.singularitygroup.hotreload",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "2.0.7",
     "com.unity.collab-proxy": "2.8.1",

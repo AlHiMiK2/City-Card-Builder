@@ -709,10 +709,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 134192111766612056, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 259593406430661208, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -723,7 +719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 461566507227619504, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: _isFlip
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 468696987369309305, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -763,7 +759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1749224749377989550, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: _isFlip
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1774571650122747751, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -839,7 +835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317338860796918011, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: _isFlip
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2712758005081121358, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -847,7 +843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2977125431084519183, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: _isFlip
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3065397176052201451, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -979,7 +975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7725292975349900801, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: _isFlip
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7887484730602275104, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1035,7 +1031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8657946924932521698, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: _isFlip
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8847351535768361365, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1043,7 +1039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8876398276260509610, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: _isFlip
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9108262301594106307, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
       propertyPath: m_AnchorMax.y

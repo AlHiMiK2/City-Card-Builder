@@ -10,7 +10,6 @@ namespace _Project.Scripts.City
         [SerializeField] private MeshFilter _constructionMeshFilter;
         [SerializeField] private MeshRenderer _constructionRenderer;
         [SerializeField] private MeshRenderer _buildPlaceRenderer;
-        [SerializeField] private bool _isFlip;
         [SerializeField] private Vector3 _healthBarOffset;
         [SerializeField] private int _outlineLayerMask;
         
@@ -34,12 +33,6 @@ namespace _Project.Scripts.City
             _index = index;
             _uiHandler = UIHandler.Instance;
             _uiHandler.AddConstructionDataView(transform.position + _healthBarOffset, _ownerIndex);
-            
-            if (_isFlip)
-            {
-                _constructionRenderer.transform.localScale = new Vector3(1, 1, -1);
-            }
-            
             Build(defenceCardConfig);
         }
 
@@ -68,16 +61,7 @@ namespace _Project.Scripts.City
             _constructionRenderer.enabled = true;
             _constructionMeshFilter.mesh = config.Mesh;
             _constructionMeshFilter.transform.localPosition = config.MeshOffset;
-
-            if (_isFlip)
-            {
-                var rotation = Quaternion.Euler(config.RotationOffset.x, config.RotationOffset.y + 180f, config.RotationOffset.z);
-                _constructionMeshFilter.transform.SetLocalPositionAndRotation(config.MeshOffset, rotation);
-            }
-            else
-            {
-                _constructionMeshFilter.transform.SetLocalPositionAndRotation(config.MeshOffset, Quaternion.Euler(config.RotationOffset));
-            }
+            _constructionMeshFilter.transform.SetLocalPositionAndRotation(config.MeshOffset, Quaternion.Euler(config.RotationOffset));
         }
 
         public void SetOutlineState(bool state)

@@ -204,7 +204,7 @@ Material:
     - _IntersectionDistortion: 0
     - _IntersectionFalloff: 1
     - _IntersectionFoamOn: 1
-    - _IntersectionLength: 4.62
+    - _IntersectionLength: 3
     - _IntersectionRippleDist: 32
     - _IntersectionRippleSpeed: 3
     - _IntersectionRippleStrength: 0.5
@@ -295,7 +295,7 @@ Material:
     - _WaveDistance: 0.775
     - _WaveDistortion: 0.5
     - _WaveFrequency: 0.8
-    - _WaveHeight: 1
+    - _WaveHeight: 0.1
     - _WaveMaxLayers: 64
     - _WaveNormalStr: 0.1
     - _WaveSpeed: 2.3999996

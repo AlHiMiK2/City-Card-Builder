@@ -310,5 +310,155 @@ namespace _Project.Scripts.Card
                 place.SetOutlineState(true);
             }
         }
+
+        public static bool TryApplyLayerDamage(int damage, BuildPlace target, Player.Player ownerPlayer)
+        {
+            if (target.ConstructionData.Health <= 0) return false;
+
+            List<ConstructionData> firstLine = new List<ConstructionData>();
+            List<ConstructionData> secondLine = new List<ConstructionData>();
+
+            for (int i = 0; i < ownerPlayer.BuildPlaces.Length; i++)
+            {
+                if (target.Index == ownerPlayer.BuildPlaces[i].Index) continue;
+                if (i < 3)
+                {
+                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
+                    {
+                        firstLine.Add(ownerPlayer.BuildPlaces[i].ConstructionData);
+                    }
+                }
+                else
+                {
+                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
+                    {
+                        secondLine.Add(ownerPlayer.BuildPlaces[i].ConstructionData);
+                    }
+                }
+            }
+
+            if (target.Index < 3)
+            {
+                target.ConstructionData.TakeDamage(damage / (firstLine.Count+1));
+                foreach (var place in firstLine)
+                {
+                    place.TakeDamage(damage / (firstLine.Count+1));
+                }
+
+                return true;
+            }
+            if (target.Index < 6)
+            {
+                if (ownerPlayer.BuildPlaces[target.Index - 3].ConstructionData.Health <= 0)
+                {
+                    target.ConstructionData.TakeDamage(damage / (secondLine.Count+1));
+                    foreach (var place in secondLine)
+                    {
+                        place.TakeDamage(damage / (secondLine.Count + 1));
+                    }
+
+                    return true;
+                }
+            }
+            else
+            {
+                bool isValid = false;
+
+                for (int i = 3; i < ownerPlayer.BuildPlaces.Length; i++)
+                {
+                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health <= 0)
+                    {
+                        if (ownerPlayer.BuildPlaces[i - 3].ConstructionData.Health <= 0)
+                        {
+                            isValid = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (isValid)
+                {
+                    ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static void VisualiseLayerDamage(BuildPlace target, Player.Player ownerPlayer)
+        {
+            if (target.ConstructionData.Health <= 0) return;
+
+            List<BuildPlace> attackPlaces = new List<BuildPlace>();
+            List<BuildPlace> firstLine = new List<BuildPlace>();
+            List<BuildPlace> secondLine = new List<BuildPlace>();
+
+            for (int i = 0; i < ownerPlayer.BuildPlaces.Length; i++)
+            {
+                if (target.Index == ownerPlayer.BuildPlaces[i].Index) continue;
+                if (i < 3)
+                {
+                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
+                    {
+                        firstLine.Add(ownerPlayer.BuildPlaces[i]);
+                    }
+                }
+                else
+                {
+                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
+                    {
+                        secondLine.Add(ownerPlayer.BuildPlaces[i]);
+                    }
+                }
+            }
+
+            if (target.Index < 3)
+            {
+                attackPlaces.Add(target);
+                foreach (var place in firstLine)
+                {
+                    attackPlaces.Add(place);
+                }
+            }
+            else if (target.Index < 6)
+            {
+                if (ownerPlayer.BuildPlaces[target.Index - 3].ConstructionData.Health <= 0)
+                {
+                    attackPlaces.Add(target);
+                    foreach (var place in secondLine)
+                    {
+                        attackPlaces.Add(place);
+                    }
+                }
+            }
+            else
+            {
+                bool isValid = false;
+
+                for (int i = 3; i < ownerPlayer.BuildPlaces.Length; i++)
+                {
+                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health <= 0)
+                    {
+                        if (ownerPlayer.BuildPlaces[i - 3].ConstructionData.Health <= 0)
+                        {
+                            isValid = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (isValid)
+                {
+                    attackPlaces.Add(ownerPlayer.MainBuildPlace);
+                }
+            }
+
+            foreach (var place in attackPlaces)
+            {
+                place.SetOutlineState(true);
+            }
+        }
     }
 }

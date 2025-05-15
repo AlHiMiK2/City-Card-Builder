@@ -60,17 +60,17 @@ namespace _Project.Scripts.Card
             {
                 if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace))
                 {
-                    _cardHandler.VisualiseApplyCard(_config, buildPlace, _ownerIndex);
+                    _cardHandler.TryApplyCard(_config, buildPlace, _ownerIndex, true);
                     return;
                 }
             }
             
-            _cardHandler.VisualiseApplyCard(_config, null, _ownerIndex);
+            _cardHandler.TryApplyCard(_config, null, _ownerIndex, true);
         }
         
         private void OnEndDrag()
         {
-            _cardHandler.VisualiseApplyCard(_config, null, _ownerIndex);
+            _cardHandler.TryApplyCard(_config, null, _ownerIndex, true);
             
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             bool isHit = Physics.Raycast(ray, out RaycastHit hitInfo, _rayDistance, _layerMask, QueryTriggerInteraction.Ignore);
@@ -79,7 +79,7 @@ namespace _Project.Scripts.Card
             {
                 if (hitInfo.transform.TryGetComponent(out BuildPlace buildPlace))
                 {
-                    if(_cardHandler.TryApplyCard(_config, buildPlace, _ownerIndex))
+                    if(_cardHandler.TryApplyCard(_config, buildPlace, _ownerIndex, false))
                         Destroy(gameObject);
                 }
             }

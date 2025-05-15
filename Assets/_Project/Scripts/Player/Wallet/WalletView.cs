@@ -1,5 +1,5 @@
 using _Project.Scripts.City.Wallet;
-using _Project.Scripts.Player;
+using _Project.Scripts;
 using TMPro;
 using UnityEngine;
 

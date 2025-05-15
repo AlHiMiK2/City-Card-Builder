@@ -5,14 +5,14 @@ namespace _Project.Scripts.Handlers
     public class GameHandler : MonoBehaviour
     {
         [SerializeField] private GameConfig _config;
-        [SerializeField] private Player.Player[] _players;
+        [SerializeField] private Player[] _players;
 
         private CardHandler _cardHandler;
         private UIHandler _uiHandler;
         private int _turnOwnerIndex;
         private bool _isEnd;
 
-        public Player.Player[] Players => _players;
+        public Player[] Players => _players;
         public GameConfig Config => _config;
         public static GameHandler Instance { get; private set; }
 

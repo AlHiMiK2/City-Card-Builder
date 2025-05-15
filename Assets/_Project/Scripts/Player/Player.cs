@@ -1,14 +1,15 @@
-﻿using _Project.Scripts.City;
+﻿using System;
+using System.Linq;
+using _Project.Scripts.City;
 using _Project.Scripts.City.Wallet;
 using _Project.Scripts.Handlers;
 using UnityEngine;
 
-namespace _Project.Scripts.Player
+namespace _Project.Scripts
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] private BuildPlace[] _buildPlaces;
-        [SerializeField] private MainBuildPlace _mainBuildPlace;
+        [SerializeField] private BuildLine[] _buildLines;
         [SerializeField] private WalletView _walletView;
         
         private CardHandler _cardHandler;
@@ -18,9 +19,15 @@ namespace _Project.Scripts.Player
         private bool _isDead;
 
         public Wallet Wallet => _wallet;
-        public BuildPlace[] BuildPlaces => _buildPlaces;
-        public MainBuildPlace MainBuildPlace => _mainBuildPlace;
+        public BuildLine[] BuildLines => _buildLines;
+        public BuildPlace MainBuildPlace => _buildLines.Last().Places[0];
         public bool IsDead => _isDead;
+        
+        [Serializable]
+        public class BuildLine
+        {
+            public BuildPlace[] Places;
+        }
 
         public void Init(int walletCapacity, int index)
         {
@@ -30,28 +37,34 @@ namespace _Project.Scripts.Player
             _index = index;
             
             int placeIndex = 0;
-            foreach (var place in _buildPlaces)
+            foreach (var line in _buildLines)
             {
-                place.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
-                placeIndex++;
+                foreach (var place in line.Places)
+                {
+                    place.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
+                    placeIndex++;
+                }
             }
             
-            _mainBuildPlace.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.MainDefenceCardConfig);
-            _mainBuildPlace.ConstructionData.HealthChanged += OnMainPlaceHealthChanged;
+            MainBuildPlace.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.MainDefenceCardConfig);
+            MainBuildPlace.ConstructionData.HealthChanged += OnMainPlaceHealthChanged;
         }        
         
         private void OnDestroy()
         {
-            _mainBuildPlace.ConstructionData.HealthChanged -= OnMainPlaceHealthChanged;
+            MainBuildPlace.ConstructionData.HealthChanged -= OnMainPlaceHealthChanged;
         }
         
         public void Earn()
         {
             int earn = 0;
             
-            foreach (var place in _buildPlaces)
+            foreach (var line in _buildLines)
             {
-                earn += place.ConstructionData.Earn;
+                foreach (var place in line.Places)
+                {
+                    earn += place.ConstructionData.Earn;
+                }
             }
             
             _wallet.AddScore(earn);
@@ -59,17 +72,9 @@ namespace _Project.Scripts.Player
 
         private void OnMainPlaceHealthChanged()
         {
-            if (_mainBuildPlace.ConstructionData.Health <= 0)
+            if (MainBuildPlace.ConstructionData.Health <= 0)
             {
                 _isDead = true;
-            }
-        }
-
-        private void OnValidate()
-        {
-            if (_buildPlaces.Length != 6)
-            {
-                _buildPlaces = new BuildPlace[6];
             }
         }
     }

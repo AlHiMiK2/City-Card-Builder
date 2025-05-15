@@ -188,14 +188,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabde252f4874c4788a2b311c54987ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildPlaces:
-  - {fileID: 7725292975349900801}
-  - {fileID: 8657946924932521698}
-  - {fileID: 1749224749377989550}
-  - {fileID: 2317338860796918011}
-  - {fileID: 8876398276260509610}
-  - {fileID: 461566507227619504}
-  _mainBuildPlace: {fileID: 2977125431084519183}
+  _buildLines:
+  - Places:
+    - {fileID: 7725292975349900801}
+    - {fileID: 8657946924932521698}
+    - {fileID: 1749224749377989550}
+  - Places:
+    - {fileID: 2317338860796918011}
+    - {fileID: 8876398276260509610}
+    - {fileID: 461566507227619504}
+  - Places:
+    - {fileID: 2977125431084519183}
   _walletView: {fileID: 3725467432322371390}
 --- !u!1 &5377391300682466321
 GameObject:
@@ -456,7 +459,6 @@ MonoBehaviour:
   _constructionMeshFilter: {fileID: 8128486083826397146}
   _constructionRenderer: {fileID: 3489505739565500486}
   _buildPlaceRenderer: {fileID: 4186340260907655586}
-  _isFlip: 0
   _healthBarOffset: {x: 0, y: 1, z: 0}
   _outlineLayerMask: 1
 --- !u!1 &6329064318513179712

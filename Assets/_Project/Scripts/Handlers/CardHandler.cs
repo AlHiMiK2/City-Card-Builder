@@ -46,36 +46,75 @@ namespace _Project.Scripts.Handlers
             _appliedCardCount = 0; 
         }
 
-        public bool TryApplyCard(CardConfig config, BuildPlace target, int ownerIndex)
+        public bool TryApplyCard(CardConfig config, BuildPlace target, int ownerIndex, bool isVisual)
         {
+            foreach (var player in _gameHandler.Players)
+            {
+                player.MainBuildPlace.SetOutlineState(false);
+                
+                foreach (var line in player.BuildLines)
+                {
+                    foreach (var place in line.Places)
+                    {
+                        place.SetOutlineState(false);
+                    }
+                }
+            }
+
+            if (target == null) return false;
             if (config is DefenceCardConfig defenceConfig)
             {
-                if (target.OwnerIndex != ownerIndex) return false;
-                target.Build(defenceConfig);
-                CardApplied();
-                return true;
+                if (isVisual)
+                {
+                    if (target.OwnerIndex == ownerIndex)
+                    {
+                        target.SetOutlineState(true);
+                    }
+                }
+                else
+                {
+                    if (target.OwnerIndex != ownerIndex) return false;
+                    target.Build(defenceConfig);
+                    CardApplied();
+                    return true;
+                }
             }
             if (config is AttackCardConfig attackConfig)
             {
                 if (target.OwnerIndex == ownerIndex) return false;
-
+                
                 if (attackConfig.Type == DamageType.Accurate)
                 {
-                    if (AttackUtils.TryApplyAccurateDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex]) == false)
+                    if (isVisual)
+                    {
+                        AttackUtils.TryApplyAccurateDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], true);
+                        return false;
+                    }
+                    if (AttackUtils.TryApplyAccurateDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], false) == false)
                     {
                         return false;
                     }
                 }
                 else if (attackConfig.Type == DamageType.Area)
                 {
-                    if (AttackUtils.TryApplyAreaDamage(attackConfig.Damage, _gameHandler.Players[target.OwnerIndex]) == false)
+                    if (isVisual)
+                    {
+                        AttackUtils.TryApplyAreaDamage(attackConfig.Damage, _gameHandler.Players[target.OwnerIndex], true);
+                        return false;
+                    }
+                    if (AttackUtils.TryApplyAreaDamage(attackConfig.Damage, _gameHandler.Players[target.OwnerIndex], false) == false)
                     {
                         return false;
                     }
                 }
                 else if (attackConfig.Type == DamageType.Layer)
                 {
-                    if (AttackUtils.TryApplyLayerDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex]) == false)
+                    if (isVisual)
+                    {
+                        AttackUtils.TryApplyLayerDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], true);
+                        return false;
+                    }
+                    if (AttackUtils.TryApplyLayerDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], false) == false)
                     {
                         return false;
                     }
@@ -86,57 +125,21 @@ namespace _Project.Scripts.Handlers
             }
             if (config is UpgradeCardConfig upgradeConfig)
             {
+                if (isVisual)
+                {
+                    if (target.OwnerIndex == ownerIndex)
+                    {
+                        target.SetOutlineState(true);
+                    }
+                    return false;
+                }
+
                 if (target.OwnerIndex != ownerIndex) return false;
                 CardApplied();
                 return true;
             }
 
             return false;
-        }
-
-        public void VisualiseApplyCard(CardConfig config, BuildPlace target, int ownerIndex)
-        {
-            foreach (var player in _gameHandler.Players)
-            {
-                player.MainBuildPlace.SetOutlineState(false);
-                
-                foreach (var buildPlace in player.BuildPlaces)
-                {
-                    buildPlace.SetOutlineState(false);
-                }
-            }
-            
-            if(!target) return;
-            if (config is DefenceCardConfig defenceConfig)
-            {
-                if (target.OwnerIndex != ownerIndex) return;
-                target.SetOutlineState(true);
-                return;
-            }
-            if (config is AttackCardConfig attackConfig)
-            {
-                if (target.OwnerIndex == ownerIndex) return;
-
-                if (attackConfig.Type == DamageType.Accurate)
-                {
-                    AttackUtils.VisualiseAccurateDamage(target, _gameHandler.Players[target.OwnerIndex]);
-                }
-                else if (attackConfig.Type == DamageType.Area)
-                {
-                    AttackUtils.VisualiseAreaDamage(_gameHandler.Players[target.OwnerIndex]);
-                }
-
-                else if (attackConfig.Type == DamageType.Layer)
-                {
-                    AttackUtils.VisualiseLayerDamage(target, _gameHandler.Players[target.OwnerIndex]);
-                }
-
-                return;
-            }
-            if (config is UpgradeCardConfig upgradeConfig)
-            {
-                if (target.OwnerIndex != ownerIndex) return;
-            }
         }
 
         private void CardApplied()

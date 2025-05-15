@@ -26,7 +26,6 @@ Material:
   - _DEPTHEXP_ON
   - _DEPTH_TEX
   - _FOAM
-  - _INTERSECTIONSHARP_ON
   - _RECEIVEDYNAMICEFFECTS_ON
   - _SHARP_INERSECTION
   - _SIMPLE_LIGHTING
@@ -200,15 +199,15 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _HorizonDistance: 8
-    - _IntersectionClipping: 0.706
+    - _IntersectionClipping: 0.612
     - _IntersectionDistortion: 0
     - _IntersectionFalloff: 1
     - _IntersectionFoamOn: 1
-    - _IntersectionLength: 3
+    - _IntersectionLength: 3.14
     - _IntersectionRippleDist: 32
     - _IntersectionRippleSpeed: 3
     - _IntersectionRippleStrength: 0.5
-    - _IntersectionSharp: 1
+    - _IntersectionSharp: 0
     - _IntersectionSize: 0.944
     - _IntersectionSource: 0
     - _IntersectionSpeed: 0.1

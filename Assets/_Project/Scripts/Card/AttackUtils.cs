@@ -1,464 +1,171 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts.City;
-using UnityEngine;
 
 namespace _Project.Scripts.Card
 {
     public static class AttackUtils
     {
-        public static bool TryApplyAreaDamage(int damage, Player.Player ownerPlayer)
+        public static bool TryApplyAreaDamage(int damage, Player ownerPlayer, bool isVisual)
         {
-            List<ConstructionData> attackConstructions = new List<ConstructionData>();
-            List<ConstructionData> allConstructions = new List<ConstructionData>();
-
-            foreach (var buildPlace in ownerPlayer.BuildPlaces)
+            List<BuildPlace> attackPlaces = new List<BuildPlace>();
+            int lineLenght = ownerPlayer.BuildLines[0].Places.Length;
+            
+            for (int i = 0; i < lineLenght; i++)
             {
-                allConstructions.Add(buildPlace.ConstructionData);
+                attackPlaces.Add(GetFirstWholeInHorizontal(ownerPlayer.BuildLines, i));
             }
 
-            for (int i = 0; i < 3; i++)
+            if (isVisual)
             {
-                if (allConstructions[i].Health > 0)
+                foreach (var place in attackPlaces)
                 {
-                    attackConstructions.Add(allConstructions[i]);
-                }
-                else if (allConstructions[i + 3].Health > 0)
-                {
-                    attackConstructions.Add(allConstructions[i + 3]);
-                }
-                else
-                {
-                    attackConstructions.Add(ownerPlayer.MainBuildPlace.ConstructionData);
+                    place.SetOutlineState(true);
                 }
             }
-
-            foreach (var data in attackConstructions)
+            else
             {
-                data.TakeDamage(damage / 3);
+                foreach (var place in attackPlaces)
+                {
+                    place.ConstructionData.TakeDamage(damage / attackPlaces.Count);
+                }
             }
             
             return true;
         }
         
-        public static void VisualiseAreaDamage(Player.Player ownerPlayer)
-        {
-            List<BuildPlace> attackPlaces = new List<BuildPlace>();
-            BuildPlace[] allPlaces = ownerPlayer.BuildPlaces;
-
-            for (int i = 0; i < 3; i++)
-            {
-                if (allPlaces[i].ConstructionData.Health > 0)
-                {
-                    attackPlaces.Add(allPlaces[i]);
-                }
-                else if (allPlaces[i + 3].ConstructionData.Health > 0)
-                {
-                    attackPlaces.Add(allPlaces[i + 3]);
-                }
-                else
-                {
-                    attackPlaces.Add(ownerPlayer.MainBuildPlace);
-                }
-            }
-
-            foreach (var place in attackPlaces)
-            {
-                place.SetOutlineState(true);
-            }
-        }
-        
-        public static bool TryApplyAccurateDamage(int damage, BuildPlace target, Player.Player ownerPlayer)
+        public static bool TryApplyAccurateDamage(int damage, BuildPlace target, Player ownerPlayer, bool isVisual)
         {  
             if(target.ConstructionData.Health <= 0) return false;
-            
-            List<ConstructionData> firstLine = new List<ConstructionData>();
-            List<ConstructionData> secondLine = new List<ConstructionData>();
-            
-            for (int i = 0; i < ownerPlayer.BuildPlaces.Length; i++)
-            {
-                if (target.Index == ownerPlayer.BuildPlaces[i].Index) continue;
-                if (i < 3)
-                {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
-                    {
-                        firstLine.Add(ownerPlayer.BuildPlaces[i].ConstructionData);
-                    }
-                }
-                else
-                {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
-                    {
-                        secondLine.Add(ownerPlayer.BuildPlaces[i].ConstructionData);
-                    }
-                }
-            }
 
-            if (target.Index < 3)
-            {
-                target.ConstructionData.TakeDamage(damage / 2);
-                
-                if (firstLine.Count > 0)
-                {
-                    foreach (var place in firstLine)
-                    {
-                        place.TakeDamage(damage / (firstLine.Count * 2));
-                    }
-                }
-                else
-                {
-                    foreach (var place in secondLine)
-                    {
-                        place.TakeDamage(damage / (secondLine.Count * 2));
-                    }
-                }
-                if (firstLine.Count == 0 && secondLine.Count == 0)
-                {
-                    ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage / 2);
-                }
-                        
-                return true;
-            }
-            if (target.Index < 6)
-            {
-                if (ownerPlayer.BuildPlaces[target.Index - 3].ConstructionData.Health <= 0)
-                {
-                    target.ConstructionData.TakeDamage(damage / 2);
-
-                    if (firstLine.Count > 0)
-                    {
-                        foreach (var place in firstLine)
-                        {
-                            place.TakeDamage(damage / (firstLine.Count * 2));
-                        }
-                    }
-                    else
-                    {
-                        foreach (var place in secondLine)
-                        {
-                            place.TakeDamage(damage / (secondLine.Count * 2));
-                        }
-                    }
-                    if (firstLine.Count == 0 && secondLine.Count == 0)
-                    {
-                        ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage / 2);
-                    }
-                        
-                    return true;
-                }
-            }
-            else
-            {
-                bool isValid = false;
-
-                for (int i = 3; i < ownerPlayer.BuildPlaces.Length; i++)
-                {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health <= 0)
-                    {
-                        if (ownerPlayer.BuildPlaces[i - 3].ConstructionData.Health <= 0)
-                        {
-                            isValid = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (isValid)
-                {
-                    ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage / 2);
-                    
-                    if (firstLine.Count > 0)
-                    {
-                        foreach (var place in firstLine)
-                        {
-                            place.TakeDamage(damage / (firstLine.Count * 2));
-                        }
-                    }
-                    else if (secondLine.Count > 0)
-                    {
-                        foreach (var place in secondLine)
-                        {
-                            place.TakeDamage(damage / (secondLine.Count * 2));
-                        }
-                    }
-                    else
-                    {
-                        ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage / 2);
-                    }
-
-                    return true;
-                }
-            }
-            
-            return false;
-        }
-        
-        public static void VisualiseAccurateDamage(BuildPlace target, Player.Player ownerPlayer)
-        {
-            if(target.ConstructionData.Health <= 0) return;
-            
             List<BuildPlace> attackPlaces = new List<BuildPlace>();
-            List<BuildPlace> firstLine = new List<BuildPlace>();
-            List<BuildPlace> secondLine = new List<BuildPlace>();
-            
-            for (int i = 0; i < ownerPlayer.BuildPlaces.Length; i++)
+            int targetHorizontal = 0;
+
+            foreach (var line in ownerPlayer.BuildLines)
             {
-                if (target.Index == ownerPlayer.BuildPlaces[i].Index) continue;
-                if (i < 3)
+                for (var i = 0; i < line.Places.Length; i++)
                 {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
+                    if (line.Places[i].Index == target.Index)
                     {
-                        firstLine.Add(ownerPlayer.BuildPlaces[i]);
-                    }
-                }
-                else
-                {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
-                    {
-                        secondLine.Add(ownerPlayer.BuildPlaces[i]);
+                        targetHorizontal = i;
+                        break;
                     }
                 }
             }
 
-            if (target.Index < 3)
+            if (GetFirstWholeInHorizontal(ownerPlayer.BuildLines, targetHorizontal).Index == target.Index)
             {
                 attackPlaces.Add(target);
-                
-                if (firstLine.Count > 0)
+
+                var attackLine = GetAllWholeInLine(GetFirstWholeLine(ownerPlayer.BuildLines, target.Index), target.Index);
+                attackPlaces.AddRange(attackLine);
+            }
+            
+            if (isVisual)
+            {
+                foreach (var place in attackPlaces)
                 {
-                    foreach (var place in firstLine)
-                    {
-                        attackPlaces.Add(place);
-                    }
+                    place.SetOutlineState(true);
+                }
+                
+                return false;
+            }
+
+            foreach (var place in attackPlaces)
+            {
+                if (place.Index == target.Index)
+                {
+                    place.ConstructionData.TakeDamage(damage / 2);
                 }
                 else
                 {
-                    foreach (var place in secondLine)
-                    {
-                        attackPlaces.Add(place);
-                    }
-                }
-                if (firstLine.Count == 0 && secondLine.Count == 0)
-                {
-                    attackPlaces.Add(ownerPlayer.MainBuildPlace);
+                    place.ConstructionData.TakeDamage(damage / ((attackPlaces.Count - 1) * 2));
                 }
             }
-            else if (target.Index < 6)
-            {
-                if (ownerPlayer.BuildPlaces[target.Index - 3].ConstructionData.Health <= 0)
-                {
-                    attackPlaces.Add(target);
-
-                    if (firstLine.Count > 0)
-                    {
-                        foreach (var place in firstLine)
-                        {
-                            attackPlaces.Add(place);
-                        }
-                    }
-                    else
-                    {
-                        foreach (var place in secondLine)
-                        {
-                            attackPlaces.Add(place);
-                        }
-                    }
-                    if (firstLine.Count == 0 && secondLine.Count == 0)
-                    {
-                        attackPlaces.Add(ownerPlayer.MainBuildPlace);
-                    }
-                }
-            }
-            else
-            {
-                bool isValid = false;
-
-                for (int i = 3; i < ownerPlayer.BuildPlaces.Length; i++)
-                {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health <= 0)
-                    {
-                        if (ownerPlayer.BuildPlaces[i - 3].ConstructionData.Health <= 0)
-                        {
-                            isValid = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (isValid)
-                {
-                    attackPlaces.Add(ownerPlayer.MainBuildPlace);
-                    
-                    if (firstLine.Count > 0)
-                    {
-                        foreach (var place in firstLine)
-                        {
-                            attackPlaces.Add(place);
-                        }
-                    }
-                    else if (secondLine.Count > 0)
-                    {
-                        foreach (var place in secondLine)
-                        {
-                            attackPlaces.Add(place);
-                        }
-                    }
-                }
-            }
-            
-            foreach (var place in attackPlaces)
-            {
-                place.SetOutlineState(true);
-            }
+                
+            return true;
         }
 
-        public static bool TryApplyLayerDamage(int damage, BuildPlace target, Player.Player ownerPlayer)
+        public static bool TryApplyLayerDamage(int damage, BuildPlace target, Player ownerPlayer, bool isVisual)
         {
             if (target.ConstructionData.Health <= 0) return false;
+            List<BuildPlace> attackPlaces = new List<BuildPlace>();
+            int targetLine = 0;
+            int targetHorizontal = 0;
 
-            List<ConstructionData> firstLine = new List<ConstructionData>();
-            List<ConstructionData> secondLine = new List<ConstructionData>();
-
-            for (int i = 0; i < ownerPlayer.BuildPlaces.Length; i++)
+            for (var i = 0; i < ownerPlayer.BuildLines.Length; i++)
             {
-                if (target.Index == ownerPlayer.BuildPlaces[i].Index) continue;
-                if (i < 3)
+                for (var j = 0; j < ownerPlayer.BuildLines[i].Places.Length; j++)
                 {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
+                    if (ownerPlayer.BuildLines[i].Places[j].Index == target.Index)
                     {
-                        firstLine.Add(ownerPlayer.BuildPlaces[i].ConstructionData);
-                    }
-                }
-                else
-                {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
-                    {
-                        secondLine.Add(ownerPlayer.BuildPlaces[i].ConstructionData);
+                        targetLine = i;
+                        targetHorizontal = j;
+                        break;
                     }
                 }
             }
 
-            if (target.Index < 3)
+            if (GetFirstWholeInHorizontal(ownerPlayer.BuildLines, targetHorizontal).Index == target.Index)
             {
-                target.ConstructionData.TakeDamage(damage / (firstLine.Count+1));
-                foreach (var place in firstLine)
-                {
-                    place.TakeDamage(damage / (firstLine.Count+1));
-                }
-
-                return true;
+                attackPlaces.AddRange(ownerPlayer.BuildLines[targetLine].Places);
             }
-            if (target.Index < 6)
-            {
-                if (ownerPlayer.BuildPlaces[target.Index - 3].ConstructionData.Health <= 0)
-                {
-                    target.ConstructionData.TakeDamage(damage / (secondLine.Count+1));
-                    foreach (var place in secondLine)
-                    {
-                        place.TakeDamage(damage / (secondLine.Count + 1));
-                    }
 
-                    return true;
+            if (isVisual)
+            {
+                foreach (var place in attackPlaces)
+                {
+                    place.SetOutlineState(true);
                 }
             }
             else
             {
-                bool isValid = false;
-
-                for (int i = 3; i < ownerPlayer.BuildPlaces.Length; i++)
+                foreach (var place in attackPlaces)
                 {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health <= 0)
-                    {
-                        if (ownerPlayer.BuildPlaces[i - 3].ConstructionData.Health <= 0)
-                        {
-                            isValid = true;
-                            break;
-                        }
-                    }
+                    place.ConstructionData.TakeDamage(damage / attackPlaces.Count);
                 }
-
-                if (isValid)
+            }
+            
+            return true;
+        }
+        
+        private static BuildPlace GetFirstWholeInHorizontal(Player.BuildLine[] lines, int index)
+        {
+            for (var i = 0; i < lines.Length; i++)
+            {
+                if (i == lines.Length)
                 {
-                    ownerPlayer.MainBuildPlace.ConstructionData.TakeDamage(damage);
-
-                    return true;
+                    return lines[i].Places[0];
+                }
+                
+                if (lines[i].Places[index].ConstructionData.Health > 0)
+                {
+                    return lines[i].Places[index];
                 }
             }
 
-            return false;
+            return null;
         }
 
-        public static void VisualiseLayerDamage(BuildPlace target, Player.Player ownerPlayer)
+        private static List<BuildPlace> GetAllWholeInLine(Player.BuildLine line, int ignore = -1)
         {
-            if (target.ConstructionData.Health <= 0) return;
-
-            List<BuildPlace> attackPlaces = new List<BuildPlace>();
-            List<BuildPlace> firstLine = new List<BuildPlace>();
-            List<BuildPlace> secondLine = new List<BuildPlace>();
-
-            for (int i = 0; i < ownerPlayer.BuildPlaces.Length; i++)
+            return line.Places.Where(place => place.ConstructionData.Health > 0 && place.Index != ignore).ToList();
+        }
+        
+        private static Player.BuildLine GetFirstWholeLine(Player.BuildLine[] lines, int ignore = -1)
+        {
+            foreach (var line in lines)
             {
-                if (target.Index == ownerPlayer.BuildPlaces[i].Index) continue;
-                if (i < 3)
+                foreach (var place in line.Places)
                 {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
+                    if (place.Index != ignore && place.ConstructionData.Health > 0)
                     {
-                        firstLine.Add(ownerPlayer.BuildPlaces[i]);
-                    }
-                }
-                else
-                {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health > 0)
-                    {
-                        secondLine.Add(ownerPlayer.BuildPlaces[i]);
+                        return line;
                     }
                 }
             }
 
-            if (target.Index < 3)
-            {
-                attackPlaces.Add(target);
-                foreach (var place in firstLine)
-                {
-                    attackPlaces.Add(place);
-                }
-            }
-            else if (target.Index < 6)
-            {
-                if (ownerPlayer.BuildPlaces[target.Index - 3].ConstructionData.Health <= 0)
-                {
-                    attackPlaces.Add(target);
-                    foreach (var place in secondLine)
-                    {
-                        attackPlaces.Add(place);
-                    }
-                }
-            }
-            else
-            {
-                bool isValid = false;
-
-                for (int i = 3; i < ownerPlayer.BuildPlaces.Length; i++)
-                {
-                    if (ownerPlayer.BuildPlaces[i].ConstructionData.Health <= 0)
-                    {
-                        if (ownerPlayer.BuildPlaces[i - 3].ConstructionData.Health <= 0)
-                        {
-                            isValid = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (isValid)
-                {
-                    attackPlaces.Add(ownerPlayer.MainBuildPlace);
-                }
-            }
-
-            foreach (var place in attackPlaces)
-            {
-                place.SetOutlineState(true);
-            }
+            return null;
         }
     }
 }

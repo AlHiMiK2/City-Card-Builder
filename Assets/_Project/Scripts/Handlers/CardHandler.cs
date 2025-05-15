@@ -73,7 +73,14 @@ namespace _Project.Scripts.Handlers
                         return false;
                     }
                 }
-                
+                else if (attackConfig.Type == DamageType.Layer)
+                {
+                    if (AttackUtils.TryApplyLayerDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex]) == false)
+                    {
+                        return false;
+                    }
+                }
+
                 CardApplied();
                 return true;
             }
@@ -118,7 +125,12 @@ namespace _Project.Scripts.Handlers
                 {
                     AttackUtils.VisualiseAreaDamage(_gameHandler.Players[target.OwnerIndex]);
                 }
-                
+
+                else if (attackConfig.Type == DamageType.Layer)
+                {
+                    AttackUtils.VisualiseLayerDamage(target, _gameHandler.Players[target.OwnerIndex]);
+                }
+
                 return;
             }
             if (config is UpgradeCardConfig upgradeConfig)

@@ -39,15 +39,18 @@ namespace _Project.Scripts.Card
             if(target.ConstructionData.Health <= 0) return false;
 
             List<BuildPlace> attackPlaces = new List<BuildPlace>();
+            int targetLine = 0;
             int targetHorizontal = 0;
 
-            foreach (var line in ownerPlayer.BuildLines)
+            for (var i = 0; i < ownerPlayer.BuildLines.Length; i++)
             {
-                for (var i = 0; i < line.Places.Length; i++)
+                for (var j = 0; j < ownerPlayer.BuildLines[i].Places.Length; j++)
                 {
                     if (line.Places[i].Index == target.Index)
+                    if (ownerPlayer.BuildLines[i].Places[j].Index == target.Index)
                     {
-                        targetHorizontal = i;
+                        targetLine = i;
+                        targetHorizontal = j;
                         break;
                     }
                 }
@@ -57,8 +60,9 @@ namespace _Project.Scripts.Card
             {
                 attackPlaces.Add(target);
 
-                var attackLine = GetAllWholeInLine(GetFirstWholeLine(ownerPlayer.BuildLines, target.Index), target.Index);
-                attackPlaces.AddRange(attackLine);
+                var places = GetAllWholeInLine(GetFirstWholeLine(ownerPlayer.BuildLines, target.Index), target.Index);
+
+                attackPlaces.AddRange(places.Where(place => GetPlaceHorizontal(ownerPlayer.BuildLines, place) != targetHorizontal));
             }
             
             if (isVisual)
@@ -108,7 +112,7 @@ namespace _Project.Scripts.Card
 
             if (GetFirstWholeInHorizontal(ownerPlayer.BuildLines, targetHorizontal).Index == target.Index)
             {
-                attackPlaces.AddRange(ownerPlayer.BuildLines[targetLine].Places);
+                attackPlaces.AddRange(GetAllWholeInLine(ownerPlayer.BuildLines[targetLine]));
             }
 
             if (isVisual)
@@ -133,7 +137,7 @@ namespace _Project.Scripts.Card
         {
             for (var i = 0; i < lines.Length; i++)
             {
-                if (i == lines.Length)
+                if (i == lines.Length - 1)
                 {
                     return lines[i].Places[0];
                 }
@@ -166,6 +170,21 @@ namespace _Project.Scripts.Card
             }
 
             return null;
+        }
+        private static int GetPlaceHorizontal(Player.BuildLine[] lines, BuildPlace checkPlace)
+        {
+            foreach (var line in lines)
+            {
+                for (var i = 0; i < line.Places.Length; i++)
+                {
+                    if (line.Places[i].Index == checkPlace.Index)
+                    {
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
         }
     }
 }

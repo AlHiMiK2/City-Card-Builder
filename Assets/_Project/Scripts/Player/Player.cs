@@ -41,12 +41,19 @@ namespace _Project.Scripts
             {
                 foreach (var place in line.Places)
                 {
-                    place.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
+                    if (place as MainBuildPlace)
+                    {
+                        place.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.MainDefenceCardConfig);
+                    }
+                    else
+                    {
+                        place.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
+                    }
+                    
                     placeIndex++;
                 }
             }
             
-            MainBuildPlace.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.MainDefenceCardConfig);
             MainBuildPlace.ConstructionData.HealthChanged += OnMainPlaceHealthChanged;
         }        
         

@@ -64,6 +64,7 @@ namespace _Project.Scripts.Handlers
             if (target == null) return false;
             if (config is DefenceCardConfig defenceConfig)
             {
+                if (target as MainBuildPlace) return false;
                 if (isVisual)
                 {
                     if (target.OwnerIndex == ownerIndex)
@@ -85,36 +86,21 @@ namespace _Project.Scripts.Handlers
                 
                 if (attackConfig.Type == DamageType.Accurate)
                 {
-                    if (isVisual)
-                    {
-                        AttackUtils.TryApplyAccurateDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], true);
-                        return false;
-                    }
-                    if (AttackUtils.TryApplyAccurateDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], false) == false)
+                    if (AttackUtils.TryApplyAccurateDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], isVisual) == false || isVisual)
                     {
                         return false;
                     }
                 }
                 else if (attackConfig.Type == DamageType.Area)
                 {
-                    if (isVisual)
-                    {
-                        AttackUtils.TryApplyAreaDamage(attackConfig.Damage, _gameHandler.Players[target.OwnerIndex], true);
-                        return false;
-                    }
-                    if (AttackUtils.TryApplyAreaDamage(attackConfig.Damage, _gameHandler.Players[target.OwnerIndex], false) == false)
+                    if (AttackUtils.TryApplyAreaDamage(attackConfig.Damage, _gameHandler.Players[target.OwnerIndex], isVisual) == false || isVisual)
                     {
                         return false;
                     }
                 }
                 else if (attackConfig.Type == DamageType.Layer)
                 {
-                    if (isVisual)
-                    {
-                        AttackUtils.TryApplyLayerDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], true);
-                        return false;
-                    }
-                    if (AttackUtils.TryApplyLayerDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], false) == false)
+                    if (AttackUtils.TryApplyLayerDamage(attackConfig.Damage, target, _gameHandler.Players[target.OwnerIndex], isVisual) == false || isVisual)
                     {
                         return false;
                     }

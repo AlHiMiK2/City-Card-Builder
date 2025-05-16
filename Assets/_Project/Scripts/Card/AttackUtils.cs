@@ -39,16 +39,14 @@ namespace _Project.Scripts.Card
             if(target.ConstructionData.Health <= 0) return false;
 
             List<BuildPlace> attackPlaces = new List<BuildPlace>();
-            int targetLine = 0;
             int targetHorizontal = 0;
 
-            for (var i = 0; i < ownerPlayer.BuildLines.Length; i++)
+            foreach (var line in ownerPlayer.BuildLines)
             {
-                for (var j = 0; j < ownerPlayer.BuildLines[i].Places.Length; j++)
+                for (var j = 0; j < line.Places.Length; j++)
                 {
-                    if (ownerPlayer.BuildLines[i].Places[j].Index == target.Index)
+                    if (line.Places[j].Index == target.Index)
                     {
-                        targetLine = i;
                         targetHorizontal = j;
                         break;
                     }

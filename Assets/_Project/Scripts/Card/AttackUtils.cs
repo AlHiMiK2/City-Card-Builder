@@ -46,7 +46,6 @@ namespace _Project.Scripts.Card
             {
                 for (var j = 0; j < ownerPlayer.BuildLines[i].Places.Length; j++)
                 {
-                    if (line.Places[i].Index == target.Index)
                     if (ownerPlayer.BuildLines[i].Places[j].Index == target.Index)
                     {
                         targetLine = i;

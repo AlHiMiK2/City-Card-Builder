@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace _Project.Scripts.City
 {
-    public class BuildPlace : NetworkBehaviour
+    public class BuildPlace : MonoBehaviour
     {
         [SerializeField] private MeshFilter _constructionMeshFilter;
         [SerializeField] private MeshRenderer _constructionRenderer;

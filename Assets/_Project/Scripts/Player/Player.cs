@@ -29,8 +29,7 @@ namespace _Project.Scripts
         {
             public BuildPlace[] Places;
         }
-
-        [ClientRpc]
+        
         public void Init(int walletCapacity, int index)
         {
             _wallet = new Wallet(walletCapacity);

@@ -62,7 +62,7 @@ namespace _Project.Scripts.Handlers
         public void SetWaitingPlayerPanelState(bool state)
         {
             _waitingPlayerPanel.SetActive(state);
-            _turnView.gameObject.SetActive(!state);
+            _turnView.transform.parent.gameObject.SetActive(!state);
         }
     }
 }

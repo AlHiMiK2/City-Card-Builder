@@ -1,5 +1,6 @@
 using _Project.Scripts.Handlers;
 using Mirror;
+using UnityEngine;
 
 public class GameNetworkManager : NetworkManager
 {
@@ -11,13 +12,15 @@ public class GameNetworkManager : NetworkManager
         UIHandler.Instance.SetWaitingPlayerPanelState(true);
     }
 
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+    public override void OnServerConnect(NetworkConnectionToClient conn)
     {
-        base.OnServerAddPlayer(conn);
+        base.OnServerConnect(conn);
         
-        if (numPlayers >= MinPlayerCount)
+        Debug.Log("Connected");
+        if (NetworkServer.connections.Count >= MinPlayerCount)
         {
             UIHandler.Instance.SetWaitingPlayerPanelState(false);
+            GameHandler.Instance.StartGame();
         }
         else
         {
@@ -29,7 +32,7 @@ public class GameNetworkManager : NetworkManager
     {
         base.OnServerDisconnect(conn);
         
-        if (numPlayers < MinPlayerCount)
+        if (NetworkServer.connections.Count < MinPlayerCount)
         {
             UIHandler.Instance.SetWaitingPlayerPanelState(true);
         }

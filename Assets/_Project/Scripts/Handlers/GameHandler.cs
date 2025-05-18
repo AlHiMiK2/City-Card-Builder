@@ -1,27 +1,39 @@
-﻿using UnityEngine;
+﻿using System;
+using Mirror;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Handlers
 {
-    public class GameHandler : MonoBehaviour
+    public class GameHandler : NetworkBehaviour
     {
         [SerializeField] private GameConfig _config;
-        [SerializeField] private Player[] _players;
+        [SerializeField] private PlayerSpawnpoint[] _playerSpawnpoints;
 
         private bool _isStarted;
         private CardHandler _cardHandler;
         private UIHandler _uiHandler;
         private int _turnOwnerIndex;
         private bool _isEnd;
+        private Player[] _players;
 
         public Player[] Players => _players;
         public GameConfig Config => _config;
         public static GameHandler Instance { get; private set; }
 
+        [Serializable]
+        private class PlayerSpawnpoint
+        {
+            public Player Prefab;
+            public Transform Spawnpoint;
+        }
+        
         private void Awake()
         {
             Instance = this;
         }
 
+        [Server]
         public void StartGame()
         {
             if(_isStarted) return;
@@ -30,10 +42,15 @@ namespace _Project.Scripts.Handlers
             _cardHandler.Init(this);
             _uiHandler = UIHandler.Instance;
             _uiHandler.Init();
+            _players = new Player[_playerSpawnpoints.Length];
             
             for (var i = 0; i < _players.Length; i++)
             {
+                var spawnpoint = _playerSpawnpoints[i];
+                var instance = Instantiate(spawnpoint.Prefab, spawnpoint.Spawnpoint.position, spawnpoint.Spawnpoint.rotation);
+                _players[i] = instance;
                 _players[i].Init(_config.WalletCapacity, i);
+                NetworkServer.Spawn(instance.gameObject);
             }
             
             StartTurn();

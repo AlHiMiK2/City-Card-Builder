@@ -1,11 +1,12 @@
 ﻿using _Project.Scripts.Card;
 using _Project.Scripts.Handlers;
+using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.City
 {
-    public class BuildPlace : MonoBehaviour
+    public class BuildPlace : NetworkBehaviour
     {
         [SerializeField] private MeshFilter _constructionMeshFilter;
         [SerializeField] private MeshRenderer _constructionRenderer;

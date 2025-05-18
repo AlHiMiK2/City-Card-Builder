@@ -1,11 +1,7 @@
 fileFormatVersion: 2
-guid: e383132f744a8c1448807b71fa31f7ef
-MonoImporter:
+guid: 29b2ae9aeacc49b47b711838dd1876a4
+TextScriptImporter:
   externalObjects: {}
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -14,5 +10,5 @@ AssetOrigin:
   productId: 129321
   packageName: Mirror
   packageVersion: 96.0.1
-  assetPath: Assets/ScriptTemplates/Editor/MoveToAssetsFolder.cs
+  assetPath: Assets/ScriptTemplates/52-Mirror__Network Behaviour-NewNetworkBehaviour.cs.txt
   uploadId: 736421

@@ -16,7 +16,6 @@ public class GameNetworkManager : NetworkManager
     {
         base.OnServerConnect(conn);
         
-        Debug.Log("Connected");
         if (NetworkServer.connections.Count >= MinPlayerCount)
         {
             UIHandler.Instance.SetWaitingPlayerPanelState(false);

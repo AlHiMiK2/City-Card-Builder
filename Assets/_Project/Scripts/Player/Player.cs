@@ -3,11 +3,12 @@ using System.Linq;
 using _Project.Scripts.City;
 using _Project.Scripts.City.Wallet;
 using _Project.Scripts.Handlers;
+using Mirror;
 using UnityEngine;
 
 namespace _Project.Scripts
 {
-    public class Player : MonoBehaviour
+    public class Player : NetworkBehaviour
     {
         [SerializeField] private BuildLine[] _buildLines;
         [SerializeField] private WalletView _walletView;
@@ -29,6 +30,7 @@ namespace _Project.Scripts
             public BuildPlace[] Places;
         }
 
+        [ClientRpc]
         public void Init(int walletCapacity, int index)
         {
             _wallet = new Wallet(walletCapacity);

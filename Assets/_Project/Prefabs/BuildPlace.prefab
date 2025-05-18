@@ -154,6 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71f44eff4474c8d87ee1a82afebbc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   _constructionMeshFilter: {fileID: 8237243926242361380}
   _constructionRenderer: {fileID: 3392658171909542416}
   _buildPlaceRenderer: {fileID: 8406830115496433165}

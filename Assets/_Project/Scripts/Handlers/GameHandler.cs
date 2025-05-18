@@ -46,9 +46,9 @@ namespace _Project.Scripts.Handlers
             for (var i = 0; i < _players.Length; i++)
             {
                 var spawnpoint = _playerSpawnpoints[i];
-                var instance = Instantiate(spawnpoint.Prefab, spawnpoint.Spawnpoint.position, spawnpoint.Spawnpoint.rotation);
-                NetworkServer.Spawn(instance.gameObject);
-                _players[i] = instance;
+                var instance = Instantiate(spawnpoint.Prefab.gameObject, spawnpoint.Spawnpoint.position, spawnpoint.Spawnpoint.rotation);
+                NetworkServer.Spawn(instance);
+                _players[i] = instance.GetComponent<Player>();
                 _players[i].Init(_config.WalletCapacity, i);
             }
             

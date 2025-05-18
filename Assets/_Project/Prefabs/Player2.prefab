@@ -240,9 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbde7764f30579e4aa27831717184ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   _constructionMeshFilter: {fileID: 1073770504436488331}
   _constructionRenderer: {fileID: 1164228117291303097}
   _buildPlaceRenderer: {fileID: 5009643304943599448}
@@ -331,7 +328,7 @@ MonoBehaviour:
   sceneId: 0
   _assetId: 2879645770
   serverOnly: 0
-  visibility: 0
+  visibility: 2
   hasSpawned: 0
 --- !u!1 &4122176098227246717
 GameObject:

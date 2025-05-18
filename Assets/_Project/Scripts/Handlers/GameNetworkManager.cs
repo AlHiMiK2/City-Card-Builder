@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameNetworkManager : NetworkManager
 {
+    [SerializeField] private GameHandler _gameHandler;
+    
     private const int MinPlayerCount = 2;
 
     public override void OnStartServer()
@@ -19,7 +21,7 @@ public class GameNetworkManager : NetworkManager
         if (NetworkServer.connections.Count >= MinPlayerCount)
         {
             UIHandler.Instance.SetWaitingPlayerPanelState(false);
-            GameHandler.Instance.StartGame();
+            _gameHandler.StartGame();
         }
         else
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using Mirror;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Handlers
 {
@@ -48,9 +47,9 @@ namespace _Project.Scripts.Handlers
             {
                 var spawnpoint = _playerSpawnpoints[i];
                 var instance = Instantiate(spawnpoint.Prefab, spawnpoint.Spawnpoint.position, spawnpoint.Spawnpoint.rotation);
+                NetworkServer.Spawn(instance.gameObject);
                 _players[i] = instance;
                 _players[i].Init(_config.WalletCapacity, i);
-                NetworkServer.Spawn(instance.gameObject);
             }
             
             StartTurn();

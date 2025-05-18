@@ -649,6 +649,7 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
+  _gameHandler: {fileID: 334012685}
 --- !u!4 &695876734
 Transform:
   m_ObjectHideFlags: 0

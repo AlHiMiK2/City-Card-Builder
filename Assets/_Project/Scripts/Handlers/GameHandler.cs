@@ -7,6 +7,7 @@ namespace _Project.Scripts.Handlers
         [SerializeField] private GameConfig _config;
         [SerializeField] private Player[] _players;
 
+        private bool _isStarted;
         private CardHandler _cardHandler;
         private UIHandler _uiHandler;
         private int _turnOwnerIndex;
@@ -21,8 +22,10 @@ namespace _Project.Scripts.Handlers
             Instance = this;
         }
 
-        private void Start()
+        public void StartGame()
         {
+            if(_isStarted) return;
+            _isStarted = true;
             _cardHandler = CardHandler.Instance;
             _cardHandler.Init(this);
             _uiHandler = UIHandler.Instance;
@@ -55,6 +58,7 @@ namespace _Project.Scripts.Handlers
             if (TryEndGame(out int winPlayerIndex))
             {
                 Debug.Log("Win Player: " + winPlayerIndex + 1);
+                _cardHandler.ClearBuild();
             }
             else
             {

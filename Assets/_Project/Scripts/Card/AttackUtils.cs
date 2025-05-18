@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.City;
+using UnityEngine;
 
 namespace _Project.Scripts.Card
 {
@@ -16,6 +17,8 @@ namespace _Project.Scripts.Card
                 attackPlaces.Add(GetFirstWholeInHorizontal(ownerPlayer.BuildLines, i));
             }
 
+            if (attackPlaces.Count == 0) return false;
+            
             if (isVisual)
             {
                 foreach (var place in attackPlaces)
@@ -61,6 +64,8 @@ namespace _Project.Scripts.Card
 
                 attackPlaces.AddRange(places.Where(place => GetPlaceHorizontal(ownerPlayer.BuildLines, place) != targetHorizontal));
             }
+
+            if (attackPlaces.Count == 0) return false;
             
             if (isVisual)
             {
@@ -111,6 +116,8 @@ namespace _Project.Scripts.Card
             {
                 attackPlaces.AddRange(GetAllWholeInLine(ownerPlayer.BuildLines[targetLine]));
             }
+            
+            if (attackPlaces.Count == 0) return false;
 
             if (isVisual)
             {
@@ -136,7 +143,15 @@ namespace _Project.Scripts.Card
             {
                 if (i == lines.Length - 1)
                 {
-                    return lines[i].Places[0];
+                    Player.BuildLine[] checkWalls = new Player.BuildLine[lines.Length - 1];
+                    
+                    for (int j = 0; j < checkWalls.Length; j++)
+                    {
+                        checkWalls[j] = lines[j];
+                    }
+                    
+                    if(CheckWallGap(checkWalls))
+                        return lines[i].Places[0];
                 }
                 
                 if (lines[i].Places[index].ConstructionData.Health > 0)
@@ -151,6 +166,29 @@ namespace _Project.Scripts.Card
         private static List<BuildPlace> GetAllWholeInLine(Player.BuildLine line, int ignore = -1)
         {
             return line.Places.Where(place => place.ConstructionData.Health > 0 && place.Index != ignore).ToList();
+        }
+
+        private static bool CheckWallGap(Player.BuildLine[] lines)
+        {
+            for (int i = 0; i < lines[0].Places.Length; i++)
+            {
+                bool isGap = false;
+                
+                foreach (var line in lines)
+                {
+                    isGap = line.Places[i].ConstructionData.Health <= 0;
+
+                    if (isGap == false)
+                    {
+                        break;
+                    }
+                }
+
+                if (isGap)
+                    return true;
+            }
+
+            return false;
         }
         
         private static Player.BuildLine GetFirstWholeLine(Player.BuildLine[] lines, int ignore = -1)

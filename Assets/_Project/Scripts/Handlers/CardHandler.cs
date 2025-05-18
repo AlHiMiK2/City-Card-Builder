@@ -159,5 +159,10 @@ namespace _Project.Scripts.Handlers
                 }
             }
         }
+
+        public void ClearBuild()
+        {
+            _cardContainer.Clear();
+        }
     }
 }

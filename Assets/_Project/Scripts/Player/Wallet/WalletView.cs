@@ -27,7 +27,10 @@ public class WalletView : MonoBehaviour
     
     private void OnDisable()
     {
-        _wallet.ScoreChanged -= UpdateView;
+        if (_wallet != null)
+        {
+            _wallet.ScoreChanged -= UpdateView;
+        }
     }
     
     private void UpdateView(int money)

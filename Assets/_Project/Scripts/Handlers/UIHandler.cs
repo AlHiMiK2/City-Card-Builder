@@ -11,6 +11,7 @@ namespace _Project.Scripts.Handlers
         [SerializeField] private string _turnPrefix;
         [SerializeField] private string _turnPostfix;
         [SerializeField] private TMP_Text _turnView;
+        [SerializeField] private GameObject _waitingPlayerPanel;
 
         private List<List<TMP_Text>> _constructionDataViews = new ();
         private Camera _camera;
@@ -56,6 +57,12 @@ namespace _Project.Scripts.Handlers
         public void SetTurnViewValue(int turn)
         {
             _turnView.text = _turnPrefix + turn + _turnPostfix;
+        }
+
+        public void SetWaitingPlayerPanelState(bool state)
+        {
+            _waitingPlayerPanel.SetActive(state);
+            _turnView.gameObject.SetActive(!state);
         }
     }
 }

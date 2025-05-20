@@ -46,10 +46,10 @@ namespace _Project.Scripts.Handlers
             for (var i = 0; i < _players.Length; i++)
             {
                 var spawnpoint = _playerSpawnpoints[i];
-                var instance = Instantiate(spawnpoint.Prefab.gameObject, spawnpoint.Spawnpoint.position, spawnpoint.Spawnpoint.rotation);
-                NetworkServer.Spawn(instance);
+                GameObject instance = Instantiate(spawnpoint.Prefab.gameObject, spawnpoint.Spawnpoint.position, spawnpoint.Spawnpoint.rotation);
+                NetworkServer.AddPlayerForConnection(NetworkServer.connections[i], instance);
                 _players[i] = instance.GetComponent<Player>();
-                //_players[i].Init(_config.WalletCapacity, i);
+                _players[i].Init(_config.WalletCapacity, i);
             }
             
             StartTurn();
@@ -115,6 +115,16 @@ namespace _Project.Scripts.Handlers
             bool isEnd = lifePlayerCount <= 1;
             
             return isEnd;
+        }
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            
+            if (_playerSpawnpoints.Length != GameNetworkManager.PlayerCount)
+            {
+                _playerSpawnpoints = new PlayerSpawnpoint[GameNetworkManager.PlayerCount];
+            }
         }
     }
 }

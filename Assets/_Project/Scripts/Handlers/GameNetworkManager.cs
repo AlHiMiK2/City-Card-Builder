@@ -6,7 +6,7 @@ public class GameNetworkManager : NetworkManager
 {
     [SerializeField] private GameHandler _gameHandler;
     
-    private const int MinPlayerCount = 2;
+    public const int PlayerCount = 2;
 
     public override void OnStartServer()
     {
@@ -18,7 +18,7 @@ public class GameNetworkManager : NetworkManager
     {
         base.OnServerConnect(conn);
         
-        if (NetworkServer.connections.Count >= MinPlayerCount)
+        if (NetworkServer.connections.Count >= PlayerCount)
         {
             UIHandler.Instance.SetWaitingPlayerPanelState(false);
             _gameHandler.StartGame();
@@ -33,7 +33,7 @@ public class GameNetworkManager : NetworkManager
     {
         base.OnServerDisconnect(conn);
         
-        if (NetworkServer.connections.Count < MinPlayerCount)
+        if (NetworkServer.connections.Count < PlayerCount)
         {
             UIHandler.Instance.SetWaitingPlayerPanelState(true);
         }

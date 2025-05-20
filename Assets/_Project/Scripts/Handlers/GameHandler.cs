@@ -49,7 +49,7 @@ namespace _Project.Scripts.Handlers
                 var instance = Instantiate(spawnpoint.Prefab.gameObject, spawnpoint.Spawnpoint.position, spawnpoint.Spawnpoint.rotation);
                 NetworkServer.Spawn(instance);
                 _players[i] = instance.GetComponent<Player>();
-                _players[i].Init(_config.WalletCapacity, i);
+                //_players[i].Init(_config.WalletCapacity, i);
             }
             
             StartTurn();

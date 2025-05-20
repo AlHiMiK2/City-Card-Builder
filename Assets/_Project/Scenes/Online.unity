@@ -618,7 +618,7 @@ MonoBehaviour:
   runInBackground: 1
   headlessStartMode: 0
   editorAutoStart: 0
-  sendRate: 60
+  sendRate: 5
   offlineScene: 
   onlineScene: Assets/_Project/Scenes/Online.unity
   offlineSceneLoadDelay: 0

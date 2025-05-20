@@ -30,11 +30,6 @@ namespace _Project.Scripts
             public BuildPlace[] Places;
         }
 
-        private void Start()
-        {
-            Debug.Log("Spawned");
-        }
-
         public void Init(int walletCapacity, int index)
         {
             _wallet = new Wallet(walletCapacity);

@@ -7,7 +7,6 @@ namespace _Project.Scripts.Handlers
     public class GameHandler : NetworkBehaviour
     {
         [SerializeField] private GameConfig _config;
-        [SerializeField] private PlayerSpawnpoint[] _playerSpawnpoints;
 
         private bool _isStarted;
         private CardHandler _cardHandler;
@@ -19,13 +18,6 @@ namespace _Project.Scripts.Handlers
         public Player[] Players => _players;
         public GameConfig Config => _config;
         public static GameHandler Instance { get; private set; }
-
-        [Serializable]
-        private class PlayerSpawnpoint
-        {
-            public Player Prefab;
-            public Transform Spawnpoint;
-        }
         
         private void Awake()
         {
@@ -33,7 +25,7 @@ namespace _Project.Scripts.Handlers
         }
 
         [Server]
-        public void StartGame()
+        public void StartGame(Player[] players)
         {
             if(_isStarted) return;
             _isStarted = true;
@@ -41,14 +33,10 @@ namespace _Project.Scripts.Handlers
             _cardHandler.Init(this);
             _uiHandler = UIHandler.Instance;
             _uiHandler.Init();
-            _players = new Player[_playerSpawnpoints.Length];
+            _players = players;
             
             for (var i = 0; i < _players.Length; i++)
             {
-                var spawnpoint = _playerSpawnpoints[i];
-                GameObject instance = Instantiate(spawnpoint.Prefab.gameObject, spawnpoint.Spawnpoint.position, spawnpoint.Spawnpoint.rotation);
-                NetworkServer.AddPlayerForConnection(NetworkServer.connections[i], instance);
-                _players[i] = instance.GetComponent<Player>();
                 _players[i].Init(_config.WalletCapacity, i);
             }
             
@@ -115,16 +103,6 @@ namespace _Project.Scripts.Handlers
             bool isEnd = lifePlayerCount <= 1;
             
             return isEnd;
-        }
-
-        protected override void OnValidate()
-        {
-            base.OnValidate();
-            
-            if (_playerSpawnpoints.Length != GameNetworkManager.PlayerCount)
-            {
-                _playerSpawnpoints = new PlayerSpawnpoint[GameNetworkManager.PlayerCount];
-            }
         }
     }
 }

@@ -336,11 +336,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   _config: {fileID: 11400000, guid: 72a361926ef902c498ff5319f305c4ed, type: 2}
-  _playerSpawnpoints:
-  - Prefab: {fileID: 2899538570140228998, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
-    Spawnpoint: {fileID: 1035454916}
-  - Prefab: {fileID: 778456916165357164, guid: c402bc2896ab47b43a6137baf3a32292, type: 3}
-    Spawnpoint: {fileID: 291960582}
 --- !u!114 &334012686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,6 +645,11 @@ MonoBehaviour:
   evaluationInterval: 3
   timeInterpolationGui: 0
   _gameHandler: {fileID: 334012685}
+  _playerSpawnpoints:
+  - Prefab: {fileID: 2899538570140228998, guid: 639d1a584138b834c9e167abb29200f2, type: 3}
+    Spawnpoint: {fileID: 1035454916}
+  - Prefab: {fileID: 778456916165357164, guid: c402bc2896ab47b43a6137baf3a32292, type: 3}
+    Spawnpoint: {fileID: 291960582}
 --- !u!4 &695876734
 Transform:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using _Project.Scripts;
 using _Project.Scripts.Handlers;
 using Mirror;
@@ -9,17 +8,22 @@ public class GameNetworkManager : NetworkManager
 {
     [Header("Custom")]
     [SerializeField] private GameHandler _gameHandler;
-    [SerializeField] private PlayerSpawnpoint[] _playerSpawnpoints;
+    [SerializeField] private PlayerSpawnpoint[] _spawnpoints;
 
     private Player[] _players;
     
     public const int PlayerCount = 2;
 
     [Serializable]
-    private class PlayerSpawnpoint
+    public struct PlayerSpawnpoint
     {
         public Player Prefab;
-        public Transform Spawnpoint;
+        public Transform Target;
+    }
+    
+    public struct SpawnMessage : NetworkMessage
+    {
+        public PlayerSpawnpoint Spawnpoint;
     }
     
     public override void OnStartServer()
@@ -27,16 +31,20 @@ public class GameNetworkManager : NetworkManager
         base.OnStartServer();
         _players = new Player[PlayerCount];
         UIHandler.Instance.SetWaitingPlayerPanelState(true);
+        NetworkServer.RegisterHandler<SpawnMessage>(OnCreatePlayer);
     }
 
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+    private void OnCreatePlayer(NetworkConnectionToClient conn, SpawnMessage message)
     {
-        var spawnpoint = _playerSpawnpoints[numPlayers - 1];
-        GameObject instance = Instantiate(spawnpoint.Prefab.gameObject, spawnpoint.Spawnpoint.position, spawnpoint.Spawnpoint.rotation);
-        NetworkServer.AddPlayerForConnection(conn, instance);
-        _players[numPlayers - 1] = spawnpoint.Prefab;
-        
-        if (numPlayers == PlayerCount)
+        Player instance = Instantiate(message.Spawnpoint.Prefab, message.Spawnpoint.Target.position, message.Spawnpoint.Target.rotation);
+        _players[NetworkServer.connections.Count - 1] = instance;
+        NetworkServer.AddPlayerForConnection(conn, instance.gameObject);
+        TryStartGame();
+    }
+
+    private void TryStartGame()
+    {
+        if (NetworkServer.connections.Count == PlayerCount)
         {
             UIHandler.Instance.SetWaitingPlayerPanelState(false);
             _gameHandler.StartGame(_players);
@@ -46,7 +54,7 @@ public class GameNetworkManager : NetworkManager
             UIHandler.Instance.SetWaitingPlayerPanelState(true);
         }
     }
-
+    
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
         base.OnServerDisconnect(conn);
@@ -55,5 +63,12 @@ public class GameNetworkManager : NetworkManager
         {
             UIHandler.Instance.SetWaitingPlayerPanelState(true);
         }
+    }
+
+    public override void OnClientConnect()
+    {
+        base.OnClientConnect();
+        SpawnMessage message = new SpawnMessage() {Spawnpoint = _spawnpoints[NetworkServer.connections.Count - 1]};
+        NetworkClient.Send(message);
     }
 }

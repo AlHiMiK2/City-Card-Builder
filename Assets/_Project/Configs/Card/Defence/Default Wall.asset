@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Default Wall
   m_EditorClassIdentifier: 
   _label: Wall
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 93bb96332fb08044b91dec6d4f7ee5ec, type: 3}
   _health: 10
   _earn: 3
   _mesh: {fileID: -2432090755550338912, guid: 612ff15c58d8bde4fa0c41a21f2c2402, type: 3}

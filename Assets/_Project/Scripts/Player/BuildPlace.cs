@@ -60,7 +60,7 @@ namespace _Project.Scripts.City
         public void Build(DefenceCardConfig config)
         {
             _constructionData.SetData(config.Health, config.Earn);
-            _constructionRenderer.materials = config.Materials;
+            //_constructionRenderer.materials = config.Materials;
             _constructionRenderer.enabled = true;
             _constructionMeshFilter.mesh = config.Mesh;
             _constructionMeshFilter.transform.localPosition = config.MeshOffset;

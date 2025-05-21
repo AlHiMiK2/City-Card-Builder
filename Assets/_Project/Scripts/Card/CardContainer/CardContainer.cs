@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _Project.Scripts.Handlers;
 using Mirror;
 using UnityEngine;
 
@@ -15,9 +16,9 @@ namespace _Project.Scripts.Card
 
         public List<Card> Cards => _cards;
 
-        public void Fill(List<CardConfig> cardConfigs, int ownerPlayerIndex, bool isBonus)
+        public void Fill(List<int> cardIds, int ownerPlayerIndex, bool isBonus)
         {
-            foreach (var cardConfig in cardConfigs)
+            foreach (var cardId in cardIds)
             {
                 Card instance;
                 
@@ -26,7 +27,7 @@ namespace _Project.Scripts.Card
                 else
                     instance = Instantiate(_cardPrefab, _container);
                 
-                instance.Init(cardConfig, ownerPlayerIndex);
+                instance.Init(GameHandler.Instance.Config.CardDatabase.GetCardConfigById(cardId), ownerPlayerIndex);
                 _cards.Add(instance);
                 instance.transform.Translate(_spawnOffset);
             }

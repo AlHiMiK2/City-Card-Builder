@@ -43,7 +43,7 @@ namespace _Project.Scripts.Handlers
             if (_cardBuildGenerator == null)
                 _cardBuildGenerator = new CardBuildGenerator(_gameHandler.Config);
 
-            _cardContainer.Fill(_cardBuildGenerator.Generate(isBonusBuild), ownerPlayerIndex, isBonusBuild);
+            UIHandler.Instance.TargetFillCardContainer(NetworkServer.connections[ownerPlayerIndex], _cardBuildGenerator.Generate(isBonusBuild), ownerPlayerIndex, isBonusBuild);
             _appliedCardCount = 0; 
         }
 

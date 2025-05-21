@@ -12,15 +12,15 @@ namespace _Project.Scripts.Card
             _config = config;
         }
 
-        public List<CardConfig> Generate(bool isBonusBuild)
+        public List<int> Generate(bool isBonusBuild)
         {
-            List<CardConfig> instantiatedCards = new List<CardConfig>();
+            List<int> instantiatedCards = new List<int>();
 
             if (isBonusBuild == false)
             {
                 for (int i = 0; i < _config.UpgradeCardCount; i++)
                 {
-                    instantiatedCards.Add(_config.CardDatabase.GetRandomUpgradeCardConfig());
+                    instantiatedCards.Add(_config.CardDatabase.GetRandomUpgradeCardConfig().Id);
                 }
             }
 
@@ -32,11 +32,11 @@ namespace _Project.Scripts.Card
 
                 if (selectedCardType == 0)
                 {
-                    instantiatedCards.Add(_config.CardDatabase.GetRandomAttackCardConfig());
+                    instantiatedCards.Add(_config.CardDatabase.GetRandomAttackCardConfig().Id);
                 }
                 else
                 {
-                    instantiatedCards.Add(_config.CardDatabase.GetRandomDefenceCardConfig());
+                    instantiatedCards.Add(_config.CardDatabase.GetRandomDefenceCardConfig().Id);
                 }
             }
 

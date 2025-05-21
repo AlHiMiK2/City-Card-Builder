@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 namespace _Project.Scripts.Card
 {
-    public class CardContainer : MonoBehaviour
+    public class CardContainer : NetworkBehaviour
     {
         [SerializeField] private Card _cardPrefab;
         [SerializeField] private Card _bonusCardPrefab;

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Handlers
 {
-    public class CardHandler : NetworkBehaviour
+    public class CardHandler : MonoBehaviour
     {
         [SerializeField] private CardContainer _cardContainer;
         
@@ -23,13 +23,12 @@ namespace _Project.Scripts.Handlers
         {
             Instance = this;
         }
-
-        [ClientRpc]
-        public void RpcInit()
+        
+        public void Init()
         {
             _gameHandler = GameHandler.Instance;
         }
-
+        
         public void StartTurn(int ownerPlayerIndex, bool isBonusBuild)
         {
             _isMainBuildApplied = false;

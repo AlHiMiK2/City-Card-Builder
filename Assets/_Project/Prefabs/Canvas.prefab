@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5729519585582467333}
   - component: {fileID: 2415142739839643892}
   - component: {fileID: 5803619177641511243}
-  - component: {fileID: 5582845037406470091}
   - component: {fileID: 3699914774167478555}
   m_Layer: 5
   m_Name: CardContainer
@@ -97,22 +96,6 @@ MonoBehaviour:
   elementsTransform: {fileID: 7401705514716709016}
   elementsContainer: {fileID: 5210704253248179299}
   gridLayoutGroup: {fileID: 3415384973607548435}
---- !u!114 &5582845037406470091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73212649199921843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd12fe492abe4501a3c0d1ae39a67a62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  _cardContainer: {fileID: 3699914774167478555}
 --- !u!114 &3699914774167478555
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -108,6 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fb079112b84ec495701a576801c84d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   _cardPrefab: {fileID: -7113842017304705252, guid: 5db3a1b98b07b654c828f42dbfbd0556, type: 3}
   _bonusCardPrefab: {fileID: -7113842017304705252, guid: aff0e368a8a98284cbe568299fb8c6fe, type: 3}
   _container: {fileID: 7401705514716709016}
@@ -234,6 +237,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   _canvas: {fileID: 2908767116527639649}
+  _cardContainer: {fileID: 3699914774167478555}
   _constructionDataViewPrefab: {fileID: 4092273762660891531, guid: 1198345534e931d4eb11afd919af4d61, type: 3}
   _turnPrefix: 'Player '
   _turnPostfix: '''s turn'

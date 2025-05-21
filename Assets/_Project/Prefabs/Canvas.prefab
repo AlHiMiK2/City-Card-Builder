@@ -109,6 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd12fe492abe4501a3c0d1ae39a67a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   _cardContainer: {fileID: 3699914774167478555}
 --- !u!114 &3699914774167478555
 MonoBehaviour:
@@ -139,6 +142,7 @@ GameObject:
   - component: {fileID: 2292803868831390206}
   - component: {fileID: 6193091804617818724}
   - component: {fileID: 9040846922198224654}
+  - component: {fileID: 1386770289043316084}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -243,12 +247,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab63d09b5944be1a3c4a301f17916ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   _canvas: {fileID: 2908767116527639649}
   _constructionDataViewPrefab: {fileID: 4092273762660891531, guid: 1198345534e931d4eb11afd919af4d61, type: 3}
   _turnPrefix: 'Player '
   _turnPostfix: '''s turn'
   _turnView: {fileID: 1416918270812110158}
   _waitingPlayerPanel: {fileID: 6618769049026291395}
+--- !u!114 &1386770289043316084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426895434331307723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 771427539
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &862885338472426947
 GameObject:
   m_ObjectHideFlags: 0

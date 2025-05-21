@@ -28,12 +28,11 @@ namespace _Project.Scripts.Handlers
             Instance = this;
         }
 
-        [ClientRpc]
-        public void RpcInit()
+        private void Start()
         {
             _camera = Camera.main;
         }
-        
+
         public void AddConstructionDataView(Vector3 worldPosition, int ownerIndex)
         {
             if (_constructionDataViews.Count - 1 < ownerIndex)

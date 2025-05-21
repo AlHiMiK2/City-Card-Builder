@@ -31,7 +31,6 @@ namespace _Project.Scripts.Handlers
             _cardHandler = CardHandler.Instance;
             _cardHandler.Init();
             _uiHandler = UIHandler.Instance;
-            _uiHandler.RpcInit();
             _players = players;
             
             for (var i = 0; i < _players.Length; i++)

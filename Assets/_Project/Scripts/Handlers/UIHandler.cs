@@ -17,7 +17,6 @@ namespace _Project.Scripts.Handlers
         [SerializeField] private GameObject _waitingPlayerPanel;
 
         private List<List<TMP_Text>> _constructionDataViews = new ();
-        private Camera _camera;
         
         public Canvas Canvas => _canvas;
         
@@ -28,11 +27,6 @@ namespace _Project.Scripts.Handlers
             Instance = this;
         }
 
-        private void Start()
-        {
-            _camera = Camera.main;
-        }
-
         public void AddConstructionDataView(Vector3 worldPosition, int ownerIndex)
         {
             if (_constructionDataViews.Count - 1 < ownerIndex)
@@ -40,7 +34,7 @@ namespace _Project.Scripts.Handlers
                 _constructionDataViews.Add(new List<TMP_Text>());
             }
             
-            Vector3 position = _camera.WorldToScreenPoint(worldPosition);
+            Vector3 position = Camera.main.WorldToScreenPoint(worldPosition);
             var instance = Instantiate(_constructionDataViewPrefab, position, Quaternion.identity, transform);
             _constructionDataViews[ownerIndex].Add(instance);
         }

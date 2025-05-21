@@ -2,14 +2,11 @@
 using _Project.Scripts.City;
 using _Project.Scripts.Enums;
 using Mirror;
-using UnityEngine;
 
 namespace _Project.Scripts.Handlers
 {
-    public class CardHandler : MonoBehaviour
+    public class CardHandler : NetworkBehaviour
     {
-        [SerializeField] private CardContainer _cardContainer;
-        
         private CardBuildGenerator _cardBuildGenerator;
         private GameHandler _gameHandler;
         private int _appliedCardCount;
@@ -47,6 +44,7 @@ namespace _Project.Scripts.Handlers
             _appliedCardCount = 0; 
         }
 
+        [Command]
         public bool TryApplyCard(CardConfig config, BuildPlace target, int ownerIndex, bool isVisual)
         {
             foreach (var player in _gameHandler.Players)
@@ -137,7 +135,7 @@ namespace _Project.Scripts.Handlers
             {
                 if (_gameHandler.Config.BonusCardApplyPerTurn <= _appliedCardCount)
                 {
-                    _cardContainer.Clear();
+                    UIHandler.Instance.TargetClearCardContainer(NetworkServer.connections[_ownerPlayerIndex]);
                     _gameHandler.NextTurn();
                 }
             }
@@ -149,12 +147,12 @@ namespace _Project.Scripts.Handlers
                 
                     if (_isBonusBuild)
                     {
-                        _cardContainer.Clear();
+                        UIHandler.Instance.TargetClearCardContainer(NetworkServer.connections[_ownerPlayerIndex]);
                         CreateCardBuild(_ownerPlayerIndex, true);
                     }
                     else
                     {
-                        _cardContainer.Clear();
+                        UIHandler.Instance.TargetClearCardContainer(NetworkServer.connections[_ownerPlayerIndex]);
                         _gameHandler.NextTurn();
                     }
                 }
@@ -163,7 +161,7 @@ namespace _Project.Scripts.Handlers
 
         public void ClearBuild()
         {
-            _cardContainer.Clear();
+            UIHandler.Instance.TargetClearCardContainer(NetworkServer.connections[_ownerPlayerIndex]);
         }
     }
 }

@@ -67,5 +67,11 @@ namespace _Project.Scripts.Handlers
         {
             _cardContainer.Fill(cardConfigs, ownerPlayerIndex, isBonus);
         }
+        
+        [TargetRpc]
+        public void TargetClearCardContainer(NetworkConnectionToClient target)
+        {
+            _cardContainer.Clear();
+        }
     }
 }

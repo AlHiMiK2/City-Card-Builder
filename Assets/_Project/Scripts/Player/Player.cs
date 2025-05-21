@@ -19,6 +19,9 @@ namespace _Project.Scripts
         private int _index;
         private bool _isDead;
 
+        [SyncVar]
+        public bool IsWalletFulled;
+
         public Wallet Wallet => _wallet;
         public BuildLine[] BuildLines => _buildLines;
         public BuildPlace MainBuildPlace => _buildLines.Last().Places[0];
@@ -77,6 +80,7 @@ namespace _Project.Scripts
             }
             
             _wallet.AddScore(earn);
+            IsWalletFulled = _wallet.IsFulled;
         }
 
         private void OnMainPlaceHealthChanged()
@@ -85,6 +89,12 @@ namespace _Project.Scripts
             {
                 _isDead = true;
             }
+        }
+
+        [ClientRpc]
+        public void RpcClearWallet()
+        {
+            _wallet.ClearScore();
         }
     }
 }

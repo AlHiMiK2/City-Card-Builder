@@ -44,13 +44,13 @@ namespace _Project.Scripts.Handlers
 
         private void StartTurn()
         {
-            bool isWalletFulled = _players[_turnOwnerIndex].Wallet.IsFulled;
+            bool isWalletFulled = _players[_turnOwnerIndex].IsWalletFulled;
             
             _cardHandler.StartTurn(_turnOwnerIndex, isWalletFulled);
             
             if (isWalletFulled)
             {
-                _players[_turnOwnerIndex].Wallet.ClearScore();
+                _players[_turnOwnerIndex].RpcClearWallet();
             }
             
             _uiHandler.SetTurnViewValue(_turnOwnerIndex + 1);

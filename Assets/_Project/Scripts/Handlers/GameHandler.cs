@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using _Project.Scripts.City;
+using Mirror;
 using UnityEngine;
 
 namespace _Project.Scripts.Handlers
@@ -101,6 +102,12 @@ namespace _Project.Scripts.Handlers
             bool isEnd = lifePlayerCount <= 1;
             
             return isEnd;
+        }
+
+        [Command]
+        public void CmdBuild(BuildPlace place, int configId)
+        {
+            place.RpcBuild(configId);
         }
     }
 }

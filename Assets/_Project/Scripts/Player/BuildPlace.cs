@@ -2,7 +2,6 @@
 using _Project.Scripts.Handlers;
 using Mirror;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project.Scripts.City
 {
@@ -64,6 +63,12 @@ namespace _Project.Scripts.City
             _constructionMeshFilter.mesh = config.Mesh;
             _constructionMeshFilter.transform.localPosition = config.MeshOffset;
             _constructionMeshFilter.transform.SetLocalPositionAndRotation(config.MeshOffset, Quaternion.Euler(config.RotationOffset));
+        }
+
+        [ClientRpc]
+        public void RpcBuild(int configId)
+        {
+            Build(configId);
         }
 
         public void SetOutlineState(bool state)

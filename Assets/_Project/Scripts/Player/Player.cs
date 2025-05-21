@@ -30,7 +30,8 @@ namespace _Project.Scripts
             public BuildPlace[] Places;
         }
 
-        public void Init(int walletCapacity, int index)
+        [ClientRpc]
+        public void RpcInit(int walletCapacity, int index)
         {
             _wallet = new Wallet(walletCapacity);
             _walletView.Init(_wallet);

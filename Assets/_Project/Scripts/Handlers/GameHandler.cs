@@ -36,10 +36,10 @@ namespace _Project.Scripts.Handlers
             
             for (var i = 0; i < _players.Length; i++)
             {
-                _players[i].Init(_config.WalletCapacity, i);
+                _players[i].RpcInit(_config.WalletCapacity, i);
             }
             
-            //StartTurn();
+            StartTurn();
         }
 
         private void StartTurn()

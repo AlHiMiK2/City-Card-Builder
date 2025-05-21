@@ -40,7 +40,7 @@ namespace _Project.Scripts.Handlers
                 _players[i].Init(_config.WalletCapacity, i);
             }
             
-            StartTurn();
+            //StartTurn();
         }
 
         private void StartTurn()

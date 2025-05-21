@@ -28,7 +28,9 @@ namespace _Project.Scripts.City
             _constructionData = new ConstructionData();
             _constructionData.HealthChanged += OnConstructionHealthChanged;
         }
-        public void Init(int index, int ownerPlayerIndex, DefenceCardConfig defenceCardConfig)
+        
+        [ClientRpc]
+        public void RpcInit(int index, int ownerPlayerIndex, DefenceCardConfig defenceCardConfig)
         {
             _ownerIndex = ownerPlayerIndex;
             _index = index;

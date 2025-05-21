@@ -30,9 +30,9 @@ namespace _Project.Scripts.Handlers
             if(_isStarted) return;
             _isStarted = true;
             _cardHandler = CardHandler.Instance;
-            _cardHandler.Init(this);
+            _cardHandler.RpcInit(this);
             _uiHandler = UIHandler.Instance;
-            _uiHandler.Init();
+            _uiHandler.RpcInit();
             _players = players;
             
             for (var i = 0; i < _players.Length; i++)

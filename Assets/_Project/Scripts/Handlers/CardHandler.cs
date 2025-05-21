@@ -1,11 +1,12 @@
 ﻿using _Project.Scripts.Card;
 using _Project.Scripts.City;
 using _Project.Scripts.Enums;
+using Mirror;
 using UnityEngine;
 
 namespace _Project.Scripts.Handlers
 {
-    public class CardHandler : MonoBehaviour
+    public class CardHandler : NetworkBehaviour
     {
         [SerializeField] private CardContainer _cardContainer;
         
@@ -23,7 +24,8 @@ namespace _Project.Scripts.Handlers
             Instance = this;
         }
 
-        public void Init(GameHandler handler)
+        [ClientRpc]
+        public void RpcInit(GameHandler handler)
         {
             _gameHandler = handler;
         }

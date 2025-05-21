@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Mirror;
 using TMPro;
 using UnityEngine;
 
 namespace _Project.Scripts.Handlers
 {
-    public class UIHandler : MonoBehaviour
+    public class UIHandler : NetworkBehaviour
     {
         [SerializeField] private Canvas _canvas;
         [SerializeField] private TMP_Text _constructionDataViewPrefab;
@@ -25,7 +26,8 @@ namespace _Project.Scripts.Handlers
             Instance = this;
         }
 
-        public void Init()
+        [ClientRpc]
+        public void RpcInit()
         {
             _camera = Camera.main;
         }

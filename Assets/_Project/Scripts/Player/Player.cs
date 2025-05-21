@@ -44,11 +44,11 @@ namespace _Project.Scripts
                 {
                     if (place as MainBuildPlace)
                     {
-                        place.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.MainDefenceCardConfig);
+                        place.RpcInit(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.MainDefenceCardConfig);
                     }
                     else
                     {
-                        place.Init(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
+                        place.RpcInit(placeIndex, _index, GameHandler.Instance.Config.CardDatabase.DefaultDefenceCardConfig);
                     }
                     
                     placeIndex++;

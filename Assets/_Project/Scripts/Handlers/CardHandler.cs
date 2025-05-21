@@ -25,9 +25,9 @@ namespace _Project.Scripts.Handlers
         }
 
         [ClientRpc]
-        public void RpcInit(GameHandler handler)
+        public void RpcInit()
         {
-            _gameHandler = handler;
+            _gameHandler = GameHandler.Instance;
         }
 
         public void StartTurn(int ownerPlayerIndex, bool isBonusBuild)

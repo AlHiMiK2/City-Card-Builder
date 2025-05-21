@@ -2,11 +2,14 @@
 using _Project.Scripts.City;
 using _Project.Scripts.Enums;
 using Mirror;
+using UnityEngine;
 
 namespace _Project.Scripts.Handlers
 {
     public class CardHandler : NetworkBehaviour
     {
+        [SerializeField] private CardContainer _cardContainer;
+        
         private CardBuildGenerator _cardBuildGenerator;
         private GameHandler _gameHandler;
         private int _appliedCardCount;
@@ -40,11 +43,10 @@ namespace _Project.Scripts.Handlers
             if (_cardBuildGenerator == null)
                 _cardBuildGenerator = new CardBuildGenerator(_gameHandler.Config);
 
-            UIHandler.Instance.TargetFillCardContainer(NetworkServer.connections[ownerPlayerIndex], _cardBuildGenerator.Generate(isBonusBuild), ownerPlayerIndex, isBonusBuild);
+            _cardContainer.Fill(_cardBuildGenerator.Generate(isBonusBuild), ownerPlayerIndex, isBonusBuild);
             _appliedCardCount = 0; 
         }
-
-        [Command]
+        
         public bool TryApplyCard(CardConfig config, BuildPlace target, int ownerIndex, bool isVisual)
         {
             foreach (var player in _gameHandler.Players)
@@ -135,7 +137,7 @@ namespace _Project.Scripts.Handlers
             {
                 if (_gameHandler.Config.BonusCardApplyPerTurn <= _appliedCardCount)
                 {
-                    UIHandler.Instance.TargetClearCardContainer(NetworkServer.connections[_ownerPlayerIndex]);
+                    _cardContainer.Clear();
                     _gameHandler.NextTurn();
                 }
             }
@@ -147,12 +149,12 @@ namespace _Project.Scripts.Handlers
                 
                     if (_isBonusBuild)
                     {
-                        UIHandler.Instance.TargetClearCardContainer(NetworkServer.connections[_ownerPlayerIndex]);
+                        _cardContainer.Clear();
                         CreateCardBuild(_ownerPlayerIndex, true);
                     }
                     else
                     {
-                        UIHandler.Instance.TargetClearCardContainer(NetworkServer.connections[_ownerPlayerIndex]);
+                        _cardContainer.Clear();
                         _gameHandler.NextTurn();
                     }
                 }
@@ -161,7 +163,7 @@ namespace _Project.Scripts.Handlers
 
         public void ClearBuild()
         {
-            UIHandler.Instance.TargetClearCardContainer(NetworkServer.connections[_ownerPlayerIndex]);
+            _cardContainer.Clear();
         }
     }
 }

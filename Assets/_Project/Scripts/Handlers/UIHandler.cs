@@ -9,7 +9,6 @@ namespace _Project.Scripts.Handlers
     public class UIHandler : NetworkBehaviour
     {
         [SerializeField] private Canvas _canvas;
-        [SerializeField] private CardContainer _cardContainer;
         [SerializeField] private TMP_Text _constructionDataViewPrefab;
         [SerializeField] private string _turnPrefix;
         [SerializeField] private string _turnPostfix;
@@ -60,18 +59,6 @@ namespace _Project.Scripts.Handlers
         {
             _waitingPlayerPanel.SetActive(state);
             _turnView.transform.parent.gameObject.SetActive(!state);
-        }
-
-        [TargetRpc]
-        public void TargetFillCardContainer(NetworkConnectionToClient target, List<int> cardConfigs, int ownerPlayerIndex, bool isBonus)
-        {
-            _cardContainer.Fill(cardConfigs, ownerPlayerIndex, isBonus);
-        }
-        
-        [TargetRpc]
-        public void TargetClearCardContainer(NetworkConnectionToClient target)
-        {
-            _cardContainer.Clear();
         }
     }
 }

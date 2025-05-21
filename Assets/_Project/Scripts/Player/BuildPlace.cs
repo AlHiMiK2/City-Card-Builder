@@ -17,7 +17,7 @@ namespace _Project.Scripts.City
         private ConstructionData _constructionData;
         private int _ownerIndex;
         private int _index;
-        private UIHandler _uiHandler;
+        private GameHandler _gameHandler;
         
         public int Index => _index;
         public int OwnerIndex => _ownerIndex;
@@ -30,13 +30,12 @@ namespace _Project.Scripts.City
         }
         
         [ClientRpc]
-        public void RpcInit(int index, int ownerPlayerIndex, DefenceCardConfig defenceCardConfig)
+        public void RpcInit(int index, int ownerPlayerIndex, int configId)
         {
             _ownerIndex = ownerPlayerIndex;
             _index = index;
-            _uiHandler = UIHandler.Instance;
-            _uiHandler.AddConstructionDataView(transform.position + _healthBarOffset, _ownerIndex);
-            Build(defenceCardConfig);
+            UIHandler.Instance.AddConstructionDataView(transform.position + _healthBarOffset, _ownerIndex);
+            Build(configId);
         }
 
         private void OnConstructionHealthChanged()
@@ -54,13 +53,14 @@ namespace _Project.Scripts.City
 
         private void UpdateHealthView()
         {
-            _uiHandler.SetConstructionDataViewValue(_constructionData.InitHealth, _constructionData.Health, _constructionData.Earn, _index, _ownerIndex);
+            UIHandler.Instance.SetConstructionDataViewValue(_constructionData.InitHealth, _constructionData.Health, _constructionData.Earn, _index, _ownerIndex);
         }
         
-        public void Build(DefenceCardConfig config)
+        public void Build(int configId)
         {
+            DefenceCardConfig config = (DefenceCardConfig)GameHandler.Instance.Config.CardDatabase.GetCardConfigById(configId);
             _constructionData.SetData(config.Health, config.Earn);
-            //_constructionRenderer.materials = config.Materials;
+            _constructionRenderer.materials = config.Materials;
             _constructionRenderer.enabled = true;
             _constructionMeshFilter.mesh = config.Mesh;
             _constructionMeshFilter.transform.localPosition = config.MeshOffset;

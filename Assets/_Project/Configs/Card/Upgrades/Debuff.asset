@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _label: Debuff
   _icon: {fileID: 21300000, guid: 1b2949386acab96429aa33a5dda1f7bb, type: 3}
+  _id: 8

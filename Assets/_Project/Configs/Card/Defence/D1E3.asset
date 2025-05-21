@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _label: Farm
   _icon: {fileID: 21300000, guid: df4db3a31bab9f148b921c9ae035fa28, type: 3}
+  _id: 5
   _health: 6
   _earn: 18
   _mesh: {fileID: -2432090755550338912, guid: a7fc760bbe74cef4eaad034e8706caa1, type: 3}

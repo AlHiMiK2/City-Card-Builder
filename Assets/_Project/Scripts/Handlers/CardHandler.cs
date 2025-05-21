@@ -77,7 +77,7 @@ namespace _Project.Scripts.Handlers
                 else
                 {
                     if (target.OwnerIndex != ownerIndex) return false;
-                    target.Build(defenceConfig);
+                    target.Build(defenceConfig.Id);
                     CardApplied();
                     return true;
                 }

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _label: Layer Damage
   _icon: {fileID: 21300000, guid: 93bb96332fb08044b91dec6d4f7ee5ec, type: 3}
+  _id: 4
   _damage: 9
   _type: 3

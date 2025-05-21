@@ -1,16 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Card
 {
     [CreateAssetMenu(fileName = "New Card DB", menuName = "Create Card Database", order = 0)]
     public class CardDatabase : ScriptableObject
     {
-        [SerializeField] private AttackCardConfig[] _attackCardConfigs;
         [SerializeField] private DefenceCardConfig _defaultDefenceCardConfig;
+        [SerializeField] private DefenceCardConfig _mainDefenceCardConfig;
+        [SerializeField] private AttackCardConfig[] _attackCardConfigs;
         [SerializeField] private DefenceCardConfig[] _defenceCardConfigs;
         [SerializeField] private UpgradeCardConfig[] _upgradeCardConfigs;
-        [SerializeField] private DefenceCardConfig _mainDefenceCardConfig;
 
+        private List<CardConfig> _allConfigs;
+        
         public DefenceCardConfig DefaultDefenceCardConfig => _defaultDefenceCardConfig;
         public DefenceCardConfig MainDefenceCardConfig => _mainDefenceCardConfig;
 
@@ -27,6 +32,39 @@ namespace _Project.Scripts.Card
         public UpgradeCardConfig GetRandomUpgradeCardConfig()
         {
             return _upgradeCardConfigs[Random.Range(0, _upgradeCardConfigs.Length)];
+        }
+
+        public CardConfig GetCardConfigById(int id)
+        {
+            return _allConfigs.FirstOrDefault(x => x.Id == id);
+        }
+
+        private void OnValidate()
+        {
+            _defaultDefenceCardConfig.SetId(0);
+            _mainDefenceCardConfig.SetId(1);
+            _allConfigs.Add(_defaultDefenceCardConfig);
+            _allConfigs.Add(_mainDefenceCardConfig);
+            int id = 2;
+
+            foreach (var config in _attackCardConfigs)
+            {
+                config.SetId(id);
+                _allConfigs.Add(config);
+                id++;
+            }
+            foreach (var config in _defenceCardConfigs)
+            {
+                config.SetId(id);
+                _allConfigs.Add(config);
+                id++;
+            }
+            foreach (var config in _upgradeCardConfigs)
+            {
+                config.SetId(id);
+                _allConfigs.Add(config);
+                id++;
+            }
         }
     }
 }

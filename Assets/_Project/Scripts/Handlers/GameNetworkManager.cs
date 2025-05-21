@@ -21,7 +21,7 @@ public class GameNetworkManager : NetworkManager
         public Transform Target;
     }
     
-    private struct CreatePlayerMessage : NetworkMessage {}
+    public struct CreatePlayerMessage : NetworkMessage {}
     
     public override void OnStartServer()
     {

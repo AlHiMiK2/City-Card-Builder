@@ -30,7 +30,7 @@ namespace _Project.Scripts.Card
             {
                 foreach (var place in attackPlaces)
                 {
-                    place.ConstructionData.TakeDamage(damage / attackPlaces.Count);
+                    ownerPlayer.CmdTakeDamage(place, damage / attackPlaces.Count);
                 }
             }
             
@@ -81,11 +81,11 @@ namespace _Project.Scripts.Card
             {
                 if (place.Index == target.Index)
                 {
-                    place.ConstructionData.TakeDamage(damage / 2);
+                    ownerPlayer.CmdTakeDamage(place, damage / 2);
                 }
                 else
                 {
-                    place.ConstructionData.TakeDamage(damage / ((attackPlaces.Count - 1) * 2));
+                    ownerPlayer.CmdTakeDamage(place, damage / ((attackPlaces.Count - 1) * 2));
                 }
             }
                 
@@ -130,7 +130,7 @@ namespace _Project.Scripts.Card
             {
                 foreach (var place in attackPlaces)
                 {
-                    place.ConstructionData.TakeDamage(damage / attackPlaces.Count);
+                    ownerPlayer.CmdTakeDamage(place, damage / attackPlaces.Count);
                 }
             }
             

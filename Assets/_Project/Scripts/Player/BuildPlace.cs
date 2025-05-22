@@ -71,6 +71,12 @@ namespace _Project.Scripts.City
             Build(configId);
         }
 
+        [ClientRpc]
+        public void RpcTakeDamage(int damage)
+        {
+            _constructionData.TakeDamage(damage);
+        }
+
         public void SetOutlineState(bool state)
         {
             uint mask = _constructionRenderer.renderingLayerMask;

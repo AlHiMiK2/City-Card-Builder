@@ -102,5 +102,11 @@ namespace _Project.Scripts
         {
             target.RpcBuild(configId);
         }
+        
+        [Command]
+        public void CmdTakeDamage(BuildPlace target, int damage)
+        {
+            target.RpcTakeDamage(damage);
+        }
     }
 }

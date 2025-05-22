@@ -14,8 +14,6 @@ namespace _Project.Scripts.Card
         [SerializeField] private DefenceCardConfig[] _defenceCardConfigs;
         [SerializeField] private UpgradeCardConfig[] _upgradeCardConfigs;
 
-        private List<CardConfig> _allConfigs;
-        
         public DefenceCardConfig DefaultDefenceCardConfig => _defaultDefenceCardConfig;
         public DefenceCardConfig MainDefenceCardConfig => _mainDefenceCardConfig;
 
@@ -36,33 +34,52 @@ namespace _Project.Scripts.Card
 
         public CardConfig GetCardConfigById(int id)
         {
-            return _allConfigs.FirstOrDefault(x => x.Id == id);
+            if (id == 0)
+            {
+                return _defaultDefenceCardConfig;
+            }
+            if (id == 1)
+            {
+                return _mainDefenceCardConfig;
+            }
+            foreach (var config in _attackCardConfigs)
+            {
+                if(config.Id == id)
+                    return config;
+            }
+            foreach (var config in _defenceCardConfigs)
+            {
+                if(config.Id == id)
+                    return config;
+            }
+            foreach (var config in _upgradeCardConfigs)
+            {
+                if(config.Id == id)
+                    return config;
+            }
+
+            return null;
         }
 
         private void OnValidate()
         {
             _defaultDefenceCardConfig.SetId(0);
             _mainDefenceCardConfig.SetId(1);
-            _allConfigs.Add(_defaultDefenceCardConfig);
-            _allConfigs.Add(_mainDefenceCardConfig);
             int id = 2;
 
             foreach (var config in _attackCardConfigs)
             {
                 config.SetId(id);
-                _allConfigs.Add(config);
                 id++;
             }
             foreach (var config in _defenceCardConfigs)
             {
                 config.SetId(id);
-                _allConfigs.Add(config);
                 id++;
             }
             foreach (var config in _upgradeCardConfigs)
             {
                 config.SetId(id);
-                _allConfigs.Add(config);
                 id++;
             }
         }

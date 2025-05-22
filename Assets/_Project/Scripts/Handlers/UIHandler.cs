@@ -38,7 +38,8 @@ namespace _Project.Scripts.Handlers
             _constructionDataViews[ownerIndex].Add(instance);
         }
 
-        public void SetConstructionDataViewValue(int maxHealth, int health, int earn, int index, int ownerIndex)
+        [ClientRpc]
+        public void RpcSetConstructionDataViewValue(int maxHealth, int health, int earn, int index, int ownerIndex)
         {
             if (health > 0)
             {

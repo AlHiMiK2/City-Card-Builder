@@ -28,17 +28,18 @@ namespace _Project.Scripts.City
             _constructionData.HealthChanged += OnConstructionHealthChanged;
         }
         
-        public void Init(int index, int ownerPlayerIndex, int configId)
+        [ClientRpc]
+        public void RpcInit(int index, int ownerPlayerIndex, int configId)
         {
             _ownerIndex = ownerPlayerIndex;
             _index = index;
             UIHandler.Instance.AddConstructionDataView(transform.position + _healthBarOffset, _ownerIndex);
-            RpcBuild(configId);
+            Build(configId);
         }
 
         private void OnConstructionHealthChanged()
         {
-            UpdateHealthView();
+            CmdUpdateHealthView();
             
             if (_constructionData.Health <= 0)
             {
@@ -49,13 +50,13 @@ namespace _Project.Scripts.City
             }
         }
 
-        private void UpdateHealthView()
+        [Command]
+        private void CmdUpdateHealthView()
         {
-            UIHandler.Instance.SetConstructionDataViewValue(_constructionData.InitHealth, _constructionData.Health, _constructionData.Earn, _index, _ownerIndex);
+            UIHandler.Instance.RpcSetConstructionDataViewValue(_constructionData.InitHealth, _constructionData.Health, _constructionData.Earn, _index, _ownerIndex);
         }
         
-        [ClientRpc]
-        public void RpcBuild(int configId)
+        public void Build(int configId)
         {
             DefenceCardConfig config = (DefenceCardConfig)GameHandler.Instance.Config.CardDatabase.GetCardConfigById(configId);
             _constructionData.SetData(config.Health, config.Earn);
@@ -66,6 +67,12 @@ namespace _Project.Scripts.City
             _constructionMeshFilter.transform.SetLocalPositionAndRotation(config.MeshOffset, Quaternion.Euler(config.RotationOffset));
         }
 
+        [ClientRpc]
+        public void RpcBuild(int configId)
+        {
+            Build(configId);
+        }
+        
         public void SetOutlineState(bool state)
         {
             uint mask = _constructionRenderer.renderingLayerMask;

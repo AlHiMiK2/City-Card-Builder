@@ -96,5 +96,11 @@ namespace _Project.Scripts
         {
             _wallet.ClearScore();
         }
+
+        [Command]
+        public void CmdBuild(BuildPlace target, int configId)
+        {
+            target.RpcBuild(configId);
+        }
     }
 }

@@ -104,13 +104,13 @@ namespace _Project.Scripts.Handlers
             return isEnd;
         }
 
-        [Command]
+        [Command(requiresAuthority = false)]
         public void CmdBuild(BuildPlace target, int configId)
         {
             target.Build(configId);
         }
         
-        [Command]
+        [Command(requiresAuthority = false)]
         public void CmdTakeDamage(BuildPlace target, int damage)
         {
             target.ConstructionData.TakeDamage(damage);

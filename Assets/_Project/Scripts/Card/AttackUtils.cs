@@ -31,7 +31,7 @@ namespace _Project.Scripts.Card
             {
                 foreach (var place in attackPlaces)
                 {
-                    GameHandler.Instance.CmdTakeDamage(ownerPlayer.Index, place, damage / attackPlaces.Count);
+                    GameHandler.Instance.CmdTakeDamage(place, damage / attackPlaces.Count);
                 }
             }
             
@@ -82,11 +82,11 @@ namespace _Project.Scripts.Card
             {
                 if (place.Index == target.Index)
                 {
-                    GameHandler.Instance.CmdTakeDamage(ownerPlayer.Index, place, damage / 2);
+                    GameHandler.Instance.CmdTakeDamage(place, damage / 2);
                 }
                 else
                 {
-                    GameHandler.Instance.CmdTakeDamage(ownerPlayer.Index, place, damage / ((attackPlaces.Count - 1) * 2));
+                    GameHandler.Instance.CmdTakeDamage(place, damage / ((attackPlaces.Count - 1) * 2));
                 }
             }
                 
@@ -131,7 +131,7 @@ namespace _Project.Scripts.Card
             {
                 foreach (var place in attackPlaces)
                 {
-                    GameHandler.Instance.CmdTakeDamage(ownerPlayer.Index, place, damage / attackPlaces.Count);
+                    GameHandler.Instance.CmdTakeDamage(place, damage / attackPlaces.Count);
                 }
             }
             

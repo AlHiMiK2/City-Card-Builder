@@ -18,8 +18,7 @@ namespace _Project.Scripts
         private Wallet _wallet;
         private int _index;
         private bool _isDead;
-
-        [SyncVar]
+        
         public bool IsWalletFulled;
 
         public Wallet Wallet => _wallet;
@@ -33,9 +32,8 @@ namespace _Project.Scripts
         {
             public BuildPlace[] Places;
         }
-
-        [ClientRpc]
-        public void RpcInit(int walletCapacity, int index)
+        
+        public void Init(int walletCapacity, int index)
         {
             _wallet = new Wallet(walletCapacity);
             _walletView.Init(_wallet);
@@ -90,22 +88,6 @@ namespace _Project.Scripts
             {
                 _isDead = true;
             }
-        }
-
-        [ClientRpc]
-        public void RpcClearWallet()
-        {
-            _wallet.ClearScore();
-        }
-        
-        public void Build(BuildPlace target, int configId)
-        {
-            target.RpcBuild(configId);
-        }
-        
-        public void TakeDamage(BuildPlace target, int damage)
-        {
-            target.RpcTakeDamage(damage);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace _Project.Scripts.City
             UIHandler.Instance.SetConstructionDataViewValue(_constructionData.InitHealth, _constructionData.Health, _constructionData.Earn, _index, _ownerIndex);
         }
         
-        private void Build(int configId)
+        public void Build(int configId)
         {
             DefenceCardConfig config = (DefenceCardConfig)GameHandler.Instance.Config.CardDatabase.GetCardConfigById(configId);
             _constructionData.SetData(config.Health, config.Earn);
@@ -63,18 +63,6 @@ namespace _Project.Scripts.City
             _constructionMeshFilter.mesh = config.Mesh;
             _constructionMeshFilter.transform.localPosition = config.MeshOffset;
             _constructionMeshFilter.transform.SetLocalPositionAndRotation(config.MeshOffset, Quaternion.Euler(config.RotationOffset));
-        }
-
-        [ClientRpc]
-        public void RpcBuild(int configId)
-        {
-            Build(configId);
-        }
-
-        [ClientRpc]
-        public void RpcTakeDamage(int damage)
-        {
-            _constructionData.TakeDamage(damage);
         }
 
         public void SetOutlineState(bool state)

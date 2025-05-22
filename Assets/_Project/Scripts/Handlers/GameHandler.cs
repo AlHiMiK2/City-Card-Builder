@@ -36,7 +36,7 @@ namespace _Project.Scripts.Handlers
             
             for (var i = 0; i < _players.Length; i++)
             {
-                _players[i].RpcInit(_config.WalletCapacity, i);
+                _players[i].Init(_config.WalletCapacity, i);
             }
             
             StartTurn();
@@ -50,7 +50,7 @@ namespace _Project.Scripts.Handlers
             
             if (isWalletFulled)
             {
-                _players[_turnOwnerIndex].RpcClearWallet();
+                _players[_turnOwnerIndex].Wallet.ClearScore();
             }
             
             _uiHandler.SetTurnViewValue(_turnOwnerIndex + 1);
@@ -105,15 +105,15 @@ namespace _Project.Scripts.Handlers
         }
 
         [Command]
-        public void CmdBuild(int playerId, BuildPlace target, int configId)
+        public void CmdBuild(BuildPlace target, int configId)
         {
-            _players[playerId].Build(target, configId);
+            target.Build(configId);
         }
         
         [Command]
-        public void CmdTakeDamage(int playerId, BuildPlace target, int damage)
+        public void CmdTakeDamage(BuildPlace target, int damage)
         {
-            _players[playerId].TakeDamage(target, damage);
+            target.ConstructionData.TakeDamage(damage);
         }
     }
 }

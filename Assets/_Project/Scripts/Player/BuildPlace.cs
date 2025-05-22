@@ -50,7 +50,7 @@ namespace _Project.Scripts.City
             }
         }
 
-        [Command]
+        [Command(requiresAuthority = false)]
         private void CmdUpdateHealthView()
         {
             UIHandler.Instance.RpcSetConstructionDataViewValue(_constructionData.InitHealth, _constructionData.Health, _constructionData.Earn, _index, _ownerIndex);

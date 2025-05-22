@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.City;
+using _Project.Scripts.Handlers;
 using UnityEngine;
 
 namespace _Project.Scripts.Card
@@ -30,7 +31,7 @@ namespace _Project.Scripts.Card
             {
                 foreach (var place in attackPlaces)
                 {
-                    ownerPlayer.CmdTakeDamage(place, damage / attackPlaces.Count);
+                    GameHandler.Instance.CmdTakeDamage(ownerPlayer.Index, place, damage / attackPlaces.Count);
                 }
             }
             
@@ -81,11 +82,11 @@ namespace _Project.Scripts.Card
             {
                 if (place.Index == target.Index)
                 {
-                    ownerPlayer.CmdTakeDamage(place, damage / 2);
+                    GameHandler.Instance.CmdTakeDamage(ownerPlayer.Index, place, damage / 2);
                 }
                 else
                 {
-                    ownerPlayer.CmdTakeDamage(place, damage / ((attackPlaces.Count - 1) * 2));
+                    GameHandler.Instance.CmdTakeDamage(ownerPlayer.Index, place, damage / ((attackPlaces.Count - 1) * 2));
                 }
             }
                 
@@ -130,7 +131,7 @@ namespace _Project.Scripts.Card
             {
                 foreach (var place in attackPlaces)
                 {
-                    ownerPlayer.CmdTakeDamage(place, damage / attackPlaces.Count);
+                    GameHandler.Instance.CmdTakeDamage(ownerPlayer.Index, place, damage / attackPlaces.Count);
                 }
             }
             

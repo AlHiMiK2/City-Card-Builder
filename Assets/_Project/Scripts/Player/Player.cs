@@ -25,6 +25,7 @@ namespace _Project.Scripts
         public Wallet Wallet => _wallet;
         public BuildLine[] BuildLines => _buildLines;
         public BuildPlace MainBuildPlace => _buildLines.Last().Places[0];
+        public int Index => _index;
         public bool IsDead => _isDead;
         
         [Serializable]
@@ -96,15 +97,13 @@ namespace _Project.Scripts
         {
             _wallet.ClearScore();
         }
-
-        [Command]
-        public void CmdBuild(BuildPlace target, int configId)
+        
+        public void Build(BuildPlace target, int configId)
         {
             target.RpcBuild(configId);
         }
         
-        [Command]
-        public void CmdTakeDamage(BuildPlace target, int damage)
+        public void TakeDamage(BuildPlace target, int damage)
         {
             target.RpcTakeDamage(damage);
         }

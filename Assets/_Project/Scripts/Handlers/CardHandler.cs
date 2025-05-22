@@ -76,7 +76,8 @@ namespace _Project.Scripts.Handlers
                 else
                 {
                     if (target.OwnerIndex != ownerIndex) return false;
-                    _gameHandler.Players[ownerIndex].CmdBuild(target, defenceConfig.Id);
+                    if (!_gameHandler.Players[ownerIndex].authority) return false;
+                    _gameHandler.CmdBuild(ownerIndex, target, defenceConfig.Id);
                     CardApplied();
                     return true;
                 }

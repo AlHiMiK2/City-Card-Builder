@@ -103,5 +103,17 @@ namespace _Project.Scripts.Handlers
             
             return isEnd;
         }
+
+        [Command]
+        public void CmdBuild(int playerId, BuildPlace target, int configId)
+        {
+            _players[playerId].Build(target, configId);
+        }
+        
+        [Command]
+        public void CmdTakeDamage(int playerId, BuildPlace target, int damage)
+        {
+            _players[playerId].TakeDamage(target, damage);
+        }
     }
 }

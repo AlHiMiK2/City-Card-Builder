@@ -107,7 +107,7 @@ namespace _Project.Scripts.Handlers
         [Command(requiresAuthority = false)]
         public void CmdBuild(BuildPlace target, int configId)
         {
-            target.Build(configId);
+            target.RpcBuild(configId);
         }
         
         [Command(requiresAuthority = false)]

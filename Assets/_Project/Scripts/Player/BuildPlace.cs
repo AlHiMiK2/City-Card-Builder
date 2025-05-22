@@ -33,7 +33,7 @@ namespace _Project.Scripts.City
             _ownerIndex = ownerPlayerIndex;
             _index = index;
             UIHandler.Instance.AddConstructionDataView(transform.position + _healthBarOffset, _ownerIndex);
-            Build(configId);
+            RpcBuild(configId);
         }
 
         private void OnConstructionHealthChanged()
@@ -54,7 +54,8 @@ namespace _Project.Scripts.City
             UIHandler.Instance.SetConstructionDataViewValue(_constructionData.InitHealth, _constructionData.Health, _constructionData.Earn, _index, _ownerIndex);
         }
         
-        public void Build(int configId)
+        [ClientRpc]
+        public void RpcBuild(int configId)
         {
             DefenceCardConfig config = (DefenceCardConfig)GameHandler.Instance.Config.CardDatabase.GetCardConfigById(configId);
             _constructionData.SetData(config.Health, config.Earn);

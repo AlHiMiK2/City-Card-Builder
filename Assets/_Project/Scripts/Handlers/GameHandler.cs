@@ -103,11 +103,5 @@ namespace _Project.Scripts.Handlers
             
             return isEnd;
         }
-
-        [Command]
-        public void CmdBuild(BuildPlace place, int configId)
-        {
-            place.RpcBuild(configId);
-        }
     }
 }

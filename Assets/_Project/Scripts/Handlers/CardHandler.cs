@@ -76,7 +76,7 @@ namespace _Project.Scripts.Handlers
                 else
                 {
                     if (target.OwnerIndex != ownerIndex) return false;
-                    _gameHandler.CmdBuild(target, defenceConfig.Id);
+                    CmdBuildConstruction(target, defenceConfig.Id);
                     CardApplied();
                     return true;
                 }
@@ -164,6 +164,12 @@ namespace _Project.Scripts.Handlers
         public void ClearBuild()
         {
             _cardContainer.Clear();
+        }
+
+        [Command]
+        private void CmdBuildConstruction(BuildPlace place, int configId)
+        {
+            place.RpcBuild(configId);
         }
     }
 }
